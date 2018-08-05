@@ -167,7 +167,7 @@ function displayAvailChall(data) {
                     '<ul>' +
                     '<li>' + data.challAvail[index].startDate + '</li>' +
                     '<li>' + data.challAvail[index].challenge + ' ' + data.challAvail[index].challType + '</li>' +
-                    '<li>' + data.challAvail[index].duration + 'days' + '</li>' +
+                    '<li>' + data.challAvail[index].duration + ' days' + '</li>' +
                     '<li>' + '|Join Now|'
                     + '</ul>'
                 + '</ul>'
