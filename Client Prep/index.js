@@ -31,17 +31,17 @@ let MOCK_CHALL_STATS = {
     "challStats": [
 
         {
-            "challName": "10 mile mahem",
+            "challName": "10 mile Mayhem",
             "user": "aabbccdd",
             "distance": "4.1"
         },
         {
-            "challName": "10 mile mahem",
+            "challName": "10 mile Mayhem",
             "user": "eeffgg",
             "distance": "1.9"
         },
         {
-            "challName": "10 mile mahem",
+            "challName": "10 mile Mayhem",
             "user": "hhiijj",
             "distance": "2.9"
         }
