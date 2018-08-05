@@ -7,7 +7,7 @@
     <!-- Responsive viewport tag, tells small screens that it's responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>SiteTitleHere</title>
+    <title>Challenge Accepted Login</title>
 
     <!-- fonts  -->
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -33,7 +33,37 @@
       <img src='image_path_and_name.jpg' class='bg' alt='background'>
   --> 
 
-  <p>Hello World</p>
+  <p>public</p>
+
+  <div class='loginBox js-loginBox'>
+
+    <p>This is the login page!!!</p>
+
+    <form id='loginForm' role='form' class='loginForm js-loginForm'>
+      <fieldset name='login'>
+        <label class='userId js-userId' for='userIdfield'>
+          User ID:
+          <input required id='userIdfield' class='userIdfield js-userIdfield' type='text' name='userIdfield' placeholder="Enter User ID"/>
+        </label>
+        <br><br>
+        <label class='userPass js-userPass' for='userPassField'>
+          Password:
+          <input required id='userPassField' class='userPassField js-userPassField' type='password' name='userPassField' placeholder="Enter your Password"/>
+        </label>
+        <br><br>
+        <label class='login js-login' for='login'>
+          <button required class='loginButton js-loginButton' type='submit' name='loginButton'>Login</button>
+        </label>
+
+      </fieldset>
+
+    </form>
+
+  </div>
+
+  Go to <a href="/site/">site dashboard</a>
+
+
 
 
   </body>

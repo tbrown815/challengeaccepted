@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="DescriptionGoesHere" />
+
+    <!-- Responsive viewport tag, tells small screens that it's responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Challenge Accepted Dashboard</title>
+
+    <!-- fonts  -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <!-- reset -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
+
+    <!-- styles -->
+    <link href="index.css" rel="stylesheet" type="text/css" />
+    <link href="grid_v2.css" rel="stylesheet" type="text/css" />
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+
+
+
+
+  </head>
+
+  <body>
+    <!-- Background image that can scale responsively
+      <img src='image_path_and_name.jpg' class='bg' alt='background'>
+  --> 
+
+<div class='leftSection col-4'>
+
+  <div class='personStats js-personStats'>
+    <!--Personal Stats will display here-->
+  </div>
+  
+  <div class='enterStats js-enterStats'>
+    <!--User can enter stats here-->
+    <form id='enterStats' role='form' class='enterStats js-enterStats'>
+      <fieldset name='enterStats'>
+        <label class='selectDate js-selectDate' for='selectDate'>
+            Date:
+            |NEED SELECT BOX FOR DATE|
+        </label>
+        <br><br>
+        <label class='enterSteps js-enterSteps' for='enterSteps'>
+          Steps:
+          <input required id='stepsField' class='stepsField js-stepsField' type='text' name='stepsField' placeholder="Enter # Steps"/>
+        </label>
+        <br><br>
+        <label class='enterDistance js-enterDistance' for='enterDistance'>
+          Distance:
+          <input required id='distanceField' class='distanceField js-distanceField' type='text' name='distanceField' placeholder="Enter Distance"/>
+        </label>
+        <br><br>
+        <label class='submitStats js-submitStats' for='submitStatsButton'>
+          <button required class='submitStatsButton js-submitStatsButton' type='submit' name='submitStatsButton'>Submit Stats</button>
+        </label>
+        
+      </fieldset>
+      
+    </form>  
+  </div>
+    
+</div>
+
+<div class='midSection col-4'>
+
+    <div class='challengeRank js-challengeRank'>
+        <!--Challenge Rank will display here-->
+    </div>
+
+    <div class='challengeSetup js-challengeSetup'>
+        <!--Challenge Setup will display here-->
+        <form id='setupForm' role='form' class='setupForm js-setupForm'>
+            <fieldset name='setupChallenge'>
+              <label class='selectType js-selectType' for='selectType'>
+                  Type:
+                  |NEED SELECT BOX FOR TYPE|
+              </label>
+              <br><br>
+              <label class='selectDuration js-selectDuration' for='selectDuration'>
+                  Duration:
+                  |NEED SELECT BOX FOR DURATION|
+              </label>
+              <br><br>
+              <label class='createChallenge js-createChallenge' for='createChallengeButton'>
+                <button required class='createChallengeButton js-createChallengeButton' type='submit' name='createChallengeButton'>Create Challenge</button>
+              </label>
+              
+            </fieldset>
+            
+          </form>  
+
+    </div>
+
+
+</div>
+
+<div class='rightSection col-4'>
+
+    <div class='challengeSelect js-challengeSelect'>
+        <!--Challenge available to select will display here-->
+        
+    </div>
+
+</div>
+
+  </body>
+  
+  <script src="index.js" type="text/javascript"></script>
+  
+  </html>
+  
+  
+

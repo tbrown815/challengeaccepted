@@ -1,0 +1,358 @@
+https://www.w3schools.com/cssref/css_selectors.asp
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+FULL SCREEN BACKGROUND=======================
+
+/* for veiwport adjusting background*/
+.bg {
+  /* rules to fill background */
+  min-height: 100%;
+  min-width: 1024px;
+
+  /* scaling */
+  width: 100%;
+  height: 100%;
+
+  /* position */
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  z-index: -1;
+}
+
+@media screen and (max-width: 750px) {
+  .quizAppImg {
+    max-width: 100%;
+    max-height: 300px;
+  }
+}
+
+
+SIZING FOR MOBILE======================
+
+https://responsivedesign.is/develop/browser-feature-support/media-queries-for-common-device-breakpoints/
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px)  {
+  
+  /*increases font size on smaller screens*/
+  * {
+    font-size: 105%;
+  }
+
+  /*hides lock image on smaller screens*/
+  .rightWhatDo  {
+    display: none;
+  }
+
+  .createPassLeft, .createPassCenter, .createPassRight  {
+    margin-top: 20px;
+  }
+/*moves pass/phrase options to the left to reduce wrapping on small screens */
+  .passOption, .passLength, .phraseLength, .phraseNumWords, .phraseOption {
+    margin-left: 5%;
+  }
+
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  {
+  
+  body {
+    font-size: 100%;
+  }
+
+  .createPassLeft, .createPassCenter, .createPassRight  {
+    margin-top: 20px;
+  }
+
+}
+
+
+
+
+MODAL WINDOWS==========================
+
+.howWeModal { /*https://www.webdesignerdepot.com/2012/10/creating-a-modal-window-with-html5-and-css3/*/
+  position: fixed;
+  top:  0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 99999;
+  opacity: 0;
+  transition: opacity 400ms ease-in;
+  pointer-events: none;
+}
+
+.modalContent:target{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modalContent > div {
+  width: 400px;
+  position: relative;
+  margin: 10% auto;
+  padding: 5px 20px 13px 20px;
+  border-radius: 10px;
+  background: lightslategray;
+  text-align: left;
+}
+
+
+.close {
+  background: #606061;
+	color: #FFFFFF;
+	line-height: 25px;
+	position: absolute;
+	right: -12px;
+	text-align: center;
+	top: -10px;
+	width: 24px;
+	text-decoration: none;
+	font-weight: bold;
+	border-radius: 12px;
+	box-shadow: 1px 1px 3px #000;
+}
+
+.close:hover  { 
+  background: lightslategray;
+}
+
+.howWeModal h2{
+  text-align: center;
+  font-size: 24px;
+}
+
+
+CUSTOM RADIO AND CHECK==================================
+
+//These are accessible ready!
+
+/*HT for custom radios/checks - https://medium.com/claritydesignsystem/pure-css-accessible-checkboxes-and-radios-buttons-54063e759bb3*/
+
+.checkBx input[type='checkbox']  {
+  opacity: 0;
+}
+
+.checkBx label  {
+  position: relative;
+  display: inline-block;
+  padding-left: 22px;
+}
+
+.checkBx label::before  {
+  content: "";
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  border: 1px solid;   
+}
+
+/* Original
+.checkbox label::before{
+    content: "";
+    display: inline-block;
+    
+    height: 16px;
+    width: 16px;
+    
+    border: 1px solid;   
+}
+*/
+
+.checkBx label::after {
+  content: "";
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  color: #7cdcde;
+  background-color: #7cdcde;
+}
+
+/* Original
+.checkbox label::after {
+  content: "";
+  display: inline-block;
+  height: 6px;
+  width: 9px;
+  border-left: 2px solid;
+  border-bottom: 2px solid;
+  
+  transform: rotate(-45deg);
+}
+*/
+
+.checkBx label {
+  position: relative;
+}
+
+.checkBx label::before,
+.checkBx label::after {
+  position: absolute;
+}
+
+/*Outer-box*/
+.checkBx label::before {
+  top: 3px;
+  left: 1px;
+}
+
+/*Checkmark*/
+.checkBx label::after {
+  left: 2px;
+  top: 4px;
+}
+
+/* Original
+.checkbox label {
+    position: relative;
+}
+
+.checkbox label::before,
+.checkbox label::after {
+    position: absolute;
+}
+
+/*Outer-box
+.checkbox label::before {
+  top: 3px;
+}
+
+/*Checkmark
+.checkbox label::after {
+  left: 4px;
+  top: 7px;
+}
+*/
+
+
+/*Hide the checkmark by default*/
+.checkBx input[type="checkbox"] + label::after {
+  content: none;
+}
+/*Unhide the checkmark on the checked state*/
+.checkBx input[type="checkbox"]:checked + label::after {
+  content: "";
+}
+
+/*Adding focus styles on the outer-box of the fake checkbox*/
+.checkBx input[type="checkbox"]:focus + label::before {
+  outline: 3px double aliceblue;
+  /* Original
+  outline: rgb(59, 153, 252) auto 5px;
+  */
+}   
+
+
+.rdio input[type='radio']  {
+  opacity: 0;
+}
+
+.rdio label  {
+  position: relative;
+  display: inline-block;
+  padding-left: 22px;
+}
+
+.rdio label::before  {
+  content: "";
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  border-radius: 10px;
+  border: 1px solid;   
+}
+
+.rdio label::after {
+  content: "";
+  display: inline-block;
+  height: 15px;
+  width: 15px;
+  border: 1px solid aliceblue;
+  border-radius: 10px;
+  color: #7cdcde;
+  background-color: #7cdcde;
+}
+
+.rdio label {
+  position: relative;
+}
+
+.rdio label::before,
+.rdio label::after {
+  position: absolute;
+}
+
+/*Outer-box*/
+.rdio label::before {
+  top: 3px;
+  left: 1px;
+}
+
+/*Checkmark*/
+.rdio label::after {
+  left: 2px;
+  top: 4px;
+}
+
+/*Hide the checkmark by default*/
+.rdio input[type="radio"] + label::after {
+  content: none;
+}
+
+/*Unhide the checkmark on the checked state*/
+.rdio input[type="radio"]:checked + label::after {
+  content: "";
+}
+
+/*Adding focus styles on the outer-box of the fake checkbox*/
+.rdio input[type="radio"]:focus + label::before {
+  outline: 3px double aliceblue;
+}  
+
+
+
+
+//These need work to make accessible compliant
+http://selfteach.me/customizing-radio-buttons-checkboxes/
+
+input[type=radio] {
+	display: none;
+}
+
+input[type=radio] + label {
+	background: url('radio-button-unchecked.png') left top no-repeat;
+  display: block;
+	min-height: 28px;
+  padding-left: 35px;
+  line-height: 25px;
+}
+
+input[type=radio]:checked + label {
+  background: url('radio-button-checked_v2.png') left top no-repeat;
+}
+
+input[type=checkbox]  {
+	display: none;
+}
+
+input[type=checkbox] + label  {
+	background: url('checkbox-unchecked.png') left top no-repeat;	display: block;
+	min-height: 28px;
+  padding-left: 35px;
+  line-height: 25px;
+}
+
+input[type=checkbox]:checked + label  {
+  background: url('checkbox-checked_v2.png') left top no-repeat;
+}
+

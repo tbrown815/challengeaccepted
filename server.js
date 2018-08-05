@@ -33,6 +33,8 @@ const app = express();
 
 //tell app to use express static folder public
 app.use(express.static('public'));
+app.use('/site', express.static('site'));
+
 
 //tell app to use morgan for common logging
 app.use(morgan('common'));
@@ -76,5 +78,12 @@ function startServer() {
 
 
 app.get('/', (req, res) => {
-    res.status(200);
+    
+  res.status(200);
 })
+
+/*
+app.get('/users/:', (req, res) => {
+  res.status(200);
+})
+*/
