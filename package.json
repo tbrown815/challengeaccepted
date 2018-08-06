@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -12,7 +13,10 @@
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
     "express": "^4.16.3",
+    "faker": "^4.1.0",
     "mocha": "^5.2.0",
+    "mongoose": "^5.2.6",
     "morgan": "^1.9.0"
-  }
+  },
+  "dependencies": {}
 }
