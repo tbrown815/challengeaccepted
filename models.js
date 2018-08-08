@@ -1,6 +1,7 @@
 "use strict";
 
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 
 const exerStatsSchema = mongoose.Schema({
@@ -13,10 +14,11 @@ const exerStatsSchema = mongoose.Schema({
 })
 
 const userInfoSchema = mongoose.Schema({
-    username: {type: String, unique: true},
-    firstName: {type: String},
-    lastName:  {type: String},
-    email: {type: String},
+    username: {type: String, unique: true, required: true},
+    password: {type: String, required: true},
+    firstName: {type: String, required: true},
+    lastName:  {type: String, required: true},
+    email: {type: String, required: true},
     lifeSteps:  {type: Number},
     lifeDistance:  {type: Number}
 })
@@ -57,6 +59,15 @@ userInfoSchema.methods.cleanUp = function() {
         lifeSteps: this.lifeSteps,
         lifeDistance: this.lifeDistance
     };
+};
+//*
+userInfoSchema.methods.valPass = function(pass) {
+    return bcrypt.compare(pass, this.pass);
+};
+
+
+userInfoSchema.statics.hashPass = function(pass) {
+    return bcrypt.hash(pass, 10);
 };
 
 const exerStatsModel = mongoose.model('exerstats', exerStatsSchema);

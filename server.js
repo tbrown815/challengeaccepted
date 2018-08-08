@@ -8,6 +8,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 //Create a constant to import/require morgan for logging
 const morgan = require('morgan');
+//Create a constant to require passport
+const passport = require('passport');
 
 //mongoose Promise equals global ES6 Promises
 mongoose.Promise = global.Promise;
@@ -39,10 +41,14 @@ const siteRoute = require('./siteRoute');
 
 const userRoute = require('./userRoute');
 
+//const authRoute = require('./auth')
+
 //tell app to use args of '/endPointName' and const specified for 'constNameRoute' *duplicate for multiple route files
 app.use('/site', siteRoute);
 
 app.use('/users', userRoute);
+
+//app.use('/auth', authRoute);
 
 
 //catch-all endpoint
