@@ -1,8 +1,8 @@
 "use-strict";
 
-const AuthModel = require('passport-local');
+const LocalStrategy = require('passport-local');
 
-const {TokenModel, ExtractJwt} = require('passport-jwt');
+const {JwtStrategy, ExtractJwt} = require('passport-jwt');
 
 //const TokenModel = require('passport-jwt');
 //const ExtractJwt = require('passport-jwt');
@@ -11,7 +11,7 @@ const userInfoModel = require('../models')
 
 const JWT_SECRET = require('../config');
 
-const authModel = new AuthModel((username, password, callback) => {
+const authModel = new LocalStrategy((username, password, callback) => {
     let user;
 
     userInfoModel.findOne({username: username})
@@ -45,7 +45,7 @@ const authModel = new AuthModel((username, password, callback) => {
     });
 });
 
-const jwtModel = new TokenModel({
+const jwtModel = new JwtStrategy({
 
     secretOrKey: JWT_SECRET,
     jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),

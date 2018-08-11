@@ -1,3 +1,9 @@
+//AT THIS TIME THIS IS NOT USED
+
+
+/*
+
+
 "use-strict";
 
 //const authModel = require('passport-local');
@@ -20,3 +26,7 @@ const jwtModel = new TokenModel({
 );
 
 module.exports = {jwtModel};
+
+
+
+*/
