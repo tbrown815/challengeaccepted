@@ -34,6 +34,7 @@ function populateTestData() {
 function generateData() {
     return {
         username: faker.internet.userName(),
+        password: faker.internet.password(),
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
         email: faker.internet.email(),
@@ -84,6 +85,7 @@ describe('Test Resources', function() {
         })
     });
   
+    //USER TESTS
     describe('GET USERS TEST SET', function() {
 
         it('GET DB objects, validate count and json/200 resp', function() {
@@ -143,6 +145,56 @@ describe('Test Resources', function() {
 
     //GET USERS TEST BLOCK END
     });
+
+    //CREATE NEW USER TEST BLOCK
+    describe('CREATE USER TEST SET', function() {
+
+        it('Will POST data to create new user', function() {
+
+            const genData = generateData();
+
+            return chai.request(app)
+
+            .post('/users')
+
+            .send(genData)
+
+            .then(function(res) {
+                expect(res).to.have.status(201);
+                expect(res).to.be.json;
+                expect(res).to.be.a('object');
+              
+                expect(res.body).to.include.keys('id', 'username', 'firstName', 'lastName', 'email');
+                expect(res.body.username).to.contain(genData.username);
+                expect(res.body.firstName).to.contain(genData.firstName);
+                expect(res.body.lastName).to.contain(genData.lastName);
+                expect(res.body.email).to.contain(genData.email);
+
+                
+                return userInfoModel.findById(res.body.id);
+
+            })
+            .then(function(user) {
+                expect(user.username).to.equal(genData.username);
+                expect(user.firstName).to.equal(genData.firstName);
+                expect(user.lastName).to.equal(genData.lastName);
+                expect(user.email).to.equal(genData.email);
+
+
+            })
+        })
+
+
+
+        //ADD TESTS TO CHECK ERROR CONDITIONS!!!!
+
+
+
+
+    });
+    //CREATE NEW USER TEST BLOCK END
+
+
 
 
 //TEST RESOURCES END

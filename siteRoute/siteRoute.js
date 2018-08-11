@@ -4,7 +4,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const {exerStatsModel, userInfoModel} = require('./models')
+const {exerStatsModel, userInfoModel} = require('../models')
 
 router.get('/', (req, res) => {
 

@@ -2,15 +2,15 @@
 
 const express = require('express');
 
-//*
+//* Create a constant bodyParser to require body-parser
 const bodyParser = require('body-parser');
 
 const router = express.Router();
 
-//*
+//* create const for jsson Parser that calls bodyParser json with no args
 const jsonParser = bodyParser.json();
 
-const {exerStatsModel, userInfoModel} = require('./models')
+const {exerStatsModel, userInfoModel} = require('../models')
 
 router.get('/', (req, res) => {
 
@@ -44,7 +44,7 @@ router.get('/:id', (req, res) => {
 //POST to create a user
 router.post('/', jsonParser, (req, res) => {
     const requiredFields = ['username', 'password', 'firstName', 'lastName', 'email'];
-
+/*
     for (let i=0; i<requiredFields; i++) {
         const field = requiredFields[i];
 
@@ -53,7 +53,18 @@ router.post('/', jsonParser, (req, res) => {
             console.error(errMessage);
             return res.status(422).send(errMessage);
         }
-    };
+*/
+
+    const noField = requiredFields.find(field => !(field in req.body));
+
+  if (noField) {
+    return res.status(422).json({
+      code: 422,
+      reason: 'ERROR',
+      message: 'Field is not present',
+      location: noField
+    });
+  }
 
     const areStrings = ['username', 'password', 'firstName', 'lastName', 'email'];
 
@@ -69,8 +80,8 @@ router.post('/', jsonParser, (req, res) => {
     const trimmedFields = ['username', 'password', 'email'];
     const notTrimmedFields = trimmedFields.find(field => req.body[field].trim() !== req.body[field]);
 
-    if(notString) {
-        const errMessage = `${field} cannot start or end with whitespace`
+    if(notTrimmedFields) {
+        const errMessage = `${notTrimmedFields} cannot start or end with whitespace`
         console.error(errMessage);
         return res.status(422).send(errMessage);
     };
@@ -98,11 +109,16 @@ router.post('/', jsonParser, (req, res) => {
     return userInfoModel.find({username})
     .count()
     .then(count => {
+        
         if (count > 0) {
-            const errMessage = `username already exists`
-            console.error(errMessage);
-            return res.status(422).send(errMessage).done();
-            };
+            return Promise.reject({
+              code: 422,
+              reason: 'ERROR',
+              message: 'Username in use',
+              location: 'username'
+            });
+          }
+
 
     return userInfoModel.hashPass(password);
         
@@ -120,8 +136,11 @@ router.post('/', jsonParser, (req, res) => {
         return res.status(201).json(user.cleanUp());
     })
     .catch(err => {
-        console.error(err)
-        return res.status(500).json({"error message": 'something is broken'});
+            if (err.reason === 'ERROR') {
+                return res.status(err.code).json(err);
+            }
+            console.error(err)
+            res.status(500).json({"error message": 'something is broken'});
     })
 
 })

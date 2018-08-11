@@ -1,54 +1,50 @@
 //Use strict
 "use strict";
 
-//Create a constant to import(require) express
+require('dotenv').config();
+
 const express = require('express');
 
-//Create a constant to import(require) mongoose
 const mongoose = require('mongoose');
-//Create a constant to import/require morgan for logging
 const morgan = require('morgan');
-//Create a constant to require passport
 const passport = require('passport');
 
-//mongoose Promise equals global ES6 Promises
-mongoose.Promise = global.Promise;
-//Create const of PORT, DATABASE_URL to import(require) config.js
-const {PORT, DATABASE_URL} = require('./config')
-//create const of Primary {modelName}  OR {modelName1, modelName2} to require models file
 const {exerStatsModel, userInfoModel} = require('./models')
 
-//Create const of Secondary {modelName} to import(require) models.js
+const {authModel, jwtModel} = require('./authRoute/authModels')
 
-//const {userInfoModel} = require('./models')
+//const {authModel} = require('./authRoute/authModels')
+//const {jwtModel} = require('./authRoute/jwtModel')
 
-//Create constant that creates a new app instance by calling top level express function
+mongoose.Promise = global.Promise;
+
+const {PORT, DATABASE_URL} = require('./config')
+
+
 const app = express();
 
-//tell app to use express.json
 app.use(express.json());
 
-//tell app to use morgan for common logging
 app.use(morgan('common'));
 
-//tell app to use express static folder public
 app.use(express.static('public'));
 //app.use('/site', express.static('siteRoute'));
 //app.use('/user', express.static('userRoute'));
 
-//Create const for new `constNameRoute` (can name it anything) to import(require) routeFile.js (can name it anything) *duplicate for multiple route files
-const siteRoute = require('./siteRoute');
+passport.use(authModel);
+passport.use(jwtModel);
 
-const userRoute = require('./userRoute');
+const siteRoute = require('../siteRoute');
 
-//const authRoute = require('./auth')
+const userRoute = require('../userRoute');
 
-//tell app to use args of '/endPointName' and const specified for 'constNameRoute' *duplicate for multiple route files
+const authRoute = require('../authRoute')
+
 app.use('/site', siteRoute);
 
 app.use('/users', userRoute);
 
-//app.use('/auth', authRoute);
+app.use('/login', authRoute);
 
 
 //catch-all endpoint
