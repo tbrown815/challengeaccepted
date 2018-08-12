@@ -5,6 +5,11 @@ const express = require('express');
 //* Create a constant bodyParser to require body-parser
 const bodyParser = require('body-parser');
 
+const passport = require('passport');
+
+const {authModel, jwtModel} = require('../authRoute/authModels')
+
+
 const router = express.Router();
 
 //* create const for jsson Parser that calls bodyParser json with no args
@@ -28,7 +33,10 @@ router.get('/', (req, res) => {
     });
 })
 
-router.get('/:id', (req, res) => {
+const authJwt = passport.authenticate('jwt', { session: false });
+
+
+router.get('/:id', authJwt, (req, res) => {
 
     userInfoModel.findById(req.params.id)
     .then(user => {

@@ -60,9 +60,10 @@ userInfoSchema.methods.cleanUp = function() {
         lifeDistance: this.lifeDistance
     };
 };
+
 //*
 userInfoSchema.methods.valPass = function(pass) {
-    return bcrypt.compare(pass, this.pass);
+    return bcrypt.compare(pass, this.password);
 };
 
 

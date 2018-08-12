@@ -8,6 +8,7 @@ const passport = require('passport');
 
 const jwt = require('jsonwebtoken');
 
+const {userInfoModel} = require('../models')
 
 const config = require('../config');
 
@@ -25,17 +26,20 @@ const genJWT = function(user) {
 const auth = passport.authenticate('local', {session: false});
 router.use(bodyParser.json());
 
-router.post('/login', auth, (req, res) => {
+
+//  /login
+router.post('/', auth, (req, res) => {
     const token = genJWT(req.user.cleanUp());
     res.json({token});
 });
 
 const authJWT = passport.authenticate('jwt', {session: false});
 
+//  /login/refresh
 router.post('/refresh', authJWT, (req, res) => {
     const token = genJWT(req.user);
     res.json({token});
 });
 
 
-module.exports = {router};
+module.exports = router;

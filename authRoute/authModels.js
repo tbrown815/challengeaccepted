@@ -1,13 +1,16 @@
 "use-strict";
 
-const LocalStrategy = require('passport-local');
+const { Strategy: LocalStrategy } = require('passport-local');
 
-const {JwtStrategy, ExtractJwt} = require('passport-jwt');
+//const LocalStrategy = require('passport-local');
+
+//const {JwtStrategy, ExtractJwt} = require('passport-jwt');
 
 //const TokenModel = require('passport-jwt');
 //const ExtractJwt = require('passport-jwt');
+const {Strategy: JwtStrategy, ExtractJwt} = require('passport-jwt');
 
-const userInfoModel = require('../models')
+const {userInfoModel} = require('../models')
 
 const JWT_SECRET = require('../config');
 
@@ -48,7 +51,8 @@ const authModel = new LocalStrategy((username, password, callback) => {
 const jwtModel = new JwtStrategy({
 
     secretOrKey: JWT_SECRET,
-    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
+   // jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
+    jwtFromRequest :ExtractJwt.fromAuthHeaderAsBearerToken('Bearer'),
     algorithms: ['HS256']
     },
     (payload, done) => {

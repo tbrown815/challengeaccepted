@@ -34,11 +34,11 @@ app.use(express.static('public'));
 passport.use(authModel);
 passport.use(jwtModel);
 
-const siteRoute = require('../siteRoute');
+const siteRoute = require('./siteRoute/siteRoute');
 
-const userRoute = require('../userRoute');
+const userRoute = require('./userRoute/userRoute');
 
-const authRoute = require('../authRoute')
+const authRoute = require('./authRoute/authRoute')
 
 app.use('/site', siteRoute);
 
@@ -49,7 +49,7 @@ app.use('/login', authRoute);
 
 //catch-all endpoint
 app.use('*', function(req,res) {
-  res.status(404).json("Thee was an error, please try again");
+  res.status(404).json("There was an error, please try again - EP does not exist");
 });
 
 
