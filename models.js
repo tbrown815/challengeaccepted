@@ -9,7 +9,7 @@ const exerStatsSchema = mongoose.Schema({
     date:   {type: Date},
     steps: {type: Number},
     distance: {type: Number},
-    exerType: {type: String}
+    exertype: {type: String}
 
 })
 
@@ -45,7 +45,7 @@ exerStatsSchema.methods.cleanUp = function() {
         date: this.date,
         steps: this.steps,
         distance: this.distance,
-        exerType: this.exerType
+        exertype: this.exertype
     };
 };
 
@@ -58,6 +58,13 @@ userInfoSchema.methods.cleanUp = function() {
         email: this.email,
         lifeSteps: this.lifeSteps,
         lifeDistance: this.lifeDistance
+    };
+};
+
+//*
+userInfoSchema.methods.setToken = function() {
+    return {
+        id: this._id
     };
 };
 

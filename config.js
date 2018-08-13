@@ -13,5 +13,5 @@ exports.TEST_DATABASE_URL = 'mongodb://localhost/test-challengeaccepted' || proc
 //exports PORT equals process env PORT || <portNum>;
 exports.PORT = process.env.PORT || 8080;
 
-exports.JWT_SECRET = process.env.JWT_SECRET;
+exports.JWT_SECRET = 'STELLA_THE_DESTROYER_OF_TOYS' || process.env.JWT_SECRET;
 exports.JWT_EXPIRE = process.env.JWT_EXPIRE || '5d';

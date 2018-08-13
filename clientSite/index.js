@@ -1,3 +1,7 @@
+const authToken = JSON.parse(`${sessionStorage.getItem('authToken')}`);
+const userToken = JSON.parse(`${sessionStorage.getItem('userToken')}`);
+
+const getUserStatsURL = 'http://localhost:8080/site/stats/';
 
 
 let MOCK_USER_STATS = {
@@ -75,16 +79,33 @@ let totalSteps = 0;
 let totalDistance = 0;
 
 
-function getUserStats(userBack) {
-    setTimeout(function() {userBack(MOCK_USER_STATS)}, 1);
+function getUserStats() {
+ //   setTimeout(function() {userBack(MOCK_USER_STATS)}, 1);
 
+    let userStats = {
+        async: true,
+        crossDomain: true,
+        url: `${getUserStatsURL}` + `${userToken}`,
+        method: 'GET',
+        headers: {Authorization: `Bearer ${authToken}`},
+        success: function(response) {
+                console.log('user stat success') 
+        }
+    }
+
+    $.ajax(userStats).done(function(response) {
+        console.log('user response: ', response)
+        displayUserStats(response);
+    })
+    
 }
 
 
 
 
 function displayUserStats(data) {
-console.log('data.userStats.length: ', data.userStats.length)
+    console.log('data: ', data)
+    //console.log('data.userStats.length: ', data.userStats.length)
 
     let userStatArray = data.userStats;
 
@@ -175,12 +196,20 @@ function displayAvailChall(data) {
     }
 }
 
-
     
 function getAndDisplayInfo() {
     getUserStats(displayUserStats);
     getChallStats(displayChallStats);
     getAvailChall(displayAvailChall);
+           
+    $('.js-bottomtemp').html(`
+    <p>TEMP DATA:</p>
+    <ul>
+    <li>authToken: ${authToken}
+    <li>userToken: ${userToken}
+    </ul>`
+    );
+    
 }
 
     $(getAndDisplayInfo);

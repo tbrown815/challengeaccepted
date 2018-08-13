@@ -1,0 +1,12 @@
+{"_id":{"$oid":"5b677c3a26d763cda52d90b3"},"user":{"$oid":"5b676da626d763cda52d8c9c"},"date":"05-24-2018","steps":"4212","distance":"2.1","exertype":"walk"}
+{"_id":{"$oid":"5b677c3a26d763cda52d90b4"},"user":{"$oid":"5b676da626d763cda52d8c9c"},"date":"05-26-2018","steps":"6156","distance":"3.2","exertype":"run"}
+{"_id":{"$oid":"5b677c3a26d763cda52d90b5"},"user":{"$oid":"5b676da626d763cda52d8c9c"},"date":"05-28-2018","steps":"3226","distance":"1.5","exertype":"walk"}
+{"_id":{"$oid":"5b677c3a26d763cda52d90b6"},"user":{"$oid":"5b676da626d763cda52d8c9e"},"date":"05-25-2018","steps":"1211","distance":".5","exertype":"walk"}
+{"_id":{"$oid":"5b677c3a26d763cda52d90b7"},"user":{"$oid":"5b676da626d763cda52d8c9e"},"date":"05-27-2018","steps":"4200","distance":"2","exertype":"walk"}
+{"_id":{"$oid":"5b677c3a26d763cda52d90b8"},"user":{"$oid":"5b676da626d763cda52d8c9e"},"date":"05-29-2018","steps":"6156","distance":"3.9","exertype":"walk"}
+{"_id":{"$oid":"5b677c3a26d763cda52d90b9"},"user":{"$oid":"5b676da626d763cda52d8c9d"},"date":"05-22-2018","steps":"15548","distance":"6.3","exertype":"run"}
+{"_id":{"$oid":"5b677c3a26d763cda52d90ba"},"user":{"$oid":"5b676da626d763cda52d8c9d"},"date":"05-23-2018","steps":"17025","distance":"7.2","exertype":"run"}
+{"_id":{"$oid":"5b677c3a26d763cda52d90bb"},"user":{"$oid":"5b676da626d763cda52d8c9d"},"date":"05-24-2018","steps":"4238","distance":"2.7","exertype":"walk"}
+{"_id":{"$oid":"5b677c3a26d763cda52d90bc"},"user":{"$oid":"5b676da626d763cda52d8c9f"},"date":"05-29-2018","steps":"3226","distance":"1.5","exertype":"walk"}
+{"_id":{"$oid":"5b677c3a26d763cda52d90bd"},"user":{"$oid":"5b676da626d763cda52d8c9f"},"date":"05-30-2018","steps":"4200","distance":"2","exertype":"walk"}
+{"_id":{"$oid":"5b677c3a26d763cda52d90be"},"user":{"$oid":"5b676da626d763cda52d8c9f"},"date":"05-31-2018","steps":"15548","distance":"6.3","exertype":"run"}

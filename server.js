@@ -4,49 +4,68 @@
 require('dotenv').config();
 
 const express = require('express');
-
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const passport = require('passport');
 
-const {exerStatsModel, userInfoModel} = require('./models')
+//const {exerStatsModel, userInfoModel} = require('./models')
 
-const {authModel, jwtModel} = require('./authRoute/authModels')
+const {userInfoModel} = require('./models');
 
-//const {authModel} = require('./authRoute/authModels')
-//const {jwtModel} = require('./authRoute/jwtModel')
+//const {router: userRoute} = require('./users')
+
+const userRoute = require('./users/userRoute')
+
+const siteRoute = require('./site/siteRoute')
+
+
+const {router: authRoute, localStrategy, jwtStrategy} = require('./auth');
 
 mongoose.Promise = global.Promise;
 
 const {PORT, DATABASE_URL} = require('./config')
 
-
 const app = express();
 
-app.use(express.json());
+//app.use(express.json());
 
 app.use(morgan('common'));
 
 app.use(express.static('public'));
-//app.use('/site', express.static('siteRoute'));
+app.use('/clientSite', express.static('siteRoute'));
 //app.use('/user', express.static('userRoute'));
 
-passport.use(authModel);
-passport.use(jwtModel);
 
-const siteRoute = require('./siteRoute/siteRoute');
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+    res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+    if (req.method === 'OPTIONS') {
+      return res.send(204);
+    }
+    next();
+  });
 
-const userRoute = require('./userRoute/userRoute');
 
-const authRoute = require('./authRoute/authRoute')
+passport.use(localStrategy);
+passport.use(jwtStrategy);
 
+app.use('/auth', authRoute);
+app.use('/users', userRoute);
 app.use('/site', siteRoute);
 
-app.use('/users', userRoute);
 
-app.use('/login', authRoute);
+/*
+const jwtAuth = passport.authenticate('jwt', { session: false });
 
+// A protected endpoint which needs a valid JWT to access it
+app.get('/users/protected', jwtAuth, (req, res) => {
+    return res.json({
+        data: 'rosebud'
+    })
 
+});
+*/
 //catch-all endpoint
 app.use('*', function(req,res) {
   res.status(404).json("There was an error, please try again - EP does not exist");
@@ -106,10 +125,3 @@ if (require.main === module) {
 
 
 module.exports = {app, startServer, stopServer};
-
-/*
-app.get('/', (req, res) => {
-    
-  res.status(200);
-})
-*/

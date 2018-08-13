@@ -70,6 +70,36 @@ describe('Test Resources', function() {
     });
 
 
+    const jwt = require('jsonwebtoken');
+
+    describe('auth', function() {
+        it.only('should return typeof html and status 200', function() {
+            const username = "username"; 
+        const firstName = "firsrtname";
+        const lastName = "whatever";
+        const token = jwt.sign(
+            {
+              user: {
+                username,
+                firstName,
+                lastName
+              }
+            },
+            'secret',
+            {
+              algorithm: 'HS256',
+              subject: username,
+              expiresIn: '7d'
+            }
+          );
+            return chai.request(app)
+            .get('/users/123')
+            .set('authorization', `Bearer ${token}`)
+            .then(function(res) {
+                expect(res).to.not.have.status(401);
+            })
+        })
+    })
 
 
     describe('HTML TEST SET', function() {
