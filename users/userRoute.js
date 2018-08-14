@@ -232,12 +232,10 @@ router.put('/update/:id', jsonParser, (req,res) => {
                 return res.status(422).send(errMessage);
             };
 
-        userInfoModel.findByIdAndUpdate(req.params.id, {$set: toUpdate})
-        .then(data => {
-            return res.status(204).json({"message": `${req.body.id} e-mail has been updated`}).end()
-           // return res.status(204).send(`${req.body.id} e-mail has been updated`).end()
-        }
-        )
+        userInfoModel.findByIdAndUpdate(req.params.id, {$set: toUpdate}, {new: true}, function() {
+            return res.send(`${req.body.id} e-mail has been updated`)
+        })
+
         .catch(err => {
             if (err.reason === 'ERROR') {
                 return res.status(err.code).json(err);
