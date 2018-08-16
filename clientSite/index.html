@@ -33,10 +33,10 @@
       <img src='image_path_and_name.jpg' class='bg' alt='background'>
   --> 
 <div class='row'>
-<div class='leftSection col-4'>
+<div class='leftSection col-6'>
 
-  <div class='personStats js-personStats'>
-    <!--Personal Stats will display here-->
+  <div class='lifeStats js-lifeStats'>
+       <!--Personal Stats will display here-->
   </div>
   
   <div class='enterStats js-enterStats'>
@@ -77,87 +77,16 @@
   </div>
     
 </div>
+<div class='rightSection col-6'>
 
-<div class='midSection col-4'>
-
-    <div class='challengeRank js-challengeRank'>
-        <!--Challenge Rank will display here-->
-    </div>
-
-    <div class='challengeSetup js-challengeSetup'>
-        <!--Challenge Setup will display here-->
-        <form id='setupForm' role='form' class='setupForm js-setupForm'>
-            <fieldset name='setupChallenge'>
-              <label class='startDate js-startDate' for='selectStartDate'>Select a start date:
-                <br>
-                <input required id='selectStartDate' class='selectStartDate js-selectStartDate' type='date' name='selectStartDate'>
-              </label>
-              <br><br>
-              <label class='selectType js-selectType' for='selectType'>Type of Challenge:
-                <br>
-                <select id='selectType'>
-                  <option value=''>--Select a challenge--</option>
-                  <option value='steps'>Steps</option>
-                  <option value='distance'>Distance</option>
-                </select>
-              </label>
-              <br><br>
-              <label class='selectDuration js-selectDuration' for='selectDuration'>Number of days:
-              <br>
-                <select id='selectDuration'>
-                  <option value=''>--Select number of days--</option>
-                  <option value='1'>1</option>
-                  <option value='2'>2</option>
-                  <option value='3'>3</option>
-                  <option value='4'>4</option>
-                  <option value='5'>5</option>
-                  <option value='6'>6</option>
-                  <option value='7'>7</option>
-                  <option value='8'>8</option>
-                  <option value='9'>9</option>
-                  <option value='10'>10</option>
-                  <option value='11'>11</option>
-                  <option value='12'>12</option>
-                  <option value='13'>13</option>
-                  <option value='14'>14</option>
-                  <option value='15'>15</option>
-                  <option value='16'>16</option>
-                  <option value='17'>17</option>
-                  <option value='18'>18</option>
-                  <option value='19'>19</option>
-                  <option value='20'>20</option>
-                  <option value='21'>21</option>
-                  <option value='22'>22</option>
-                  <option value='23'>23</option>
-                  <option value='24'>24</option>
-                  <option value='25'>25</option>
-                  <option value='26'>26</option>
-                  <option value='27'>27</option>
-                  <option value='28'>28</option>
-                  <option value='29'>29</option>
-                  <option value='30'>30</option>
-                </select>
-              </label>
-              <br><br>
-              <label class='createChallenge js-createChallenge' for='createChallengeButton'>
-                <button required class='createChallengeButton js-createChallengeButton' type='submit' name='createChallengeButton'>Create Challenge</button>
-              </label>
-              
-            </fieldset>
-            
-          </form>  
-
-    </div>
-
+      <div class='personStats js-personStats'>
+        <!--Personal Stats will display here-->
+      </div>
 
 </div>
 
-<div class='rightSection col-4'>
 
-    <div class='challengeSelect js-challengeSelect'>
-        <!--Challenge available to select will display here-->
-    </div>
-  </div>
+
 </div>
 
   <br><br><br>
@@ -171,6 +100,35 @@
   </div>
 
 </div>
+</div>
+
+<div id='openEditModal' class='modal modal js-modal'>
+    <div>
+        <a href='#close' title='Close' class='close'>X</a>
+        <h2 class='modalTitle'>Edit</h2>
+        <p>Content goes here</p>
+        <br>
+        <p>Content goes here
+        </p>
+    </div>
+</div>
+
+<div id='openDelModal' class='modal modal js-modal'>
+    <div>
+        <a href='#close' title='Close' class='close'>X</a>
+        <h2 class='modalTitle'>Delete</h2>
+        <form id='delExerForm' role='form' class='delExerForm js-delExerForm'>
+            <fieldset name='delExerStat'>
+              <label class='delExerStat js-delExerStat' for='delExerStat'>
+                <h3>ARE YOU SURE?</h3>
+                </label>
+                <br>
+                <label class='yesDelStats js-yesDelStats' for='yesDelStats'>
+                    <button required class='yesDelStatsButton js-yesDelStatsButton' type='submit' name='yesDelStatsButton'>YES DELETE!</button>
+                </label>   
+            </fieldset>
+        </form>             
+    </div>
 </div>
   
   </body>

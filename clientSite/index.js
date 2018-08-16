@@ -2,7 +2,7 @@ const authToken = JSON.parse(`${sessionStorage.getItem('authToken')}`);
 const userToken = JSON.parse(`${sessionStorage.getItem('userToken')}`);
 
 const getUserStatsURL = 'http://localhost:8080/site/stats/';
-
+const delUserStatsURL = 'http://localhost:8080/site/';
 
 let MOCK_USER_STATS = {
     "userStats": [
@@ -31,48 +31,6 @@ let MOCK_USER_STATS = {
     ]
 };
 
-let MOCK_CHALL_STATS = {
-    "challStats": [
-
-        {
-            "challName": "10 mile Mayhem",
-            "user": "aabbccdd",
-            "distance": "4.1"
-        },
-        {
-            "challName": "10 mile Mayhem",
-            "user": "eeffgg",
-            "distance": "1.9"
-        },
-        {
-            "challName": "10 mile Mayhem",
-            "user": "hhiijj",
-            "distance": "2.9"
-        }
-    ]
-};
-
-let MOCK_CHALL_AVAIL = {
-    "challAvail": [
-
-        {
-            "startDate": "08-24-2018",
-            "challName": "15000 Step 2 day shuffle",
-            "challType": "steps",
-            "challenge": "15000",
-            "duration": "2"
-        },
-        {
-            "startDate": "08-10-2018",
-            "challName": "20 Mile four day jam!",
-            "challType": "miles",
-            "challenge": "20",
-            "duration": "4"
-
-
-        }
-    ]
-};
 
 
 let totalSteps = 0;
@@ -116,7 +74,7 @@ function displayUserStats(data) {
         totalDistance = totalDistance + parseInt(data.userStats[i].distance)
     }
         
-        $('.js-personStats').html(`
+        $('.js-lifeStats').html(`
         <p>Lifetime stats:</p>
         <ul>
         <li>Lifetime Steps: ${totalSteps}
@@ -126,81 +84,137 @@ function displayUserStats(data) {
     );
     
     $('.js-personStats').append(
-        '<p>Recent stats:</p>'
+        '<p>Recent Activity:</p>'
     )
-
+    
+  
+    
     for (index in data.userStats) {
+    
+       
+        let statID = data.userStats[index].id;
+        let exerDate = data.userStats[index].date.substring(0, 10);
+        let numSteps = data.userStats[index].steps;
+        let distance = data.userStats[index].distance;
+        let exertype = data.userStats[index].exertype;
 
-        $('.js-personStats').append(
-            '<ul>' +
-                '<li>' + 'Date: ' + data.userStats[index].date +
-                '<li>' + 'Total # Steps: ' + data.userStats[index].steps +
-                '<li>' + 'Total Distance: ' + data.userStats[index].distance
-            + '</ul>'
-        );
-    }
-}
-
-
-
-
-function getChallStats(challBack) {
-    setTimeout(function() {challBack(MOCK_CHALL_STATS)}, 1);
-
-}
-
-
-
-
-function displayChallStats(data) {
-    $('.js-challengeRank').append(
-        '<p>Challenge stats:</p>'
-    );
-
-  for (index in data.challStats) {
-    $('.js-challengeRank').append(
-            '<ul>' +
-            '<li>' + 'Challenge Name:' + data.challStats[index].challName +
-            '<li>' + 'Users:' + data.challStats[index].user +
-            '<li>' + 'Total Distance:' + data.challStats[index].distance
-            + '</ul>'
-        );
-    }
-}
-
-
-
-function getAvailChall(availBack) {
-    setTimeout(function() {availBack(MOCK_CHALL_AVAIL)}, 1);
-
-}
-
-
-function displayAvailChall(data) {
-
-    $('.js-challengeSelect').append(
-        '<p>Available Challenges:</p>'
-    );
-    for (index in data.challAvail) {
-        $('.js-challengeSelect').append(
-                '<ul>' + 
-                '<li>' + data.challAvail[index].challName + '</li>' +
-                    '<ul>' +
-                    '<li>' + data.challAvail[index].startDate + '</li>' +
-                    '<li>' + data.challAvail[index].challenge + ' ' + data.challAvail[index].challType + '</li>' +
-                    '<li>' + data.challAvail[index].duration + ' days' + '</li>' +
-                    '<li>' + '|Join Now|'
-                    + '</ul>'
+        
+        if(numSteps === null && distance === null) {
+            $('.js-personStats').append(
+                '<ul>' +
+                '<li>' + 'Date: ' + exerDate +
+                '<li>' + 'Activity: ' + exertype +
+                '<li> <a href=\'#openEditModal\' class=\'js-editStats\' id=\''+statID+'\'onclick=\'(this)\'>Edit</a> | ' +
+                    '<a href=\'#openDelModal\' class=\'js-delStats\' id=\''+statID+'\'onclick=\'(this)\'>Delete</a>'
                 + '</ul>'
-        );
+            );
+
+        }
+        else if(numSteps === null) {
+            $('.js-personStats').append(
+                '<ul>' +
+                    '<li>' + 'Date: ' + exerDate +
+                    '<li>' + 'Total Distance: ' + distance + ' miles' +
+                    '<li>' + 'Activity: ' + exertype +
+                    '<li> <a href=\'#openEditModal\' class=\'js-editStats\' id=\''+statID+'\'onclick=\'(this)\'>Edit</a> | ' +
+                    '<a href=\'#openDelModal\' class=\'js-delStats\' id=\''+statID+'\'onclick=\'(this)\'>Delete</a>'
+                + '</ul>'
+            );
+
+        }
+        else if(distance === null) {
+            $('.js-personStats').append(
+                '<ul>' +
+                    '<li>' + 'Date: ' + exerDate +
+                    '<li>' + 'Total # Steps: ' + numSteps +
+                    '<li>' + 'Activity: ' + exertype +
+                    '<li> <a href=\'#openEditModal\' class=\'js-editStats\' id=\''+statID+'\'onclick=\'(this)\'>Edit</a> | ' +
+                    '<a href=\'#openDelModal\' class=\'js-delStats\' id=\''+statID+'\'onclick=\'(this)\'>Delete</a>'
+                    + '</ul>'
+            );
+
+        }
+        else {
+            $('.js-personStats').append(
+                '<ul>' +
+                    '<li>' + 'Date: ' + exerDate +
+                    '<li>' + 'Total # Steps: ' + numSteps +
+                    '<li>' + 'Total Distance: ' + distance + ' miles' +
+                    '<li>' + 'Activity: ' + exertype +
+                    '<li> <a href=\'#openEditModal\' class=\'js-editStats\' id=\''+statID+'\'onclick=\'(this)\'>Edit</a> | ' +
+                    '<a href=\'#openDelModal\' class=\'js-delStats\' id=\''+statID+'\'onclick=\'(this)\'>Delete</a>'
+                + '</ul>'
+            );
+
+        }
+
     }
+
+
+    $('.js-editStats').unbind().click(function() {
+        
+        //on the event prevent default behavior with no args
+        //event.preventDefault();
+
+        let clickedId = $(this).attr('id');
+
+        console.log('edit id: ', clickedId)
+
+        editStats(clickedId);
+
+    })
+
+    $('.js-delStats').unbind().click(function() {
+        
+        //on the event prevent default behavior with no args
+        //event.preventDefault();
+
+        let clickedId = $(this).attr('id');
+
+        console.log('del id: ', clickedId)
+
+        delStats(clickedId);
+
+    })
+
+}
+
+
+function editStats(data) {
+    console.log('edit data: ', data)
+
+}
+
+function delStats(data) {
+    console.log('del data: ', data)
+
+    let delID = data;
+
+    $('.js-delExerForm').unbind().submit(function(event) {
+
+        event.preventDefault();
+
+        let delStats = {
+            async: true,
+            crossDomain: true,
+            url: `${delUserStatsURL}` + `${delID}`,
+            method: 'DELETE',
+            headers: {Authorization: `Bearer ${authToken}`},
+            success: function(response) {
+                    console.log('user stat removed') 
+            }
+        }
+
+        $.ajax(delStats);
+
+        $('#div').load('#div > *')
+    })
+
 }
 
     
 function getAndDisplayInfo() {
     getUserStats(displayUserStats);
-    getChallStats(displayChallStats);
-    getAvailChall(displayAvailChall);
            
     $('.js-bottomtemp').html(`
     <p>TEMP DATA:</p>
