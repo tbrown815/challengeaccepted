@@ -61,9 +61,58 @@
 
   </div>
 
-  Go to <a href="/site/">site dashboard</a>
+  <a href="#openNewUserModal">New User?</a>
 
+  <div id='openNewUserModal' class='modal modal js-modal'>
+    <div>
+        <a href='#close' title='closeModal' id='closeNewUserModal' class='closeModal js-closeModal'>X</a>
+        <h2 class='modalTitle'>Please provide your details:</h2>
+        <form id='newUserForm' role='form' class='newUserForm js-newUserForm'>
+          <fieldset name='newUser'>
+              <label class='newUserFirst js-newUserFirst' for='newUserFirstField'>
+                Firstname:
+                <input required id='newUserFirstField' class='newUserFirstField js-newUserFirstField' type='text' name='newUserFirstField' autocomplete='firstname' placeholder="Enter Firstname"/>
+              </label>
+              <br><br>
 
+              <label class='newUserLast js-newUserLast' for='newUserLastField'>
+                Lastname:
+                <input required id='newUserLastField' class='newUserLastField js-newUserLastField' type='text' name='newUserLastField' autocomplete='lastname' placeholder="Enter Lastname"/>
+              </label>
+              <br><br>
+
+            <label class='newUserEmail js-newUserEmail' for='newUserEmailField'>
+              E-Mail:
+              <input required id='newUserEmailField' class='newUserEmailField js-newUserEmailField' type='email' name='newUserEmailField' autocomplete='email' placeholder="you@email.com"/>
+            </label>
+            <br><br>
+
+            <label class='newUserId js-newUserId' for='newUserIdField'>
+              User ID:
+              <input required id='newUserIdField' class='newUserIdField js-newUserIdField' type='text' name='newUserIdField' autocomplete='username' placeholder="Enter User ID"/>
+            </label>
+            <br><br>
+
+            <label class='newUserPass js-newUserPass' for='newUserPassField'>
+              Password:
+              <input required id='newUserPassField' class='newUserPassField js-newUserPassField' type='password' name='newUserPassField' autocomplete='new-password' placeholder="Enter your Password"/>
+            </label>
+            <br><br>
+
+            <label class='newUserPassConf js-newUserPassConf' for='newUserPassConfField'>
+              Confirm Password:
+              <input required id='newUserPassConfField' class='newUserPassConfField js-newUserPassConfField' type='password' name='newUserPassConfField' autocomplete='current-password' placeholder="Confirm your Password"/>
+            </label>
+            <br><br>
+
+            <label class='createUser js-createUser' for='createUserButton'>
+              <button required class='createUserButton js-createUserButton' type='submit' name='createUserButton'>Submit Details</button>
+            </label>
+      
+            </fieldset>
+
+    </div>
+  </div>
 
   
 </body>

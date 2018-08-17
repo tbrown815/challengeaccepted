@@ -88,6 +88,16 @@ function displayUserStats(data) {
     )
     
   
+    console.log('userStatArray: ', userStatArray)
+    
+            if(userStatArray.length < 1 || userStatArray === null || userStatArray === undefined) {
+                $('.js-personStats').append(`
+                    <p>Log activities to the left.</p>
+                    
+                    <p>This section displays your last 10 recorded activities</p>`
+                );
+    
+            }
     
     for (index in data.userStats) {
     
@@ -98,52 +108,54 @@ function displayUserStats(data) {
         let distance = data.userStats[index].distance;
         let exertype = data.userStats[index].exertype;
 
-        
+        //$('.js-formSteps').val(numSteps);
+
+
         if(numSteps === null && distance === null) {
-            $('.js-personStats').append(
-                '<ul>' +
-                '<li>' + 'Date: ' + exerDate +
-                '<li>' + 'Activity: ' + exertype +
-                '<li> <a href=\'#openEditModal\' class=\'js-editStats\' id=\''+statID+'\'onclick=\'(this)\'>Edit</a> | ' +
-                    '<a href=\'#openDelModal\' class=\'js-delStats\' id=\''+statID+'\'onclick=\'(this)\'>Delete</a>'
-                + '</ul>'
+            $('.js-personStats').append(`
+                <ul>
+                <li>Date: ${exerDate}
+                <li>Activity: ${exertype}
+                <li> <a href='#openEditModal' class='js-editStats' id='${statID}' onclick='(this)'>Edit</a> |
+                    <a href='#openDelModal' class='js-delStats' id='${statID}' onclick='(this)'>Delete</a>
+                </ul>`
             );
 
         }
         else if(numSteps === null) {
-            $('.js-personStats').append(
-                '<ul>' +
-                    '<li>' + 'Date: ' + exerDate +
-                    '<li>' + 'Total Distance: ' + distance + ' miles' +
-                    '<li>' + 'Activity: ' + exertype +
-                    '<li> <a href=\'#openEditModal\' class=\'js-editStats\' id=\''+statID+'\'onclick=\'(this)\'>Edit</a> | ' +
-                    '<a href=\'#openDelModal\' class=\'js-delStats\' id=\''+statID+'\'onclick=\'(this)\'>Delete</a>'
-                + '</ul>'
+            $('.js-personStats').append(`
+                <ul>
+                <li>Date: ${exerDate}
+                <li> Distance: ${distance} miles
+                <li>Activity: ${exertype}
+                <li> <a href='#openEditModal' class='js-editStats' id='${statID}' onclick='(this)'>Edit</a> |
+                    <a href='#openDelModal' class='js-delStats' id='${statID}' onclick='(this)'>Delete</a>
+                </ul>`
             );
 
         }
         else if(distance === null) {
-            $('.js-personStats').append(
-                '<ul>' +
-                    '<li>' + 'Date: ' + exerDate +
-                    '<li>' + 'Total # Steps: ' + numSteps +
-                    '<li>' + 'Activity: ' + exertype +
-                    '<li> <a href=\'#openEditModal\' class=\'js-editStats\' id=\''+statID+'\'onclick=\'(this)\'>Edit</a> | ' +
-                    '<a href=\'#openDelModal\' class=\'js-delStats\' id=\''+statID+'\'onclick=\'(this)\'>Delete</a>'
-                    + '</ul>'
+            $('.js-personStats').append(`
+                <ul>
+                <li>Date: ${exerDate}
+                <li> # Steps: ${numSteps}
+                <li>Activity: ${exertype}
+                <li> <a href='#openEditModal' class='js-editStats' id='${statID}' onclick='(this)'>Edit</a> |
+                    <a href='#openDelModal' class='js-delStats' id='${statID}' onclick='(this)'>Delete</a>
+                </ul>`
             );
 
         }
         else {
-            $('.js-personStats').append(
-                '<ul>' +
-                    '<li>' + 'Date: ' + exerDate +
-                    '<li>' + 'Total # Steps: ' + numSteps +
-                    '<li>' + 'Total Distance: ' + distance + ' miles' +
-                    '<li>' + 'Activity: ' + exertype +
-                    '<li> <a href=\'#openEditModal\' class=\'js-editStats\' id=\''+statID+'\'onclick=\'(this)\'>Edit</a> | ' +
-                    '<a href=\'#openDelModal\' class=\'js-delStats\' id=\''+statID+'\'onclick=\'(this)\'>Delete</a>'
-                + '</ul>'
+            $('.js-personStats').append(`
+                <ul>
+                <li>Date: ${exerDate}
+                <li> # Steps: ${numSteps}
+                <li> Distance: ${distance} miles
+                <li>Activity: ${exertype}
+                <li> <a href='#openEditModal' class='js-editStats' id='${statID}' onclick='(this)'>Edit</a> |
+                    <a href='#openDelModal' class='js-delStats' id='${statID}' onclick='(this)'>Delete</a>
+                </ul>`
             );
 
         }
@@ -191,9 +203,10 @@ function delStats(data) {
     let delID = data;
 
     $('.js-delExerForm').unbind().submit(function(event) {
-
+        
+        
         event.preventDefault();
-
+        
         let delStats = {
             async: true,
             crossDomain: true,
@@ -202,12 +215,14 @@ function delStats(data) {
             headers: {Authorization: `Bearer ${authToken}`},
             success: function(response) {
                     console.log('user stat removed') 
+                    $('#closeDelModal')[0].click()
             }
         }
 
         $.ajax(delStats);
 
-        $('#div').load('#div > *')
+        
+        //  $('#div').load('#div > *')
     })
 
 }

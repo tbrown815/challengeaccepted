@@ -2,6 +2,7 @@
 
 //Create constant for API URL
 const userAuth = 'http://localhost:8080/auth/login/'
+const newUserURL = 'http://localhost:8080/users'
 const getUserTokenURL = 'http://localhost:8080/users/getuser/'
 
 //let authToken;
@@ -18,7 +19,9 @@ function userSearch () {
         //create variable by listening for value entered into FORM fields
         let username = $('.js-userIdfield').val();
         let password = $('.js-userPassField').val();
-        
+
+
+
         //call next function by name of function with args of <userValue(s)> and future "render/task" function  
         //Data returned from callback will send to "render/task" function  
         console.log('username: ', username);
@@ -87,12 +90,62 @@ function findUser(username, password) {
 
 //results function, single arg of data which is returned from the callback
 
-function checkUser(data) {
+function createUser() {
 
-    console.log('data: ', data);
+    $('.js-newUserForm').unbind().submit(function(event) {
 
+        event.preventDefault();
+
+        let firstName = $('.js-newUserFirstField').val()
+        let lastName = $('.js-newUserLastField').val()
+        let email = $('.js-newUserEmailField').val()
+        let username = $('.js-newUserIdField').val()
+        let password = $('.js-newUserPassField').val()
+        let passwordConf = $('.js-newUserPassConfField').val()
+
+
+        console.log('firstName: ', firstName) 
+        console.log('lastName: ', lastName) 
+        console.log('email: ', email) 
+        console.log('username: ', username) 
+        console.log('password: ', password) 
+        console.log('passwordConf: ', passwordConf) 
+
+        if (password !== passwordConf) {
+            alert('Your passwords do not match!')
+            return;
+        }
+
+        else {      
+
+            let createNewQuery = {
+                async: true,
+                crossDomain: true,
+                url: `${newUserURL}`,
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                processData: false,
+                data: JSON.stringify({firstName: `${firstName}`, lastName: `${lastName}`, email: `${email}`,username: `${username}`,password: `${password}`}),
+                success: function(response) {
+                    console.log('success response: ', response)
+
+                        alert("Congratulations, you now have an account!")
+                        
+                        $('#closeNewUserModal')[0].click()
+
+                        findUser(username, password)
+                    }
+                } 
+                
+                console.log('createNewQuery = ', createNewQuery)
+                
+                $.ajax(createNewQuery).done(function(response) {
+                    console.log('response: ', response)
+            })
+        }
+
+    })
 };
-
     
     //create const for new array after mapping data arg
       //  console.log('map data: ', data)
@@ -102,5 +155,10 @@ function checkUser(data) {
 
     //renter returned HTML to screen at appropriate class object
 
+function publicPage() {
+    userSearch();
+    createUser();
+}
 
-$(userSearch);
+
+$(publicPage);
