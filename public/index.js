@@ -2,10 +2,8 @@
 
 //Create constant for API URL
 const userAuth = 'http://localhost:8080/auth/login/'
-const newUserURL = 'http://localhost:8080/users'
+const userURL = 'http://localhost:8080/users'
 const getUserTokenURL = 'http://localhost:8080/users/getuser/'
-
-//let authToken;
 
 //First function that is in the EOF call
 function userSearch () {
@@ -37,37 +35,27 @@ function userSearch () {
 
 //2nd function with args - <userValue(s)> and callback to send data BACK to first function
 function findUser(username, password) {
+    console.log('username: ', username) 
+    console.log('password: ', password) 
 
-    let userToken = {
-        async: true,
-        crossDomain: true,
-        url: `${getUserTokenURL}` + `${username}`,
-        method: 'GET',
-        headers: {'Content-Type': 'application/json'},
-        processData: false,
-        //data: JSON.stringify(`${username}`),
-        success: function(response) {
-                sessionStorage.setItem('userToken', JSON.stringify(response.id)) 
-        }
-    }
-
-    $.ajax(userToken).done(function(response) {
-        console.log('user response: ', response)
-    })
-
-    let query = {
-        async: true,
-        crossDomain: true,
-        url: `${userAuth}`,
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        processData: false,
-        data: JSON.stringify({username: `${username}`,password: `${password}`}),
-        success: function(response) {
+        
+        let query = {
+            async: true,
+            crossDomain: true,
+            url: `${userAuth}`,
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            processData: false,
+            data: JSON.stringify({username: `${username}`,password: `${password}`}),
+            error: function (xhr) { 
+                let err = xhr.responseText;
+                if (err === 'Unauthorized'){
+                  alert('Unable to authorize access, try again.')
+                }
+            },
+            success: function(response) {
                 sessionStorage.setItem('authToken', JSON.stringify(response.authToken))
-                //authToken = response;
-                //alert("success!")
-                location.href = "/ChallengeAccepted/clientSite/index.html"
+                $.ajax(getUserToken)
             }
         } 
         
@@ -75,15 +63,32 @@ function findUser(username, password) {
         
         $.ajax(query).done(function(response) {
             console.log('response: ', response)
-
-    // WHY DOESN'T THIS WORK?
-        if (!response.authToken) {
-            console.log('response: ', response)
-            alert("Unable to authorize access")
-        }
         
     });
     
+    let getUserToken = {
+        async: true,
+        crossDomain: true,
+        url: `${getUserTokenURL}` + `${username}`,
+        method: 'GET',
+        headers: {        
+            'Content-Type': 'application/json',
+            },
+        processData: false,
+        error: function (xhr) { 
+            let err = xhr.responseText;
+            alert('Unable to authorize access, try again.')
+            },
+        success: function(response) {
+            sessionStorage.setItem('userToken', JSON.stringify(response.id))
+            sessionStorage.setItem('lifeDistance', JSON.stringify(response.lifeDistance))
+            sessionStorage.setItem('lifeSteps', JSON.stringify(response.lifeSteps))
+            sessionStorage.setItem('username', username) 
+
+            location.href = "/ChallengeAccepted/clientSite/index.html"
+
+            }
+        }
 
 
 };
@@ -121,19 +126,22 @@ function createUser() {
             let createNewQuery = {
                 async: true,
                 crossDomain: true,
-                url: `${newUserURL}`,
+                url: `${userURL}`,
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 processData: false,
-                data: JSON.stringify({firstName: `${firstName}`, lastName: `${lastName}`, email: `${email}`,username: `${username}`,password: `${password}`}),
+                data: JSON.stringify({firstName: `${firstName}`, lastName: `${lastName}`, email: `${email}`,username: `${username}`,password: `${password}`,lifeSteps: '0',lifeDistance: '0'}),
+                error: function (xhr) { 
+                    alert(`${xhr.responseJSON.reason}: ${xhr.responseJSON.location} ${xhr.responseJSON.message}`)
+                    },
                 success: function(response) {
                     console.log('success response: ', response)
 
-                        alert("Congratulations, you now have an account!")
+                       //alert("Congratulations, you now have an account!")
                         
                         $('#closeNewUserModal')[0].click()
 
-                        findUser(username, password)
+                        findUser(username, password);
                     }
                 } 
                 

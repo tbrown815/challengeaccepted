@@ -1,53 +1,34 @@
 const authToken = JSON.parse(`${sessionStorage.getItem('authToken')}`);
 const userToken = JSON.parse(`${sessionStorage.getItem('userToken')}`);
-
-const getUserStatsURL = 'http://localhost:8080/site/stats/';
-const delUserStatsURL = 'http://localhost:8080/site/';
-
-let MOCK_USER_STATS = {
-    "userStats": [
-
-        {
-            "date": "05-24-2018",
-            "steps": "12535",
-            "distance": "4.1",
-            "duration": "94",
-            "exType": "walk"
-        },
-        {
-            "date": "05-25-2018",
-            "steps": "4532",
-            "distance": "1.9",
-            "duration": "24",
-            "exType": "run"
-        },
-        {
-            "date": "05-26-2018",
-            "steps": "3423",
-            "distance": "1.2",
-            "duration": "15",
-            "exType": "walk"
-        }
-    ]
-};
+const username = sessionStorage.getItem('username');
+const totalSteps = JSON.parse(`${sessionStorage.getItem('lifeSteps')}`);
+const totalDistance = JSON.parse(`${sessionStorage.getItem('lifeDistance')}`);
 
 
+const getuserStatsURL = 'http://localhost:8080/site/stats/';
+const userStatsURL = 'http://localhost:8080/site/';
+const userLifeTimeURL = 'http://localhost:8080/users/update/';
 
-let totalSteps = 0;
-let totalDistance = 0;
+
 
 
 function getUserStats() {
- //   setTimeout(function() {userBack(MOCK_USER_STATS)}, 1);
+    //   setTimeout(function() {userBack(MOCK_USER_STATS)}, 1);
+    if (authToken === null || userToken === null) {
+        location.href = "/ChallengeAccepted/public"
+    };
 
     let userStats = {
         async: true,
         crossDomain: true,
-        url: `${getUserStatsURL}` + `${userToken}`,
+        url: `${getuserStatsURL}` + `${userToken}`,
         method: 'GET',
-        headers: {Authorization: `Bearer ${authToken}`},
+        headers: {        
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+            },
         success: function(response) {
-                console.log('user stat success') 
+        console.log('user stat success') 
         }
     }
 
@@ -63,18 +44,10 @@ function getUserStats() {
 
 function displayUserStats(data) {
     console.log('data: ', data)
-    //console.log('data.userStats.length: ', data.userStats.length)
-
+    
     let userStatArray = data.userStats;
-
-    for (let i=0; i<userStatArray.length; i++) {
-
-        
-        totalSteps = totalSteps + parseInt(data.userStats[i].steps)
-        totalDistance = totalDistance + parseInt(data.userStats[i].distance)
-    }
-        
-        $('.js-lifeStats').html(`
+    
+    $('.js-lifeStats').html(`
         <p>Lifetime stats:</p>
         <ul>
         <li>Lifetime Steps: ${totalSteps}
@@ -107,8 +80,6 @@ function displayUserStats(data) {
         let numSteps = data.userStats[index].steps;
         let distance = data.userStats[index].distance;
         let exertype = data.userStats[index].exertype;
-
-        //$('.js-formSteps').val(numSteps);
 
 
         if(numSteps === null && distance === null) {
@@ -172,7 +143,7 @@ function displayUserStats(data) {
 
         console.log('edit id: ', clickedId)
 
-        editStats(clickedId);
+        editGetStats(clickedId);
 
     })
 
@@ -192,8 +163,87 @@ function displayUserStats(data) {
 }
 
 
-function editStats(data) {
+function editGetStats(data) {
+
+    let editID = data;
+
+
+    let findStat = {
+        async: true,
+        crossDomain: true,
+        url:  `${userStatsURL}` + `${editID}`,
+        method: 'GET',
+        headers: {        
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+            },
+        success: function() {
+        console.log('user stat retrieved') 
+        }
+    }
+
+    $.ajax(findStat).done(function(response) {
+        displayEditStats(response, editID);
+    })
+
+
+}
+
+
+function displayEditStats(data, editID) {
     console.log('edit data: ', data)
+
+
+
+    editID = editID;
+    let exerDate = data.date.substring(0, 10);
+    let numSteps = data.steps;
+    let distance = data.distance;
+    let exertype = data.exertype;
+
+    $('#editDateEntry').val(exerDate);
+    $('#editStepsField').val(numSteps);
+    $('#editDistanceField').val(distance);
+    $('#selectEditExerType').val(exertype);
+
+    saveEditStats(exerDate, numSteps, distance, exertype, editID);
+}
+
+function saveEditStats(exerDate, numSteps, distance, exertype, editID) {
+
+
+
+    $('.js-editExerForm').unbind().submit(function(event) {
+
+        event.preventDefault();
+
+        editID = editID;
+        let newExerDate = $('#editDateEntry').val();
+        let newNumSteps = $('#editStepsField').val();
+        let newDistance = $('#editDistanceField').val();
+        let newExertype = $('#selectEditExerType').val();
+
+
+        let editStats = {
+            async: true,
+            crossDomain: true,
+            url: `${userStatsURL}` + `${editID}`,
+            method: 'PUT',
+            headers: {        
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${authToken}`
+                },
+            processData: false,
+            data: JSON.stringify({id: `${editID}`,date: `${newExerDate}`,steps: `${newNumSteps}`,distance: `${newDistance}`,exertype: `${newExertype}`}),
+            success: function(response) {
+                console.log('user stat updated')
+                $('#closeEditModal')[0].click();
+            }
+        }
+
+        console.log('editStats: ', editStats)
+        $.ajax(editStats);
+    })
 
 }
 
@@ -210,12 +260,15 @@ function delStats(data) {
         let delStats = {
             async: true,
             crossDomain: true,
-            url: `${delUserStatsURL}` + `${delID}`,
+            url: `${userStatsURL}` + `${delID}`,
             method: 'DELETE',
-            headers: {Authorization: `Bearer ${authToken}`},
+            headers: {        
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${authToken}`
+                },
             success: function(response) {
-                    console.log('user stat removed') 
-                    $('#closeDelModal')[0].click()
+                console.log('user stat removed') 
+                $('#closeDelModal')[0].click()
             }
         }
 
@@ -227,8 +280,98 @@ function delStats(data) {
 
 }
 
+
+function newExerStat() {
+
+//exerDate, numSteps, distance, exertype, editID
+
+/*
+  
+    execDateEntry
+    selectExerType
+    stepsField
+    distanceField
+
+*/
+
+    $('.js-enterStatsForm').unbind().submit(function(event) {
+
+        event.preventDefault();
+
+        let addExerDate = $('#execDateEntry').val();
+        let addNumSteps = $('#stepsField').val();
+        let addDistance = $('#distanceField').val();
+        let addExertype = $('#selectExerType').val();
+
+        let updateSteps = parseFloat(totalSteps) + parseFloat(addNumSteps);
+
+        let updateDistance = parseFloat(totalDistance) + parseFloat(addDistance);
+
+        console.log('updateSteps: ', updateSteps)
+        console.log('updateDistance: ', updateDistance)
+
+        let newStats = {
+            async: true,
+            crossDomain: true,
+            url: `${userStatsURL}`,
+            method: 'POST',
+            headers: {        
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${authToken}`
+                },
+            processData: false,
+            data: JSON.stringify({user: `${userToken}`,date: `${addExerDate}`,steps: `${addNumSteps}`,distance: `${addDistance}`,exertype: `${addExertype}`}),
+            success: function(response) {
+                $.ajax(updateLifeTime);
+                console.log('user stat create')
+            }
+        }
+
+        let updateLifeTime = {
+
+            async: true,
+            crossDomain: true,
+            url: `${userLifeTimeURL}` + `${userToken}`,
+            method: 'PUT',
+            headers: {        
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${authToken}`
+                } ,
+            processData: false,
+            data: JSON.stringify({id: `${userToken}`,lifeSteps: `${updateSteps}`,lifeDistance: `${updateDistance}`}),
+            success: function() {
+                sessionStorage.setItem('lifeSteps', JSON.stringify(updateSteps))
+                sessionStorage.setItem('lifeDistance', JSON.stringify(updateDistance))
+                console.log('lifetime stats updated')
+            }
+        }
+
+        console.log('newStats: ', newStats)
+        $.ajax(newStats);
+    })
+
+}
+
+
+
+
+function userLogOut() {
+    $('.js-topNav').html(`
+    <h1>Hello ${username}!</h1>
+    <a href='/ChallengeAccepted/public/' class='logoutLink js-logoutLink' id='logoutLink'>Logout</a>
+    `)
+
+    $('#logoutLink').click(function(event) {
+       // event.preventDefault();
+        sessionStorage.clear();
+    });
+
+}
+
     
 function getAndDisplayInfo() {
+    userLogOut();
+    newExerStat();
     getUserStats(displayUserStats);
            
     $('.js-bottomtemp').html(`
@@ -236,6 +379,7 @@ function getAndDisplayInfo() {
     <ul>
     <li>authToken: ${authToken}
     <li>userToken: ${userToken}
+    <li>username: ${username}
     </ul>`
     );
     

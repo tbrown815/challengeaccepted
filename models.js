@@ -64,7 +64,9 @@ userInfoSchema.methods.cleanUp = function() {
 //*
 userInfoSchema.methods.setToken = function() {
     return {
-        id: this._id
+        id: this._id,
+        lifeSteps: this.lifeSteps,
+        lifeDistance: this.lifeDistance
     };
 };
 

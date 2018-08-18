@@ -32,16 +32,27 @@
     <!-- Background image that can scale responsively
       <img src='image_path_and_name.jpg' class='bg' alt='background'>
   --> 
+  <div class='row'>
+    <div class='col-12'>
+    
+      <div class='topNav js-topNav'>
+        <!--this is the nav menu-->
+      </div>
+    
+    </div>
+   </div>
+
+    
 <div class='row'>
 <div class='leftSection col-6'>
 
   <div class='lifeStats js-lifeStats'>
        <!--Personal Stats will display here-->
   </div>
-  
+
   <div class='enterStats js-enterStats'>
     <!--User can enter stats here-->
-    <form id='enterStats' role='form' class='enterStats js-enterStats'>
+    <form id='enterStatsForm' role='form' class='enterStatsForm js-enterStatsForm'>
       <fieldset name='enterStats'>
         <label class='execDate js-execDate' for='execDateEntry'>Exercise date:
           <br>
@@ -50,7 +61,7 @@
         <br><br>
         <label class='selectExer js-selectExer' for='selectExerType'>Type of Exercise:
             <br>
-            <select id='selectExerType'>
+            <select id='selectExerType' class='selectExerType js-selectExerType'>
               <option value=''>--Select an exercise--</option>
               <option value='walk'>Walk</option>
               <option value='run'>Run</option>
@@ -91,25 +102,56 @@
 
   <br><br><br>
 
-<div class='row'>
-<div class='col-12'>
-
-  <div class='js-bottomtemp'>
-    <!--TEMP INFO FOR TESTING-->
-  THis is col 12  
-  </div>
-
-</div>
-</div>
+  <div class='row'>
+    <div class='col-12'>
+    
+      <div class='bottomtemp js-bottomtemp'>
+        <!--this is the temp info-->
+      </div>
+    
+    </div>
+   </div>
 
 <div id='openEditModal' class='modal modal js-modal'>
     <div>
-        <a href='#close' title='closeModal' class='closeModal js-closeModal'>X</a>
+        <a href='#close' title='closeModal' id='closeEditModal' class='closeModal js-closeModal'>X</a>
         <h2 class='modalTitle'>Edit</h2>
-        <p>Content goes here</p>
-        <br>
-        <p>Content goes here
-        </p>
+        <form id='editExerForm' role='form' class='editExerForm js-editExerForm'>
+          <fieldset name='editExerStat'>
+            <label class='editExerStat js-editExerStat' for='editExerStat'>
+              <form id='enterStats' role='form' class='enterStats js-enterStats'>
+                <fieldset name='editStats'>
+                  <label class='editDate js-editDate' for='editDateEntry'>Exercise date:
+                    <br>
+                      <input required id='editDateEntry' class='editDateEntry js-editDateEntry' type='date' name='editDateEntry'>
+                  </label>
+                  <br><br>
+                  <label class='selectEditExer js-selectExer' for='selectEditExerType'>Type of Exercise:
+                      <br>
+                      <select id='selectEditExerType' class='selectEditExerType js-selectEditExerType'>
+                        <option value=''>--Select an exercise--</option>
+                        <option value='walk'>Walk</option>
+                        <option value='run'>Run</option>
+                      </select>
+                    </label>
+                    <br><br>
+                  <label class='editSteps js-editSteps' for='editStepsField'>
+                    Steps:
+                    <input required id='editStepsField' class='editStepsField js-editStepsField' type='text' name='editStepsField' placeholder='Enter # Steps'/>
+                  </label>
+                  <br><br>
+                  <label class='editDistance js-editDistance' for='editDistanceField'>
+                    Distance:
+                    <input required id='editDistanceField' class='editDistanceField js-editDistanceField' type='text' name='editDistanceField' placeholder='Enter Distance'/>
+                  </label>
+                  <br><br>
+                  <label class='submitEditStats js-submitEditStats' for='submitEditStatsButton'>
+                    <button required class='submitEditStatsButton js-submitEditStatsButton' type='submit' name='submitEditStatsButton'>Update Activity</button>
+                  </label>
+                  
+                </fieldset>
+                
+              </form>  
     </div>
 </div>
 

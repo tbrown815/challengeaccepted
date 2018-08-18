@@ -16,7 +16,7 @@ const jwt = require('jsonwebtoken');
 //* create const for jsson Parser that calls bodyParser json with no args
 const jsonParser = bodyParser.json();
 
-//const jwtAuth = passport.authenticate('jwt', {session: false});
+const jwtAuth = passport.authenticate('jwt', {session: false});
 
 
 router.get('/', (req, res) => {
@@ -48,9 +48,8 @@ router.get('/:id', (req, res) => {
     })
 })
 
+
 //GET userToken
-
-
 router.get('/getuser/:username', (req, res) => {
 
     userInfoModel.findOne({username: req.params.username})
@@ -62,24 +61,6 @@ router.get('/getuser/:username', (req, res) => {
         res.status(500).json({"error message": 'unable to find user'});
     })
 })
-
-/*
-router.get('/getuser/:id', (req, res) => {
-
-    userInfoModel.find({username: req.params.username})
-    .then(username => {
-        res.json({username: username.map(
-            (user) => user.cleanUp()
-            )}
-        )
-    })
-    //ERROR CATCHER
-    .catch(err => {
-        console.error(err)
-        res.status(500).json({"error message": 'Something is broken'});
-    });
-});
-*/
 
 
 //*
@@ -130,17 +111,17 @@ router.post('/', jsonParser, (req, res) => {
     if (tooShort || tooLong) {
         return res.status(422).json({
           code: 422,
-          reason: 'ValidationError',
+          reason: 'ERROR',
           message: tooShort
             ? `is required to be at least ${userPassLength[tooShort]
               .min} characters long`
             : `Cannot be greater than ${userPassLength[tooLong]
-              .max} characters long`,
+              .max} characters`,
           location: tooShort || tooLong
         });
       }
 
-    let {username, password, firstName = '', lastName = '', email} = req.body;
+    let {username, password, firstName = '', lastName = '', email, lifeSteps, lifeDistance} = req.body;
 
     firstName = firstName.trim();
     lastName = lastName.trim();
@@ -168,7 +149,9 @@ router.post('/', jsonParser, (req, res) => {
             password: hash,
             firstName,
             lastName,
-            email
+            email,
+            lifeSteps,
+            lifeDistance
         });
     })
     .then(user => {
@@ -186,11 +169,11 @@ router.post('/', jsonParser, (req, res) => {
 
 
 //*
-//PUT to update user password or E-mail
+//PUT to update life stats
 
-router.put('/update/:id', jsonParser, (req,res) => {
+router.put('/update/:id', jwtAuth, jsonParser, (req,res) => {
 
-    const requiredFields = ['id'];
+    const requiredFields = ['id', 'lifeSteps' || 'lifeDistance'];
 
     const noField = requiredFields.find(field => !(field in req.body));
 
@@ -213,7 +196,7 @@ router.put('/update/:id', jsonParser, (req,res) => {
 
     const toUpdate = {};
 
-    const updateAllowed = ['email', 'password'];
+    const updateAllowed = ['lifeSteps', 'lifeDistance'];
 
     updateAllowed.forEach(data => {
         if(data in req.body) {
@@ -221,9 +204,8 @@ router.put('/update/:id', jsonParser, (req,res) => {
         }
     });
 
-        if(toUpdate.hasOwnProperty('email')) {
-            
-            const trimmedFields = ['email'];
+      
+            const trimmedFields = ['lifeSteps', 'lifeDistance'];
             const notTrimmedFields = trimmedFields.find(field => req.body[field].trim() !== req.body[field]);
         
             if(notTrimmedFields) {
@@ -231,9 +213,9 @@ router.put('/update/:id', jsonParser, (req,res) => {
                 console.error(errMessage);
                 return res.status(422).send(errMessage);
             };
-
+//@
         userInfoModel.findByIdAndUpdate(req.params.id, {$set: toUpdate}, {new: true}, function() {
-            return res.send(`${req.body.id} e-mail has been updated`)
+            return res.send(`${req.body.id} has been updated`)
         })
 
         .catch(err => {
@@ -243,79 +225,6 @@ router.put('/update/:id', jsonParser, (req,res) => {
             console.error(err)
             res.status(500).json({"error message": 'something is broken'});
         })
-    }
-
-/*  THIS IS FOR UPDATE PASSWORD - OUT OF SCOPE FOR MVP - FINISH LATER
-
-        if(toUpdate.hasOwnProperty('password')) {
-
-            const trimmedFields = ['password'];
-            const notTrimmedFields = trimmedFields.find(field => req.body[field].trim() !== req.body[field]);
-        
-            if(notTrimmedFields) {
-                const errMessage = `${notTrimmedFields} cannot start or end with whitespace`
-                console.error(errMessage);
-                return res.status(422).send(errMessage);
-            };
-
-            const userPassLength = {
-                password: {min: 8, max: 60}
-            };
-        
-            const tooShort = Object.keys(userPassLength).find(field => 'min' in userPassLength[field] && req.body[field].trim().length < userPassLength[field].min);
-            const tooLong = Object.keys(userPassLength).find(field => 'max' in userPassLength[field] && req.body[field].trim().length > userPassLength[field].max);
-
-            if (tooShort || tooLong) {
-                return res.status(422).json({
-                  code: 422,
-                  reason: 'ValidationError',
-                  message: tooShort
-                    ? `is required to be at least ${userPassLength[tooShort]
-                      .min} characters long`
-                    : `Cannot be greater than ${userPassLength[tooLong]
-                      .max} characters long`,
-                  location: tooShort || tooLong
-                });
-              }
-
-            let {id, password} = req.body;
-
-            return userInfoModel.find({id})
-            .then(id => {
-                if(!id) {
-                    return Promise.reject({
-                        code: 422,
-                        reason: 'ValidationError',
-                        message: 'User does not exist',
-                        location: 'id'
-                      });  
-                }
-
-                return userInfoModel.hashPass(password);
-            })
-            
-            .then(hash => {
-
-                let passUpdate = hash;
-
-                userInfoModel.findByIdAndUpdate(req.params.id, {$set: {password: passUpdate}})
-            })
-            
-            .then(() => res.status(204).end()
-
-//                res.status(201).json(data.cleanUp());
-                // return res.status(200).json({"message": "this is a placeholder"})
-            )
-
-       .catch(err => {
-           if (err.reason === 'ERROR') {
-               return res.status(err.code).json(err);
-           }
-           console.error(err)
-           res.status(500).json({"error message": 'something is broken'});
-       })
-    }
-*/
 
 })
 
