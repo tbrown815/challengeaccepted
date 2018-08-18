@@ -27,8 +27,11 @@ function getUserStats() {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${authToken}`
             },
-        success: function(response) {
-        console.log('user stat success') 
+            error: function (xhr) { 
+                errFunc(xhr)
+                },
+            success: function(response) {
+            console.log('user stat success') 
         }
     }
 
@@ -156,7 +159,7 @@ function displayUserStats(data) {
 
         console.log('del id: ', clickedId)
 
-        delStats(clickedId);
+        delGetStats(clickedId);
 
     })
 
@@ -177,7 +180,10 @@ function editGetStats(data) {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${authToken}`
             },
-        success: function() {
+            error: function (xhr) { 
+                errFunc(xhr)
+                },
+            success: function() {
         console.log('user stat retrieved') 
         }
     }
@@ -223,6 +229,78 @@ function saveEditStats(exerDate, numSteps, distance, exertype, editID) {
         let newDistance = $('#editDistanceField').val();
         let newExertype = $('#selectEditExerType').val();
 
+        let updateSteps = 0;
+        let updateDistance = 0;
+
+        let numStepsUpdate = 0;
+        let numDistanceUpdate = 0;
+
+        if (newNumSteps == numSteps) {
+            
+            numStepsUpdate = parseFloat(newNumSteps) - parseFloat(numSteps)
+            
+            updateSteps = parseFloat(totalSteps) + parseFloat(numStepsUpdate);
+
+        }
+
+        if (newNumSteps > numSteps) {
+
+            numStepsUpdate = parseFloat(newNumSteps) - parseFloat(numSteps)
+            
+            updateSteps = parseFloat(totalSteps) + parseFloat(numStepsUpdate);
+        }
+
+        if (newNumSteps < numSteps) {
+
+            numStepsUpdate = parseFloat(numSteps) - parseFloat(newNumSteps);
+
+            updateSteps = parseFloat(totalSteps) - parseFloat(numStepsUpdate);
+
+        }
+
+        if (newNumSteps == 0 || newNumSteps == null || newNumSteps == undefined) {
+
+                if (newNumSteps == null || newNumSteps == undefined) {
+                    newNumSteps = 0;
+                }
+
+                updateSteps = parseFloat(totalSteps) - parseFloat(numSteps);
+
+        }
+
+
+        if (newDistance == distance) {
+            
+            numStepsUpdate = parseFloat(newDistance) - parseFloat(distance)
+            
+            updateDistance = parseFloat(totalDistance) + parseFloat(numStepsUpdate);
+
+        }
+
+        if (newDistance > distance) {
+
+            numStepsUpdate = parseFloat(newDistance) - parseFloat(distance)
+            
+            updateDistance = parseFloat(totalDistance) + parseFloat(numStepsUpdate);
+        }
+
+        if (newDistance < distance) {
+
+            numStepsUpdate = parseFloat(distance) - parseFloat(newDistance);
+
+            updateDistance = parseFloat(totalDistance) - parseFloat(numStepsUpdate);
+
+        }
+
+        if (newDistance == 0 || newDistance == null || newDistance == undefined) {
+
+                if (newDistance == null || newDistance == undefined) {
+                    newDistance = 0;
+                }
+
+                updateDistance = parseFloat(totalDistance) - parseFloat(distance);
+
+        }
 
         let editStats = {
             async: true,
@@ -235,9 +313,14 @@ function saveEditStats(exerDate, numSteps, distance, exertype, editID) {
                 },
             processData: false,
             data: JSON.stringify({id: `${editID}`,date: `${newExerDate}`,steps: `${newNumSteps}`,distance: `${newDistance}`,exertype: `${newExertype}`}),
+            error: function (xhr) { 
+                errFunc(xhr)
+                },
             success: function(response) {
                 console.log('user stat updated')
                 $('#closeEditModal')[0].click();
+                updateLifeTimeInfo(updateSteps, updateDistance)
+
             }
         }
 
@@ -247,15 +330,50 @@ function saveEditStats(exerDate, numSteps, distance, exertype, editID) {
 
 }
 
-function delStats(data) {
-    console.log('del data: ', data)
+
+
+function delGetStats(data) {
 
     let delID = data;
+
+
+    let findStat = {
+        async: true,
+        crossDomain: true,
+        url:  `${userStatsURL}` + `${delID}`,
+        method: 'GET',
+        headers: {        
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+            },
+            error: function (xhr) { 
+                errFunc(xhr)
+                },
+            success: function(response) {
+                delStats(response);
+        console.log('user stat retrieved') 
+        }
+    }
+
+    $.ajax(findStat)
+    
+}
+
+function delStats(response) {
+    console.log('delStat data: ', response)
+
+
+    delID = response.id;
+    let numSteps = response.steps;
+    let numDistance = response.distance;
 
     $('.js-delExerForm').unbind().submit(function(event) {
         
         
         event.preventDefault();
+
+        let updateSteps = parseFloat(totalSteps) - parseFloat(numSteps);
+        let updateDistance = parseFloat(totalDistance) - parseFloat(numDistance);
         
         let delStats = {
             async: true,
@@ -266,33 +384,23 @@ function delStats(data) {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${authToken}`
                 },
-            success: function(response) {
-                console.log('user stat removed') 
+                error: function (xhr) { 
+                    errFunc(xhr)
+                    },
+                success: function() {
+                console.log('user stat removed')
                 $('#closeDelModal')[0].click()
+                updateLifeTimeInfo(updateSteps, updateDistance)
             }
         }
-
-        $.ajax(delStats);
-
         
-        //  $('#div').load('#div > *')
+        $.ajax(delStats);
     })
 
 }
 
 
 function newExerStat() {
-
-//exerDate, numSteps, distance, exertype, editID
-
-/*
-  
-    execDateEntry
-    selectExerType
-    stepsField
-    distanceField
-
-*/
 
     $('.js-enterStatsForm').unbind().submit(function(event) {
 
@@ -321,38 +429,50 @@ function newExerStat() {
                 },
             processData: false,
             data: JSON.stringify({user: `${userToken}`,date: `${addExerDate}`,steps: `${addNumSteps}`,distance: `${addDistance}`,exertype: `${addExertype}`}),
+            error: function (xhr) { 
+                errFunc(xhr)
+                },
             success: function(response) {
-                $.ajax(updateLifeTime);
                 console.log('user stat create')
+                updateLifeTimeInfo(updateSteps, updateDistance)
             }
         }
 
-        let updateLifeTime = {
-
-            async: true,
-            crossDomain: true,
-            url: `${userLifeTimeURL}` + `${userToken}`,
-            method: 'PUT',
-            headers: {        
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${authToken}`
-                } ,
-            processData: false,
-            data: JSON.stringify({id: `${userToken}`,lifeSteps: `${updateSteps}`,lifeDistance: `${updateDistance}`}),
-            success: function() {
-                sessionStorage.setItem('lifeSteps', JSON.stringify(updateSteps))
-                sessionStorage.setItem('lifeDistance', JSON.stringify(updateDistance))
-                console.log('lifetime stats updated')
-            }
-        }
-
-        console.log('newStats: ', newStats)
         $.ajax(newStats);
     })
 
 }
 
 
+function updateLifeTimeInfo(updateSteps, updateDistance) {
+    console.log('updateLifeTimeInfo start')
+
+    let updateLifeTime = {
+
+        async: true,
+        crossDomain: true,
+        url: `${userLifeTimeURL}` + `${userToken}`,
+        method: 'PUT',
+        headers: {        
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+            } ,
+        processData: false,
+        data: JSON.stringify({id: `${userToken}`,lifeSteps: `${updateSteps}`,lifeDistance: `${updateDistance}`}),
+        error: function (xhr) { 
+            errFunc(xhr)
+            },
+        success: function() {
+            sessionStorage.setItem('lifeSteps', JSON.stringify(updateSteps))
+            sessionStorage.setItem('lifeDistance', JSON.stringify(updateDistance))
+            console.log('lifetime stats updated')
+            location.reload(true);
+        }
+    }
+    
+    $.ajax(updateLifeTime);
+    
+};
 
 
 function userLogOut() {
@@ -366,8 +486,12 @@ function userLogOut() {
         sessionStorage.clear();
     });
 
-}
+};
 
+function errFunc(xhr) {
+    return  alert(`${xhr.responseJSON.reason}: ${xhr.responseJSON.location} ${xhr.responseJSON.message}`)
+  
+  };
     
 function getAndDisplayInfo() {
     userLogOut();

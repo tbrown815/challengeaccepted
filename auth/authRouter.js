@@ -19,8 +19,6 @@ const jwtAuth = passport.authenticate('jwt', {session: false});
 
 const createAuthToken = function(user) {
     
-    let timeVal = new Date().getTime();
-
     return jwt.sign({user}, config.JWT_SECRET,
         {subject: user.username,
         expiresIn: config.JWT_EXPIRE,

@@ -33,7 +33,7 @@ router.get('/', jwtAuth, (req, res) => {
     //ERROR CATCHER
     .catch(err => {
         console.error(err)
-        res.status(500).json({"error message": 'Something is broken'});
+        res.status(500).json({"code": "500", "reason": "ERROR", "location": "1", "message": 'Something is broken'});
     });
 })
 
@@ -49,7 +49,7 @@ router.get('/:id', jwtAuth, (req, res) => {
     })
     .catch(err => {
         console.error(err)
-        res.status(500).json({"error message": 'unable to find id'});
+        res.status(500).json({"code": "500", "reason": "ERROR", "location": "", "message": 'unable to find id'});
     })
 })
 
@@ -70,7 +70,7 @@ router.get('/stats/:id', jwtAuth, (req, res) => {
     //ERROR CATCHER
     .catch(err => {
         console.error(err)
-        res.status(500).json({"error message": 'Something is broken'});
+        res.status(500).json({"code": "500", "reason": "ERROR", "location": "", "message": 'unable to find id'});
     });
 });
 
@@ -88,25 +88,10 @@ router.post('/', jsonParser, jwtAuth, (req,res) => {
     return res.status(422).json(
     {code: 422,
       reason: 'ERROR',
-      message: 'Field is not present',
+      message: ' is not present',
       location: noField
     });
   }
-
-  /* WEIRD ERROR - errMessage {field} is not defined???
-    const areNum = ['steps', 'distance'];
-
-    const notNum = areNum.find(field =>
-        field in req.body && typeof req.body[field] !== 'number');
-
-    if(notNum) {
-        const errMessage = `${field} is not of the correct type`
-        console.error(errMessage);
-        return res.status(422).send(errMessage);
-    };
-
-    */
-
 
     const trimmedFields = ['date', 'exertype', 'steps', 'distance'];
     const notTrimmedFields = trimmedFields.find(field => req.body[field].trim() !== req.body[field]);
@@ -143,7 +128,7 @@ router.post('/', jsonParser, jwtAuth, (req,res) => {
 
         .catch(err => {
             console.error(err)
-            res.status(500).json({"error message": "something went wrong"})
+            res.status(500).json({"code": "500", "reason": "ERROR", "location": "", "message": "something went wrong"})
         });
 
 
@@ -154,7 +139,7 @@ router.post('/', jsonParser, jwtAuth, (req,res) => {
     //ERROR CATCHER
         .catch(err => {
             console.error(err)
-            res.status(500).json({"error message": 'bam unable to post data'})
+            res.status(500).json({"code": "500", "reason": "ERROR", "location": "", "message": 'unable to post data'})
             
         }) 
     
@@ -196,30 +181,27 @@ router.put('/:id', jsonParser, jwtAuth, (req,res) => {
         }
     });
 
-    exerStatsModel.findByIdAndUpdate(req.params.id, {$set: toUpdate})
+    exerStatsModel.findByIdAndUpdate(req.params.id, {$set: toUpdate}, {new: true}, function() {
+       // res.send(`${req.body.id} has been updated`)
+        res.json({"code": "200", "reason": "SUCCESS", "location": "", "message": `User record has been updated`})
 
-    .then(data =>
-        res.status(204).json({"message": `${req.body.id} has been updated`}))
+    })
 
-})
-
+});
 
 //DELETE EXER
 router.delete('/:id', jwtAuth, (req,res) => {
 
-    exerStatsModel.findByIdAndRemove(req.params.id)
-
-    .then(data => {
-        res.status(204).json({message: `${req.params.id} has been removed`}).end();
+    exerStatsModel.findByIdAndRemove(req.params.id,  function() {
+        //res.send(`${req.params.id} has been removed`)
+        res.json({"code": "200", "reason": "SUCCESS", "location": "", "message": `User record has been removed`})
     })
-    
-
+  
     .catch(err => {
 
         console.error(err);
 
-        res.status(500).json({"error message": 'error occurred while deleting'})
-
+        res.status(500).json({"code": "500", "reason": "ERROR", "location": "", "message": 'error occurred while deleting'})
     })
 
 })

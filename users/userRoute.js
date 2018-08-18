@@ -31,7 +31,7 @@ router.get('/', (req, res) => {
     //ERROR CATCHER
     .catch(err => {
         console.error(err)
-        res.status(500).json({"error message": 'Something is broken'});
+        res.status(500).json({"code": "500", "reason": "ERROR", "location": "", "message": 'Something is broken'});
     });
 })
 
@@ -44,7 +44,7 @@ router.get('/:id', (req, res) => {
     })
     .catch(err => {
         console.error(err)
-        res.status(500).json({"error message": 'unable to find id'});
+        res.status(500).json({"code": "500", "reason": "ERROR", "location": "", "message": 'unable to find id'});
     })
 })
 
@@ -58,7 +58,7 @@ router.get('/getuser/:username', (req, res) => {
     })
     .catch(err => {
         console.error(err)
-        res.status(500).json({"error message": 'unable to find user'});
+        res.status(500).json({"code": "500", "reason": "ERROR", "location": "", "message": 'unable to find user'});
     })
 })
 
@@ -162,7 +162,7 @@ router.post('/', jsonParser, (req, res) => {
                 return res.status(err.code).json(err);
             }
             console.error(err)
-            res.status(500).json({"error message": 'something is broken'});
+            res.status(500).json({"code": "500", "reason": "ERROR", "location": "", "message": 'something is broken'});
     })
 
 })
@@ -223,7 +223,7 @@ router.put('/update/:id', jwtAuth, jsonParser, (req,res) => {
                 return res.status(err.code).json(err);
             }
             console.error(err)
-            res.status(500).json({"error message": 'something is broken'});
+            res.status(500).json({"code": "500", "reason": "ERROR", "location": "", "message": 'something is broken'});
         })
 
 })

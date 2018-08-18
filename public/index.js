@@ -76,8 +76,7 @@ function findUser(username, password) {
             },
         processData: false,
         error: function (xhr) { 
-            let err = xhr.responseText;
-            alert('Unable to authorize access, try again.')
+            errFunc(xhr)
             },
         success: function(response) {
             sessionStorage.setItem('userToken', JSON.stringify(response.id))
@@ -132,7 +131,7 @@ function createUser() {
                 processData: false,
                 data: JSON.stringify({firstName: `${firstName}`, lastName: `${lastName}`, email: `${email}`,username: `${username}`,password: `${password}`,lifeSteps: '0',lifeDistance: '0'}),
                 error: function (xhr) { 
-                    alert(`${xhr.responseJSON.reason}: ${xhr.responseJSON.location} ${xhr.responseJSON.message}`)
+                    errFunc(xhr)
                     },
                 success: function(response) {
                     console.log('success response: ', response)
@@ -155,13 +154,10 @@ function createUser() {
     })
 };
     
-    //create const for new array after mapping data arg
-      //  console.log('map data: ', data)
+function errFunc(xhr) {
+  return  alert(`${xhr.responseJSON.reason}: ${xhr.responseJSON.location} ${xhr.responseJSON.message}`)
 
-
-      //return params present in data as HTML to pass to lower jQuery html display
-
-    //renter returned HTML to screen at appropriate class object
+}
 
 function publicPage() {
     userSearch();
