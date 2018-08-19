@@ -2,6 +2,9 @@
 
 //Create constant for API URL
 
+let userAuth;
+let userURL;
+let getUserTokenURL;
 
 function checkEnv() {
     
@@ -11,15 +14,15 @@ function checkEnv() {
     
     if (envName > 1) {
         console.log('envName > 1: ', envName > 1)
-        const userAuth = '/auth/login/'
-        const userURL = '/users'
-        const getUserTokenURL = '/users/getuser/'
+        userAuth = '/auth/login/';
+        userURL = '/users';
+        getUserTokenURL = '/users/getuser/';
     }
 
     else {
-        const userAuth = 'http://localhost:8080/auth/login/'
-        const userURL = 'http://localhost:8080/users'
-        const getUserTokenURL = 'http://localhost:8080/users/getuser/'
+        userAuth = 'http://localhost:8080/auth/login/';
+        userURL = 'http://localhost:8080/users';
+        getUserTokenURL = 'http://localhost:8080/users/getuser/';
     };
 };
 

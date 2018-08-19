@@ -4,7 +4,9 @@ const username = sessionStorage.getItem('username');
 const totalSteps = JSON.parse(`${sessionStorage.getItem('lifeSteps')}`);
 const totalDistance = JSON.parse(`${sessionStorage.getItem('lifeDistance')}`);
 
-
+let getuserStatsURL;
+let userStatsURL;
+let userLifeTimeURL;
 
 function checkEnv() {
     
@@ -15,15 +17,15 @@ function checkEnv() {
     if (envName > 1) {
         console.log('envName > 1: ', envName > 1)
         
-        const getuserStatsURL = '/site/stats/';
-        const userStatsURL = '/site/';
-        const userLifeTimeURL = '/users/update/';
+        getuserStatsURL = '/site/stats/';
+        userStatsURL = '/site/';
+        userLifeTimeURL = '/users/update/';
     }
 
     else {
-        const getuserStatsURL = 'http://localhost:8080/site/stats/';
-        const userStatsURL = 'http://localhost:8080/site/';
-        const userLifeTimeURL = 'http://localhost:8080/users/update/';
+        getuserStatsURL = 'http://localhost:8080/site/stats/';
+        userStatsURL = 'http://localhost:8080/site/';
+        userLifeTimeURL = 'http://localhost:8080/users/update/';
     };
 };
 
