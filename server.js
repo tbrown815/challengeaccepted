@@ -31,8 +31,8 @@ const app = express();
 
 app.use(morgan('common'));
 
-app.use('/public', express.static(__dirname + 'public'));
-app.use('/clientSite', express.static(__dirname + 'clientSite'));
+app.use('public', express.static(__dirname + 'public'));
+app.use('clientSite', express.static(__dirname + 'clientSite'));
 
 //app.use('/clientSite', express.static('siteRoute'));
 //app.use('/user', express.static('userRoute'));
