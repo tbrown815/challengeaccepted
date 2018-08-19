@@ -403,7 +403,7 @@ function delStats(response) {
     console.log('delStat data: ', response)
 
 
-    delID = response.id;
+    let delID = response.id;
     let numSteps = response.steps;
     let numDistance = response.distance;
 
