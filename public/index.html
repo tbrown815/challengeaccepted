@@ -16,8 +16,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
 
     <!-- styles -->
+    <link href="../grid_v2.css" rel="stylesheet" type="text/css" />
+    <link href='../common.css' rel='stylesheet' type='text/css' />
     <link href="index.css" rel="stylesheet" type="text/css" />
-    <link href="grid_v2.css" rel="stylesheet" type="text/css" />
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
@@ -36,14 +37,14 @@
       
     <div class='row'>
       
-      <nav class='col-12'>
+      <nav class='col-12 topNav js-topNav'>
         <h1>Challenge Accepted</h1>
       </nav>
 
   </div>
 
   <div class='row'>
-    <div class='col-12'>
+    <div class='col-12' role='presentation'>
 
         <div class='loginBox js-loginBox'>
 
@@ -75,7 +76,7 @@
 
 
 
-      <div id='openNewUserModal' class='modal modal js-modal'>
+      <div id='openNewUserModal' class='modal modal js-modal' role='presentation'>
         <div>
             <a href='#close' title='closeModal' id='closeNewUserModal' class='closeModal js-closeModal'>X</a>
             <h2 class='modalTitle'>Please provide your details:</h2>
@@ -116,11 +117,12 @@
                   <input required id='newUserPassConfField' class='newUserPassConfField js-newUserPassConfField' type='password' name='newUserPassConfField' autocomplete='current-password' placeholder="Confirm your Password"/>
                 </label>
                 <br><br>
+                <div class='buttonDiv'>
 
                 <label class='createUser js-createUser' for='createUserButton'>
-                  <button required class='createUserButton js-createUserButton' type='submit' name='createUserButton'>Submit Details</button>
+                  <button required class='createUserButton js-createUserButton' type='submit' name='createUserButton'>Submit</button>
                 </label>
-          
+                </div>
                 </fieldset>
 
         </div>

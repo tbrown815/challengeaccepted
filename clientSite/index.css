@@ -1,14 +1,93 @@
-https://www.w3schools.com/cssref/css_selectors.asp
 
+nav, .lifeStats, .enterStats, .personStats {
+  background-color: silver !important;
+  border: 1px solid;
+  border-color: black;
+}
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+nav {
+  margin-top: 2%;
+  text-align: center;
+}
+
+.lifeStats, .buttonDiv, input {
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.lifeStats, .enterStats, .personStats {
+  width: 100%;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+.lifeStats, .personStats {
+  width: 100%;
+
+  padding-left: 10px;
+  }
+
+.boxTitle {
+  padding-left: 5%
+}
+
+.topBullet {
+  padding-left: 19%
+}
+
+fieldset {
+  border: 0px;
+}
+.navInfo {
+  padding-bottom: 1%;
+} 
+
+.userHello {
+  margin-bottom: -1%;
+  margin-left: -70%;
+}
+
+.logoutLink {
+  margin-right: -90%;
+}
+
+input {
+  width: 100%;
+}
+
+.buttonDiv {
+  width: 22%;
 }
 
 
-.modal { /*https://www.webdesignerdepot.com/2012/10/creating-a-modal-window-with-html5-and-css3/*/
+/*
+a {
+  font-size: small;
+  color: rgb(52, 53, 9);
+}
+
+a:visited {
+  color: rgb(52, 53, 9);
+}
+
+a:hover {
+font-weight: bold;
+font-size: medium;
+color: yellow
+}
+
+button:hover {
+  font-weight: bold;
+  border-color: yellow
+}
+
+
+.modal { /*https://www.webdesignerdepot.com/2012/10/creating-a-modal-window-with-html5-and-css3/*/ 
+  
+  /*
+
+  
   position: fixed;
   top:  0;
   right: 0;
@@ -60,3 +139,51 @@ https://www.w3schools.com/cssref/css_selectors.asp
   text-align: center;
   font-size: 24px;
 }
+
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px)  {
+  
+  /*increases font size on smaller screens*/
+
+/*
+
+
+  body {
+    font-size: 100%;
+  }
+
+  nav {
+    margin-top: 5%;
+  }
+
+  .loginBox {
+    width: 100%;
+  }
+
+  .modal > div {
+    width: 90%;
+  }
+
+
+}
+
+@media only screen and (min-device-width : 480px) and (max-device-width : 1024px)  {
+  
+  body {
+    font-size: 100%;
+  }
+
+  nav {
+    margin-top: 3%;
+  }
+
+  .loginBox {
+    width: 40%;
+  }
+
+  .modal > div {
+    width: 400px;
+  }
+  
+}
+

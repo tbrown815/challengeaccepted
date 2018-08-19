@@ -73,7 +73,7 @@ describe('Test Resources', function() {
     const jwt = require('jsonwebtoken');
 
     describe('auth', function() {
-        it.only('should return typeof html and status 200', function() {
+        it('should return typeof html and status 200', function() {
             const username = "username"; 
         const firstName = "firsrtname";
         const lastName = "whatever";

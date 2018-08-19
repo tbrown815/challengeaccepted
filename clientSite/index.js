@@ -51,16 +51,16 @@ function displayUserStats(data) {
     let userStatArray = data.userStats;
     
     $('.js-lifeStats').html(`
-        <p>Lifetime stats:</p>
-        <ul>
-        <li>Lifetime Steps: ${totalSteps}
-        <li>Lifetime Distance: ${totalDistance}
+        <H2 class='boxTitle'>Lifetime stats:</h2>
+        <ul class='topBullet'>
+        <li><b>Lifetime Steps:</b> ${totalSteps}
+        <li><b>Lifetime Distance:</b> ${totalDistance} miles
         </ul>`
         
     );
     
     $('.js-personStats').append(
-        '<p>Recent Activity:</p>'
+        `<h2 class='boxTitle'>Recent Activity:</h2>`
     )
     
   
@@ -87,48 +87,56 @@ function displayUserStats(data) {
 
         if(numSteps === null && distance === null) {
             $('.js-personStats').append(`
-                <ul>
+                <ul class='topBullet'>
                 <li>Date: ${exerDate}
-                <li>Activity: ${exertype}
-                <li> <a href='#openEditModal' class='js-editStats' id='${statID}' onclick='(this)'>Edit</a> |
+                <ul>
+                    <li> Activity: ${exertype}
+                    <li> <a href='#openEditModal' class='js-editStats' id='${statID}' onclick='(this)'>Edit</a> |
                     <a href='#openDelModal' class='js-delStats' id='${statID}' onclick='(this)'>Delete</a>
+                </ul>
                 </ul>`
             );
 
         }
         else if(numSteps === null) {
             $('.js-personStats').append(`
-                <ul>
+                <ul class='topBullet'>
                 <li>Date: ${exerDate}
-                <li> Distance: ${distance} miles
-                <li>Activity: ${exertype}
-                <li> <a href='#openEditModal' class='js-editStats' id='${statID}' onclick='(this)'>Edit</a> |
-                    <a href='#openDelModal' class='js-delStats' id='${statID}' onclick='(this)'>Delete</a>
+                <ul>
+                    <li> Distance: ${distance} miles
+                    <li> Activity: ${exertype}
+                    <li> <a href='#openEditModal' class='js-editStats' id='${statID}' onclick='(this)'>Edit</a> |
+                        <a href='#openDelModal' class='js-delStats' id='${statID}' onclick='(this)'>Delete</a>
+                </ul>
                 </ul>`
             );
 
         }
         else if(distance === null) {
             $('.js-personStats').append(`
-                <ul>
+                <ul class='topBullet'>
                 <li>Date: ${exerDate}
-                <li> # Steps: ${numSteps}
-                <li>Activity: ${exertype}
-                <li> <a href='#openEditModal' class='js-editStats' id='${statID}' onclick='(this)'>Edit</a> |
-                    <a href='#openDelModal' class='js-delStats' id='${statID}' onclick='(this)'>Delete</a>
+                <ul>
+                    <li> # Steps: ${numSteps}
+                    <li> Activity: ${exertype}
+                    <li> <a href='#openEditModal' class='js-editStats' id='${statID}' onclick='(this)'>Edit</a> |
+                        <a href='#openDelModal' class='js-delStats' id='${statID}' onclick='(this)'>Delete</a>
+                </ul>
                 </ul>`
             );
 
         }
         else {
             $('.js-personStats').append(`
-                <ul>
+                <ul class='topBullet'>
                 <li>Date: ${exerDate}
-                <li> # Steps: ${numSteps}
-                <li> Distance: ${distance} miles
-                <li>Activity: ${exertype}
-                <li> <a href='#openEditModal' class='js-editStats' id='${statID}' onclick='(this)'>Edit</a> |
-                    <a href='#openDelModal' class='js-delStats' id='${statID}' onclick='(this)'>Delete</a>
+                <ul>
+                    <li> # Steps: ${numSteps}
+                    <li> Distance: ${distance} miles
+                    <li> Activity: ${exertype}
+                    <li> <a href='#openEditModal' class='js-editStats' id='${statID}' onclick='(this)'>Edit</a> |
+                        <a href='#openDelModal' class='js-delStats' id='${statID}' onclick='(this)'>Delete</a>
+                </ul>
                 </ul>`
             );
 
@@ -477,8 +485,11 @@ function updateLifeTimeInfo(updateSteps, updateDistance) {
 
 function userLogOut() {
     $('.js-topNav').html(`
-    <h1>Hello ${username}!</h1>
+    <div class='navInfo'>
+    <h1>Challenge Accepted</h1>
+    <h2 class='userHello'>Hello ${username}!</h2>
     <a href='/ChallengeAccepted/public/' class='logoutLink js-logoutLink' id='logoutLink'>Logout</a>
+    </div>
     `)
 
     $('#logoutLink').click(function(event) {
@@ -497,7 +508,8 @@ function getAndDisplayInfo() {
     userLogOut();
     newExerStat();
     getUserStats(displayUserStats);
-           
+    
+    /*
     $('.js-bottomtemp').html(`
     <p>TEMP DATA:</p>
     <ul>
@@ -506,7 +518,7 @@ function getAndDisplayInfo() {
     <li>username: ${username}
     </ul>`
     );
-    
+    */
 }
 
     $(getAndDisplayInfo);

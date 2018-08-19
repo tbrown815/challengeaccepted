@@ -1,4 +1,4 @@
-const {jwtModel} = require('../authRoute/authModels.js');
+const {jwtModel} = require('../auth/authStrat.js');
 const jwt = require('jsonwebtoken');
 const chai = require('chai');
 

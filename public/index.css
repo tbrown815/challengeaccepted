@@ -1,10 +1,3 @@
-body {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Ubuntu Mono', monospace;
-  background-color: slategray;
-}
 
 nav, .loginBox {
   background-color: silver !important;
@@ -17,6 +10,7 @@ nav, .newUserLink {
 }
 
 nav {
+  margin-top: 2%;
 }
 
 .loginBox, .buttonDiv, input {
@@ -45,7 +39,33 @@ input {
 
 
 
-.modal { /*https://www.webdesignerdepot.com/2012/10/creating-a-modal-window-with-html5-and-css3/*/
+/*
+a {
+  font-size: small;
+  color: rgb(52, 53, 9);
+}
+
+a:visited {
+  color: rgb(52, 53, 9);
+}
+
+a:hover {
+font-weight: bold;
+font-size: medium;
+color: yellow
+}
+
+button:hover {
+  font-weight: bold;
+  border-color: yellow
+}
+
+
+.modal { /*https://www.webdesignerdepot.com/2012/10/creating-a-modal-window-with-html5-and-css3/*/ 
+  
+  /*
+
+  
   position: fixed;
   top:  0;
   right: 0;
@@ -56,7 +76,6 @@ input {
   opacity: 0;
   transition: opacity 400ms ease-in;
   pointer-events: none;
-  overflow: scroll;
 }
 
 .modal:target{
@@ -103,8 +122,16 @@ input {
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px)  {
   
   /*increases font size on smaller screens*/
+
+/*
+
+
   body {
     font-size: 100%;
+  }
+
+  nav {
+    margin-top: 5%;
   }
 
   .loginBox {
@@ -122,6 +149,10 @@ input {
   
   body {
     font-size: 100%;
+  }
+
+  nav {
+    margin-top: 3%;
   }
 
   .loginBox {
