@@ -252,6 +252,7 @@ function displayEditStats(data, editID) {
 
 function saveEditStats(exerDate, numSteps, distance, exertype, editID) {
 
+    $( "#editDateEntry" ).datepicker();
 
 
     $('.js-editExerForm').unbind().submit(function(event) {
@@ -437,9 +438,12 @@ function delStats(response) {
 
 function newExerStat() {
 
+    $( "#execDateEntry" ).datepicker();
+
     $('.js-enterStatsForm').unbind().submit(function(event) {
 
         event.preventDefault();
+
 
         let addExerDate = $('#execDateEntry').val();
         let addNumSteps = $('#stepsField').val();
