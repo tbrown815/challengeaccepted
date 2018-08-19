@@ -8,7 +8,7 @@
 exports.DATABASE_URL = process.env.DATABASE_URL || 'mongodb://localhost/challengeaccepted';
 
 //exports TEST_DATABASE_URL equals process env TEST_DATABASE_URL || 'mongodb://databaseURL/test_dbName...';
-exports.TEST_DATABASE_URL = process.env.TEST_DATABASE_URL || 'mongodb://localhost/test-challengeaccepted' || ;
+exports.TEST_DATABASE_URL = process.env.TEST_DATABASE_URL || 'mongodb://localhost/test-challengeaccepted';
 
 //exports PORT equals process env PORT || <portNum>;
 exports.PORT = process.env.PORT || 8080;
