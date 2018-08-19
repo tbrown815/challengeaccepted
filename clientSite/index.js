@@ -9,6 +9,7 @@ let userStatsURL;
 let userLifeTimeURL;
 let loginRedirect;
 
+let index;
 
 function checkEnv() {
     
