@@ -101,7 +101,7 @@ describe('Test Resources', function() {
         })
     })
 
-    /*
+    
 
     describe('HTML TEST SET', function() {
 
@@ -114,7 +114,7 @@ describe('Test Resources', function() {
             })
         })
     });
-  */
+  
     //USER TESTS
     describe('GET USERS TEST SET', function() {
 
