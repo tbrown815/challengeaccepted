@@ -1,26 +1,27 @@
-'use strict';
-
 //First create initial function call and place call at EOF ex - $(rmSearch);
 
 //Create constant for API URL
 
-var userAuth = void 0;
-var userURL = void 0;
-var getUserTokenURL = void 0;
-var loginRedirect = void 0;
+let userAuth;
+let userURL;
+let getUserTokenURL;
+let loginRedirect;
 
 function checkEnv() {
-
-    var envHost = window.location.hostname;
-    var envName = envHost.search('heroku');
-
+    
+    let envHost = window.location.hostname;
+    let envName = envHost.search('heroku');
+    
+    
     if (envName > 1) {
-        console.log('envName > 1: ', envName > 1);
+        console.log('envName > 1: ', envName > 1)
         userAuth = '/auth/login/';
         userURL = '/users';
         getUserTokenURL = '/users/getuser/';
         loginRedirect = '/clientSite/index.html';
-    } else {
+    }
+
+    else {
         userAuth = 'http://localhost:8080/auth/login/';
         userURL = 'http://localhost:8080/users';
         getUserTokenURL = 'http://localhost:8080/users/getuser/';
@@ -29,143 +30,157 @@ function checkEnv() {
 };
 
 //First function that is in the EOF call
-function userSearch() {
-
+function userSearch () {
+    
     //listen on FORM class in HTML and submit with arg function with arg event
-    $('.js-loginForm').unbind().submit(function (event) {
-
+    $('.js-loginForm').unbind().submit(function(event) {
+        
         //on the event prevent default behavior with no args
         event.preventDefault();
-
+        
         //create variable by listening for value entered into FORM fields
-        var username = $('.js-userIdfield').val();
-        var password = $('.js-userPassField').val();
+        let username = $('.js-userIdfield').val();
+        let password = $('.js-userPassField').val();
+
+
 
         //call next function by name of function with args of <userValue(s)> and future "render/task" function  
         //Data returned from callback will send to "render/task" function  
         console.log('username: ', username);
         console.log('password: ', password);
-
+        
         $('.js-loginForm')[0].reset();
+        
+        findUser(username, password)
 
-        findUser(username, password);
     });
 };
 
+
 //2nd function with args - <userValue(s)> and callback to send data BACK to first function
 function findUser(username, password) {
-    console.log('username: ', username);
-    console.log('password: ', password);
+    console.log('username: ', username) 
+    console.log('password: ', password) 
 
-    var query = {
-        async: true,
-        crossDomain: true,
-        url: '' + userAuth,
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        processData: false,
-        data: JSON.stringify({ username: '' + username, password: '' + password }),
-        error: function error(xhr) {
-            var err = xhr.responseText;
-            if (err === 'Unauthorized') {
-                alert('Unable to authorize access, try again.');
+        
+        let query = {
+            async: true,
+            crossDomain: true,
+            url: `${userAuth}`,
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            processData: false,
+            data: JSON.stringify({username: `${username}`,password: `${password}`}),
+            error: function (xhr) { 
+                let err = xhr.responseText;
+                if (err === 'Unauthorized'){
+                  alert('Unable to authorize access, try again.')
+                }
+            },
+            success: function(response) {
+                sessionStorage.setItem('authToken', JSON.stringify(response.authToken))
+                $.ajax(getUserToken)
             }
-        },
-        success: function success(response) {
-            sessionStorage.setItem('authToken', JSON.stringify(response.authToken));
-            $.ajax(getUserToken);
-        }
-    };
-
-    console.log('query = ', query);
-
-    $.ajax(query).done(function (response) {
-        console.log('response: ', response);
+        } 
+        
+        console.log('query = ', query)
+        
+        $.ajax(query).done(function(response) {
+            console.log('response: ', response)
+        
     });
-
-    var getUserToken = {
+    
+    let getUserToken = {
         async: true,
         crossDomain: true,
-        url: '' + getUserTokenURL + ('' + username),
+        url: `${getUserTokenURL}` + `${username}`,
         method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: {        
+            'Content-Type': 'application/json',
+            },
         processData: false,
-        error: function error(xhr) {
-            errFunc(xhr);
-        },
-        success: function success(response) {
-            sessionStorage.setItem('userToken', JSON.stringify(response.id));
-            sessionStorage.setItem('lifeDistance', JSON.stringify(response.lifeDistance));
-            sessionStorage.setItem('lifeSteps', JSON.stringify(response.lifeSteps));
-            sessionStorage.setItem('username', username);
+        error: function (xhr) { 
+            errFunc(xhr)
+            },
+        success: function(response) {
+            sessionStorage.setItem('userToken', JSON.stringify(response.id))
+            sessionStorage.setItem('lifeDistance', JSON.stringify(response.lifeDistance))
+            sessionStorage.setItem('lifeSteps', JSON.stringify(response.lifeSteps))
+            sessionStorage.setItem('username', username) 
 
             location.href = loginRedirect;
+
+            }
         }
-    };
+
+
 };
 
 //results function, single arg of data which is returned from the callback
 
 function createUser() {
 
-    $('.js-newUserForm').unbind().submit(function (event) {
+    $('.js-newUserForm').unbind().submit(function(event) {
 
         event.preventDefault();
 
-        var firstName = $('.js-newUserFirstField').val();
-        var lastName = $('.js-newUserLastField').val();
-        var email = $('.js-newUserEmailField').val();
-        var username = $('.js-newUserIdField').val();
-        var password = $('.js-newUserPassField').val();
-        var passwordConf = $('.js-newUserPassConfField').val();
+        let firstName = $('.js-newUserFirstField').val()
+        let lastName = $('.js-newUserLastField').val()
+        let email = $('.js-newUserEmailField').val()
+        let username = $('.js-newUserIdField').val()
+        let password = $('.js-newUserPassField').val()
+        let passwordConf = $('.js-newUserPassConfField').val()
 
-        console.log('firstName: ', firstName);
-        console.log('lastName: ', lastName);
-        console.log('email: ', email);
-        console.log('username: ', username);
-        console.log('password: ', password);
-        console.log('passwordConf: ', passwordConf);
+
+        console.log('firstName: ', firstName) 
+        console.log('lastName: ', lastName) 
+        console.log('email: ', email) 
+        console.log('username: ', username) 
+        console.log('password: ', password) 
+        console.log('passwordConf: ', passwordConf) 
 
         if (password !== passwordConf) {
-            alert('Your passwords do not match!');
+            alert('Your passwords do not match!')
             return;
-        } else {
+        }
 
-            var createNewQuery = {
+        else {      
+
+            let createNewQuery = {
                 async: true,
                 crossDomain: true,
-                url: '' + userURL,
+                url: `${userURL}`,
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {'Content-Type': 'application/json'},
                 processData: false,
-                data: JSON.stringify({ firstName: '' + firstName, lastName: '' + lastName, email: '' + email, username: '' + username, password: '' + password, lifeSteps: '0', lifeDistance: '0' }),
-                error: function error(xhr) {
-                    errFunc(xhr);
-                },
-                success: function success(response) {
-                    console.log('success response: ', response);
+                data: JSON.stringify({firstName: `${firstName}`, lastName: `${lastName}`, email: `${email}`,username: `${username}`,password: `${password}`,lifeSteps: '0',lifeDistance: '0'}),
+                error: function (xhr) { 
+                    errFunc(xhr)
+                    },
+                success: function(response) {
+                    console.log('success response: ', response)
 
-                    //alert("Congratulations, you now have an account!")
+                       //alert("Congratulations, you now have an account!")
+                        
+                        $('#closeNewUserModal')[0].click()
 
-                    $('#closeNewUserModal')[0].click();
-
-                    findUser(username, password);
-                }
-            };
-
-            console.log('createNewQuery = ', createNewQuery);
-
-            $.ajax(createNewQuery).done(function (response) {
-                console.log('response: ', response);
-            });
+                        findUser(username, password);
+                    }
+                } 
+                
+                console.log('createNewQuery = ', createNewQuery)
+                
+                $.ajax(createNewQuery).done(function(response) {
+                    console.log('response: ', response)
+            })
         }
-    });
-};
 
+    })
+};
+    
 function errFunc(xhr) {
-    return alert(xhr.responseJSON.reason + ': ' + xhr.responseJSON.location + ' ' + xhr.responseJSON.message);
+  return  alert(`${xhr.responseJSON.reason}: ${xhr.responseJSON.location} ${xhr.responseJSON.message}`)
+
 }
 
 function publicPage() {
@@ -173,5 +188,6 @@ function publicPage() {
     userSearch();
     createUser();
 }
+
 
 $(publicPage);

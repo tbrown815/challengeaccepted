@@ -20,6 +20,7 @@
     "mocha": "^5.2.0"
   },
   "dependencies": {
+    "babel-standalone": "^6.26.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "dotenv": "^6.0.0",
