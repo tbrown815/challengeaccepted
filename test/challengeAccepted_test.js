@@ -101,10 +101,10 @@ describe('Test Resources', function() {
         })
     })
 
+    /*
 
     describe('HTML TEST SET', function() {
 
-/*
         it('should return typeof html and status 200', function() {
             return chai.request(app)
             .get('/')
