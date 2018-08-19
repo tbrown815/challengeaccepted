@@ -32,7 +32,9 @@ const app = express();
 app.use(morgan('common'));
 
 app.use(express.static('public'));
-app.use('/clientSite', express.static('siteRoute'));
+app.use(express.static('clientSite'));
+
+//app.use('/clientSite', express.static('siteRoute'));
 //app.use('/user', express.static('userRoute'));
 
 
