@@ -1,6 +1,6 @@
-#Challenge Accepted
+#   Challenge Accepted
 
-##About:
+##  About:
 
 I created this project for my NodeJS project while enrolled at Thinkful.
 The application is a basic tool to track different activities - At this time Steps/Distance and Run/Walks.
@@ -14,7 +14,7 @@ The application is a basic tool to track different activities - At this time Ste
 
 
 
-##Tech used:
+##  Tech used:
 
 *   nodejs
 *   expressjs
@@ -31,7 +31,7 @@ The application is a basic tool to track different activities - At this time Ste
 *   Git/GitHub
 
 
-##Access and testing:
+##  Access and testing:
 
 **Access:**
 
