@@ -93,7 +93,7 @@ describe('Test Resources', function() {
             }
           );
             return chai.request(app)
-            .get('/users/123')
+            .get('/users/')
             .set('authorization', `Bearer ${token}`)
             .then(function(res) {
                 expect(res).to.not.have.status(401);
@@ -102,12 +102,22 @@ describe('Test Resources', function() {
     })
 
     
-
+//STATIC PAGE CHECKS
     describe('HTML TEST SET', function() {
 
-        it('should return typeof html and status 200', function() {
+        it('public should return typeof html and status 200', function() {
             return chai.request(app)
             .get('/')
+            .then(function(res) {
+                expect(res).to.have.status(200);
+                expect(res).to.be.html;
+            })
+        })
+
+
+        it('clientSite should return typeof html and status 200', function() {
+            return chai.request(app)
+            .get('/clientSite/')
             .then(function(res) {
                 expect(res).to.have.status(200);
                 expect(res).to.be.html;
