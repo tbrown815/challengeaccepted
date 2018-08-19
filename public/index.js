@@ -18,14 +18,14 @@ function checkEnv() {
         userAuth = '/auth/login/';
         userURL = '/users';
         getUserTokenURL = '/users/getuser/';
-        loginRedirect = "/clientSite/index.html"
+        loginRedirect = '/clientSite/index.html';
     }
 
     else {
         userAuth = 'http://localhost:8080/auth/login/';
         userURL = 'http://localhost:8080/users';
         getUserTokenURL = 'http://localhost:8080/users/getuser/';
-        loginRedirect = "/ChallengeAccepted/clientSite/index.html"
+        loginRedirect = '/ChallengeAccepted/clientSite/index.html';
     };
 };
 

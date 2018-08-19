@@ -22,7 +22,7 @@ function checkEnv() {
         getuserStatsURL = '/site/stats/';
         userStatsURL = '/site/';
         userLifeTimeURL = '/users/update/';
-        loginRedirect = "/public/index.html"
+        loginRedirect = '/'
 
     }
 
@@ -30,7 +30,7 @@ function checkEnv() {
         getuserStatsURL = 'http://localhost:8080/site/stats/';
         userStatsURL = 'http://localhost:8080/site/';
         userLifeTimeURL = 'http://localhost:8080/users/update/';
-        loginRedirect = "/ChallengeAccepted/public/index.html"
+        loginRedirect = '/ChallengeAccepted/public/index.html';
 
     };
 };
@@ -514,7 +514,7 @@ function userLogOut() {
     <div class='navInfo'>
     <h1>Challenge Accepted</h1>
     <h2 class='userHello'>Hello ${username}!</h2>
-    <a href='/ChallengeAccepted/public/' class='logoutLink js-logoutLink' id='logoutLink'>Logout</a>
+    <a href='${loginRedirect}' class='logoutLink js-logoutLink' id='logoutLink'>Logout</a>
     </div>
     `)
 
