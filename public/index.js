@@ -5,6 +5,7 @@
 let userAuth;
 let userURL;
 let getUserTokenURL;
+let loginRedirect;
 
 function checkEnv() {
     
@@ -17,12 +18,14 @@ function checkEnv() {
         userAuth = '/auth/login/';
         userURL = '/users';
         getUserTokenURL = '/users/getuser/';
+        loginRedirect = "/clientSite/index.html"
     }
 
     else {
         userAuth = 'http://localhost:8080/auth/login/';
         userURL = 'http://localhost:8080/users';
         getUserTokenURL = 'http://localhost:8080/users/getuser/';
+        loginRedirect = "/ChallengeAccepted/clientSite/index.html"
     };
 };
 
@@ -105,7 +108,7 @@ function findUser(username, password) {
             sessionStorage.setItem('lifeSteps', JSON.stringify(response.lifeSteps))
             sessionStorage.setItem('username', username) 
 
-            location.href = "/ChallengeAccepted/clientSite/index.html"
+            location.href = loginRedirect;
 
             }
         }

@@ -7,6 +7,8 @@ const totalDistance = JSON.parse(`${sessionStorage.getItem('lifeDistance')}`);
 let getuserStatsURL;
 let userStatsURL;
 let userLifeTimeURL;
+let loginRedirect;
+
 
 function checkEnv() {
     
@@ -20,12 +22,16 @@ function checkEnv() {
         getuserStatsURL = '/site/stats/';
         userStatsURL = '/site/';
         userLifeTimeURL = '/users/update/';
+        loginRedirect = "/public/index.html"
+
     }
 
     else {
         getuserStatsURL = 'http://localhost:8080/site/stats/';
         userStatsURL = 'http://localhost:8080/site/';
         userLifeTimeURL = 'http://localhost:8080/users/update/';
+        loginRedirect = "/ChallengeAccepted/public/index.html"
+
     };
 };
 
@@ -35,7 +41,7 @@ function getUserStats() {
     //   setTimeout(function() {userBack(MOCK_USER_STATS)}, 1);
     if (authToken === null || userToken === null) {
         sessionStorage.clear();
-        location.href = "../public"
+        location.href = loginRedirect;
     };
 
     let userStats = {
