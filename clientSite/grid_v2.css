@@ -1,0 +1,85 @@
+/*border-box - any explicit width settings are guarantees that the element will
+take up no more than that width*/
+
+* {
+  box-sizing: border-box;
+}
+
+/*rows get automatically centered in their parent container. They have a
+max-width of 1000px, and they get 20px of left and right padding */
+.row {
+  max-width: 1000px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 0 auto;
+}
+
+
+/*clearfix*/
+
+/*These accomplish two objectives. The first ruleset forces the height of each row to
+expand to the height of its tallest child element. That means that rows will
+vertically contain all their content.*/
+
+.row::before,
+.row::after {
+  display: table;
+  content: '';
+}
+
+/*Second is a clearfix, and it ensures that any content that comes after the
+row will act as though the preceding row was in the normal flow, instead of
+butting up against the top of the row container.*/
+
+.row::after {
+  clear: both;
+}
+
+/*olumns should float to the left, displaying side by side as long as there's
+enough space in their parent container.
+each column gets a constant, percentage-based left and right padding, which
+gives the gutter behavior we specified in the design section above (and note
+that the way we implement the 2.08% gutter discussed above is by splitting it
+in half on the left and right)*/
+
+.col-3, .col-4, .col-6, .col-12, .titleBar  {
+  float: left;
+  padding-left: 1.40%;
+  padding-right: 1.40%;
+}
+
+/*Mobile*/
+
+/*by default, columns will take up 100% of their parent's */
+
+.col-3, .col-4, .col-6, .col-12, .titleBar {
+  width: 100%;
+}
+
+
+/*Screen override*/
+/*media query that overrides our default styling for column widths on screens
+that are 640px and wider*/
+
+@media only screen and (min-width: 640px){
+
+  .col-3 {
+    width: 25%;
+  }
+
+  .col-4 {
+    width: 33.33%;
+  }
+
+  .col-6 {
+    width: 50%;
+  }
+
+  .col-12 {
+    width: 100%;
+  }
+
+  .titleBar {
+    width: 100%;
+  }
+}

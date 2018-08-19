@@ -1,3 +1,10 @@
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Ubuntu Mono', monospace;
+  background-color: slategray;
+}
 
 nav, .lifeStats, .enterStats, .personStats {
   background-color: silver !important;
@@ -61,7 +68,6 @@ input {
 }
 
 
-/*
 a {
   font-size: small;
   color: rgb(52, 53, 9);
@@ -83,11 +89,7 @@ button:hover {
 }
 
 
-.modal { /*https://www.webdesignerdepot.com/2012/10/creating-a-modal-window-with-html5-and-css3/*/ 
-  
-  /*
-
-  
+.modal { /*https://www.webdesignerdepot.com/2012/10/creating-a-modal-window-with-html5-and-css3/*/
   position: fixed;
   top:  0;
   right: 0;
@@ -98,6 +100,7 @@ button:hover {
   opacity: 0;
   transition: opacity 400ms ease-in;
   pointer-events: none;
+  overflow: scroll;
 }
 
 .modal:target{
@@ -118,17 +121,17 @@ button:hover {
 
 .closeModal {
   background: #606061;
-	color: #FFFFFF;
-	line-height: 25px;
-	position: absolute;
-	right: -12px;
-	text-align: center;
-	top: -10px;
-	width: 24px;
-	text-decoration: none;
-	font-weight: bold;
-	border-radius: 12px;
-	box-shadow: 1px 1px 3px #000;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    top: -10px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 12px;
+    box-shadow: 1px 1px 3px #000;
 }
 
 .close:hover  { 
@@ -140,30 +143,42 @@ button:hover {
   font-size: 24px;
 }
 
+.modal h3 {
+    text-align: center;
+}
+
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px)  {
   
   /*increases font size on smaller screens*/
-
-/*
-
-
-  body {
-    font-size: 100%;
-  }
 
   nav {
     margin-top: 5%;
   }
 
   .loginBox {
-    width: 100%;
+    width: 100% !important;
+    padding: 1px;
   }
 
   .modal > div {
     width: 90%;
   }
 
+  .userHello {
+      padding-left: 30%;
+      font-size: 100%;         
+      margin-bottom: -5% !important;        
+     
+    }
+
+  .logoutLink {
+  margin-right: -85% !important
+  }
+
+  .buttonDiv {
+      margin-left: 35% !important;
+    }
 
 }
 
@@ -178,12 +193,22 @@ button:hover {
   }
 
   .loginBox {
-    width: 40%;
+    width: 50% !important;
   }
 
   .modal > div {
     width: 400px;
   }
+
+  .userHello {
+      padding-left: 5%;
+      font-size: 100%;
+      margin-bottom: -3% !important;        
+    }
   
+  .buttonDiv {
+  margin-left: 35% !important;
+  }
+
 }
 

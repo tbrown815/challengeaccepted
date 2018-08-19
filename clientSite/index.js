@@ -5,17 +5,35 @@ const totalSteps = JSON.parse(`${sessionStorage.getItem('lifeSteps')}`);
 const totalDistance = JSON.parse(`${sessionStorage.getItem('lifeDistance')}`);
 
 
-const getuserStatsURL = 'http://localhost:8080/site/stats/';
-const userStatsURL = 'http://localhost:8080/site/';
-const userLifeTimeURL = 'http://localhost:8080/users/update/';
 
+function checkEnv() {
+    
+    let envHost = window.location.hostname;
+    let envName = envHost.search('heroku');
+    
+    
+    if (envName > 1) {
+        console.log('envName > 1: ', envName > 1)
+        
+        const getuserStatsURL = '/site/stats/';
+        const userStatsURL = '/site/';
+        const userLifeTimeURL = '/users/update/';
+    }
+
+    else {
+        const getuserStatsURL = 'http://localhost:8080/site/stats/';
+        const userStatsURL = 'http://localhost:8080/site/';
+        const userLifeTimeURL = 'http://localhost:8080/users/update/';
+    };
+};
 
 
 
 function getUserStats() {
     //   setTimeout(function() {userBack(MOCK_USER_STATS)}, 1);
     if (authToken === null || userToken === null) {
-        location.href = "/ChallengeAccepted/public"
+        sessionStorage.clear();
+        location.href = "../public"
     };
 
     let userStats = {
@@ -505,6 +523,7 @@ function errFunc(xhr) {
   };
     
 function getAndDisplayInfo() {
+    checkEnv();
     userLogOut();
     newExerStat();
     getUserStats(displayUserStats);
