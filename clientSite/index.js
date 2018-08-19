@@ -48,6 +48,7 @@ function getUserStats() {
     let userStats = {
         async: true,
         crossDomain: true,
+        cache: false,
         url: `${getuserStatsURL}` + `${userToken}`,
         method: 'GET',
         headers: {        
@@ -209,6 +210,7 @@ function editGetStats(data) {
     let findStat = {
         async: true,
         crossDomain: true,
+        cache: false,
         url:  `${userStatsURL}` + `${editID}`,
         method: 'GET',
         headers: {        
@@ -341,6 +343,7 @@ function saveEditStats(exerDate, numSteps, distance, exertype, editID) {
         let editStats = {
             async: true,
             crossDomain: true,
+            cache: false,
             url: `${userStatsURL}` + `${editID}`,
             method: 'PUT',
             headers: {        
@@ -376,6 +379,7 @@ function delGetStats(data) {
     let findStat = {
         async: true,
         crossDomain: true,
+        cache: false,
         url:  `${userStatsURL}` + `${delID}`,
         method: 'GET',
         headers: {        
@@ -414,6 +418,7 @@ function delStats(response) {
         let delStats = {
             async: true,
             crossDomain: true,
+            cache: false,
             url: `${userStatsURL}` + `${delID}`,
             method: 'DELETE',
             headers: {        
@@ -460,6 +465,7 @@ function newExerStat() {
         let newStats = {
             async: true,
             crossDomain: true,
+            cache: false,
             url: `${userStatsURL}`,
             method: 'POST',
             headers: {        
@@ -490,6 +496,7 @@ function updateLifeTimeInfo(updateSteps, updateDistance) {
 
         async: true,
         crossDomain: true,
+        cache: false,
         url: `${userLifeTimeURL}` + `${userToken}`,
         method: 'PUT',
         headers: {        

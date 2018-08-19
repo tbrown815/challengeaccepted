@@ -66,6 +66,7 @@ function findUser(username, password) {
         let query = {
             async: true,
             crossDomain: true,
+            cache: false,
             url: `${userAuth}`,
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -93,6 +94,7 @@ function findUser(username, password) {
     let getUserToken = {
         async: true,
         crossDomain: true,
+        cache: false,
         url: `${getUserTokenURL}` + `${username}`,
         method: 'GET',
         headers: {        
@@ -149,6 +151,7 @@ function createUser() {
             let createNewQuery = {
                 async: true,
                 crossDomain: true,
+                cache: false,
                 url: `${userURL}`,
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
