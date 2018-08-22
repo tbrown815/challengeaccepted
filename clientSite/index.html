@@ -62,7 +62,7 @@
         <h2 class='boxTitle'>Log activity:</h2>
         <label class='execDate js-execDate' for='execDateEntry'>Activity date:
           <br>
-            <input required id='execDateEntry' class='execDateEntry js-execDateEntry' type='text' name='execDateEntry'>
+            <input required id='execDateEntry' class='execDateEntry js-execDateEntry' type='text' name='execDateEntry' placeholder='Select Date'>
         </label>
         <br><br>
         <label class='selectExer js-selectExer' for='selectExerType'>Type of Activity:
@@ -119,7 +119,7 @@
     </div>
    </div>
 
-<div id='openEditModal' class='modal modal js-modal' role='presentation'>
+<div id='openEditModal' class='modal js-modal' role='presentation' aria-hidden='true'>
     <div>
         <a href='#close' title='closeModal' id='closeEditModal' class='closeModal js-closeModal'>X</a>
         <h2 class='modalTitle'>Update Activity</h2>
@@ -127,7 +127,7 @@
           <fieldset name='editExerStat'>
                   <label class='editDate js-editDate' for='editDateEntry'>Activity date:
                     <br>
-                      <input required id='editDateEntry' class='editDateEntry js-editDateEntry' type='text' name='editDateEntry'>
+                      <input required id='editDateEntry' class='editDateEntry js-editDateEntry' type='text' name='editDateEntry' placeholder='Select Date'>
                   </label>
                   <br><br>
                   <label class='selectEditExer js-selectExer' for='selectEditExerType'>Type of Activity:
@@ -160,7 +160,7 @@
     </div>
 </div>
 
-<div id='openDelModal' class='modal modal js-modal' role='presentation'>
+<div id='openDelModal' class='modal js-modal' role='presentation' aria-hidden='true'>
     <div>
         <a href='#close' title='closeModal' id='closeDelModal' class='closeModal js-closeModal'>X</a>
         <h2 class='modalTitle'>Delete Activity</h2>
