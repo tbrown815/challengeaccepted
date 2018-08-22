@@ -136,7 +136,7 @@ function genJWT() {
 
 function resetDB() {
     console.warn('DB will be deleted and reset');
-  //  return mongoose.connection.dropDatabase();
+    return mongoose.connection.dropDatabase();
 };
 
 describe('Test Resources', function() {
@@ -606,7 +606,7 @@ it('request user stats by usertoken', function() {
                     
                             //const dbID = userData._id; 
 
-                            const dbID = '5b7b24ca154c9d732e106af0'
+                            const dbID = userData._id
 
                             let newVal = {
                             id: `${dbID}`,
