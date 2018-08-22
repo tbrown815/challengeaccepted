@@ -173,10 +173,10 @@ describe('Test Resources', function() {
         it('public should return typeof html and status 200', function() {
             return chai.request(app)
             .get('/users/')
-            .set('authorization', `Bearer ${token}`)
+            .set('authorization', `Bearer ${testToken}`)
             .then(function(res) {
                 expect(res).to.have.status(200);
-                expect(res).to.be.html;
+                expect(res).to.be.json;
             })
         })
     })
