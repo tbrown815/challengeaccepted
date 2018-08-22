@@ -443,7 +443,7 @@ describe('STATS TEST SET', function() {
             
         })
               
-it('request user stats by usertoken', function() {
+it.only('request user stats by usertoken', function() {
                 
     console.log('statData: ', statData)
     console.log('userData: ', userData)
@@ -475,7 +475,7 @@ it('request user stats by usertoken', function() {
                 expect(res.body.userStats[0].exertype).to.be.oneOf(['walk', 'run']);
 
                 expect(res.body.userStats[0].id).to.have.string(statData._id);
-              //  expect(res.body.userStats[0].date).to.equal(statDataDate);
+                expect(res.body.userStats[0].date).to.deep.equal(statData.date);
                 expect(res.body.userStats[0].steps).to.equal(statData.steps);
                 expect(res.body.userStats[0].distance).to.equal(statData.distance);
                 expect(res.body.userStats[0].exertype).to.have.string(statData.exertype);
