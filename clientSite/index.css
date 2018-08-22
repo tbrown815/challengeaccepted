@@ -1,3 +1,4 @@
+/*
 body {
   box-sizing: border-box;
   margin: 0;
@@ -6,8 +7,10 @@ body {
   background-color: slategray;
 }
 
+*/
+
 nav, .lifeStats, .enterStats, .personStats {
-  background-color: silver !important;
+  background-color: #71af8d !important;
   border: 1px solid;
   border-color: black;
 }
@@ -68,8 +71,10 @@ input {
 }
 
 
+/*
+
 a {
-  font-size: small;
+  font-size: 14px;
   color: rgb(52, 53, 9);
 }
 
@@ -80,12 +85,12 @@ a:visited {
 a:hover {
 font-weight: bold;
 font-size: medium;
-color: yellow
+color: #dff4e8;
 }
 
 button:hover {
   font-weight: bold;
-  border-color: yellow
+  border-color: #dff4e8;
 }
 
 
@@ -114,13 +119,13 @@ button:hover {
   margin: 10% auto;
   padding: 5px 20px 13px 20px;
   border-radius: 10px;
-  background: lightslategray;
+  background: #71af8d;
   text-align: left;
 }
 
 
 .closeModal {
-  background: #606061;
+  background: #63a482;
     color: #FFFFFF;
     line-height: 25px;
     position: absolute;
@@ -135,7 +140,7 @@ button:hover {
 }
 
 .close:hover  { 
-  background: lightslategray;
+  background: dff4e8;
 }
 
 .modal h2{
@@ -212,3 +217,30 @@ button:hover {
 
 }
 
+
+/* for veiwport adjusting background*/
+.bg {
+  /* rules to fill background */
+  min-height: 100%;
+  min-width: 1024px;
+
+  /* scaling */
+  width: 100%;
+  height: 100%;
+
+  /* position */
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  z-index: -1;
+}
+
+@media screen and (max-width: 750px) {
+  .quizAppImg {
+    max-width: 100%;
+    max-height: 300px;
+  }
+}
+
+*/
