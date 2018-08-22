@@ -9,6 +9,9 @@
 
     <title>Challenge Accepted Login</title>
 
+    <!--favicon-->
+    <link rel="shortcut icon" type="image/png" href="../siteFav.ico"/>
+    
     <!-- fonts  -->
     <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet">
 
@@ -20,8 +23,9 @@
 
     <!-- styles -->
     <link href="grid_v2.css" rel="stylesheet" type="text/css" />
-    <link href='../common.css' rel='stylesheet' type='text/css' />
     <link href="index.css" rel="stylesheet" type="text/css" />
+    <link href='./css/common.css' rel='stylesheet' type='text/css' />
+
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
@@ -31,10 +35,9 @@
   </head>
 
   <body>
-    <!-- Background image that can scale responsively
-      <img src='image_path_and_name.jpg' class='bg' alt='background'>
-  --> 
-  <main>
+    
+    <main>
+        <img src='../background.jpg' class='bg' alt='background'>
       
     <div class='row'>
       
@@ -83,7 +86,7 @@
 
       <div id='openNewUserModal' class='modal modal js-modal' role='presentation'>
         <div>
-            <a href='#close' title='closeModal' id='closeNewUserModal' class='closeModal js-closeModal'>X</a>
+            <a href='#close' title='Close' id='closeNewUserModal' class='closeModal js-closeModal'>X</a>
             <h2 class='modalTitle'>Please provide your details:</h2>
             <form id='newUserForm' role='form' class='newUserForm js-newUserForm'>
               <fieldset name='newUser'>

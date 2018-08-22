@@ -36,7 +36,7 @@ router.get('/', (req, res) => {
 })
 
 
-router.get('/:id', (req, res) => {
+router.get('/:id', jwtAuth, (req, res) => {
 
     userInfoModel.findById(req.params.id)
     .then(user => {
@@ -203,19 +203,11 @@ router.put('/update/:id', jwtAuth, jsonParser, (req,res) => {
             toUpdate[data] = req.body[data];
         }
     });
-
-      
-            const trimmedFields = ['lifeSteps', 'lifeDistance'];
-            const notTrimmedFields = trimmedFields.find(field => req.body[field].trim() !== req.body[field]);
-        
-            if(notTrimmedFields) {
-                const errMessage = `${notTrimmedFields} cannot start or end with whitespace`
-                console.error(errMessage);
-                return res.status(422).send(errMessage);
-            };
+    
 //@
         userInfoModel.findByIdAndUpdate(req.params.id, {$set: toUpdate}, {new: true}, function() {
             return res.send(`${req.body.id} has been updated`)
+
         })
 
         .catch(err => {
