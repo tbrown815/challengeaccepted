@@ -172,18 +172,13 @@ describe('Test Resources', function() {
 
         it('public should return typeof html and status 200', function() {
             return chai.request(app)
-<<<<<<< HEAD
             .get('/users/')
             .set('authorization', `Bearer ${token}`)
-=======
-            .get('/')
->>>>>>> testupdates
             .then(function(res) {
                 expect(res).to.have.status(200);
                 expect(res).to.be.html;
             })
         })
-<<<<<<< HEAD
     })
 
     
@@ -191,10 +186,6 @@ describe('Test Resources', function() {
     describe('HTML TEST SET', function() {
 
         it('public should return typeof html and status 200', function() {
-=======
-
-        it('clientSite should return typeof html and status 200', function() {
->>>>>>> testupdates
             return chai.request(app)
             .get('/clientSite/')
             .then(function(res) {
@@ -203,7 +194,6 @@ describe('Test Resources', function() {
             })
         })
 
-<<<<<<< HEAD
 
         it('clientSite should return typeof html and status 200', function() {
             return chai.request(app)
@@ -213,8 +203,6 @@ describe('Test Resources', function() {
                 expect(res).to.be.html;
             })
         })
-=======
->>>>>>> testupdates
     });
   
     //USER TESTS
