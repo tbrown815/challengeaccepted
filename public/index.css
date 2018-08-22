@@ -1,5 +1,3 @@
-/*
-
 body {
   box-sizing: border-box;
   margin: 0;
@@ -7,8 +5,6 @@ body {
   font-family: 'Ubuntu Mono', monospace;
   background-color: slategray;
 }
-*/
-
 
 nav, .loginBox {
   background-color: #71af8d !important;
@@ -48,7 +44,6 @@ input {
   width: 22%;
 }
 
-/*
 a {
   font-size: small;
   color: rgb(52, 53, 9);
@@ -218,5 +213,3 @@ button:hover {
     max-height: 300px;
   }
 }
-
-*/
