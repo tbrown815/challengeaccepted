@@ -3,21 +3,21 @@ const userToken = JSON.parse(`${sessionStorage.getItem('userToken')}`);
 const username = sessionStorage.getItem('username');
 const totalSteps = JSON.parse(`${sessionStorage.getItem('lifeSteps')}`);
 const totalDistance = JSON.parse(`${sessionStorage.getItem('lifeDistance')}`);
-
+/*
 let getuserStatsURL;
 let userStatsURL;
 let userLifeTimeURL;
 let loginRedirect;
+*/
 
 let index;
 
-/*
 let getuserStatsURL = '/site/stats/';
 let userStatsURL = '/site/';
 let userLifeTimeURL = '/users/update/';
 let loginRedirect = '/'
-*/
 
+/*
 function checkEnv() {
     
     let envHost = window.location.hostname;
@@ -42,6 +42,8 @@ function checkEnv() {
 
     };
 };
+*/
+
 
 function getUserStats() {
     //   setTimeout(function() {userBack(MOCK_USER_STATS)}, 1);
@@ -548,7 +550,7 @@ function errFunc(xhr) {
   };
     
 function getAndDisplayInfo() {
-    checkEnv();
+   // checkEnv();
     userLogOut();
     newExerStat();
     getUserStats(displayUserStats);
