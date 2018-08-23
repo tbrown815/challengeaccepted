@@ -1,16 +1,25 @@
 //First create initial function call and place call at EOF ex - $(rmSearch);
 
 //Create constant for API URL
-
+/*
 let userAuth;
 let userURL;
 let getUserTokenURL;
 let loginRedirect;
+*/
 
+let userAuth = '/auth/login/';
+let userURL = '/users';
+let getUserTokenURL = '/users/getuser/';
+let loginRedirect = '/clientSite/index.html';
+
+/*
 function checkEnv() {
     
     let envHost = window.location.hostname;
     let envName = envHost.search('heroku');
+    
+
     
     
     if (envName > 1) {
@@ -25,9 +34,11 @@ function checkEnv() {
         userAuth = 'http://localhost:8080/auth/login/';
         userURL = 'http://localhost:8080/users';
         getUserTokenURL = 'http://localhost:8080/users/getuser/';
-        loginRedirect = '/ChallengeAccepted/clientSite/index.html';
+        loginRedirect = '/clientSite/index.html';
     };
 };
+
+*/
 
 //First function that is in the EOF call
 function userSearch () {
@@ -187,7 +198,7 @@ function errFunc(xhr) {
 }
 
 function publicPage() {
-    checkEnv();
+   // checkEnv();
     userSearch();
     createUser();
 }

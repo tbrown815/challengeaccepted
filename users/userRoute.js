@@ -134,8 +134,8 @@ router.post('/', jsonParser, (req, res) => {
             return Promise.reject({
               code: 422,
               reason: 'ERROR',
-              message: 'Username is in use',
-              location: 'username'
+              message: 'User ID is not valid',
+              location: 'User ID: '
             });
           }
 
