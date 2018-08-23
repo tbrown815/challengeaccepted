@@ -32,6 +32,14 @@ nav {
   margin-top: 20px;
 }
 
+.fyiSensitive {
+  font-size: 12px;
+}
+
+.fyiSensitive:hover {
+  font-size: 16px;
+}
+
 fieldset {
   border: 0px;
 }

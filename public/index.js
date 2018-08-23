@@ -75,7 +75,7 @@ function findUser(username, password) {
             error: function (xhr) { 
                 let err = xhr.responseText;
                 if (err === 'Unauthorized'){
-                  alert('Unable to authorize access, try again.')
+                  alert('Unable to authorize access, try again.  User ID and passwords are case sensitive.')
                 }
             },
             success: function(response) {
