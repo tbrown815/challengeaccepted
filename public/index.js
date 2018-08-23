@@ -198,7 +198,7 @@ function errFunc(xhr) {
 }
 
 function publicPage() {
-   // checkEnv();
+    checkEnv();
     userSearch();
     createUser();
 }

@@ -548,7 +548,7 @@ function errFunc(xhr) {
   };
     
 function getAndDisplayInfo() {
-   // checkEnv();
+    checkEnv();
     userLogOut();
     newExerStat();
     getUserStats(displayUserStats);
