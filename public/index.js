@@ -1,19 +1,19 @@
 //First create initial function call and place call at EOF ex - $(rmSearch);
 
 //Create constant for API URL
-/*
+
 let userAuth;
 let userURL;
 let getUserTokenURL;
 let loginRedirect;
-*/
 
+/*
 let userAuth = '/auth/login/';
 let userURL = '/users';
 let getUserTokenURL = '/users/getuser/';
 let loginRedirect = '/clientSite/index.html';
+*/
 
-/*
 function checkEnv() {
     
     let envHost = window.location.hostname;
@@ -38,7 +38,7 @@ function checkEnv() {
     };
 };
 
-*/
+
 
 //First function that is in the EOF call
 function userSearch () {
