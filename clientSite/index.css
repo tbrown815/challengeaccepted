@@ -25,13 +25,11 @@ nav {
 
 .lifeStats, .enterStats, .personStats {
   width: 100%;
-  padding-top: 20px;
   margin-top: 20px;
 }
 
 .lifeStats, .personStats {
   width: 100%;
-
   padding-left: 10px;
   }
 
@@ -67,6 +65,11 @@ input {
   width: 22%;
 }
 
+.userHello {
+  padding-left: 4%;
+  margin-bottom: -2.5%;
+}
+
 
 a {
   font-size: 14px;
@@ -88,6 +91,13 @@ button:hover {
   border-color: #dff4e8;
 }
 
+button, select {
+  -webkit-appearance: none;
+}
+
+.selectExerType, .selectEditExerType {
+  padding-left: 10px;
+}
 
 .modal { /*https://www.webdesignerdepot.com/2012/10/creating-a-modal-window-with-html5-and-css3/*/
   position: fixed;
@@ -168,7 +178,7 @@ button:hover {
   .userHello {
       padding-left: 30%;
       font-size: 100%;         
-      margin-bottom: -5% !important;        
+      margin-bottom: -4.5% !important;        
      
     }
 
