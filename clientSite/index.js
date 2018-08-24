@@ -88,8 +88,8 @@ function displayUserStats(data) {
     $('.js-lifeStats').html(`
         <H2 class='boxTitle'>Lifetime stats:</h2>
         <ul class='topBullet'>
-        <li><b>Lifetime Steps:</b> ${totalSteps}
-        <li><b>Lifetime Distance:</b> ${totalDistance} miles
+        <li><b>Lifetime Steps:</b> ${totalSteps}.toFixed(0)
+        <li><b>Lifetime Distance:</b> ${totalDistance}.toFixed(2) miles
         </ul>`
         
     );
