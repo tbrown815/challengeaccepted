@@ -72,13 +72,13 @@ router.post('/', jsonParser, (req, res) => {
     const noField = requiredFields.find(field => !(field in req.body));
 
   if (noField) {
-    return res.status(422).json(
+    return res.status(500).json(
     {code: 422,
       reason: 'ERROR',
       message: 'Field is not present',
       location: noField
-    });
-  }
+    }).end();
+  };
 
     const areStrings = ['username', 'password', 'firstName', 'lastName', 'email'];
 

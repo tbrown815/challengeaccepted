@@ -12,13 +12,23 @@ const exerStatsSchema = mongoose.Schema({
     exertype: {type: String}
 
 })
-
+/*
 const userInfoSchema = mongoose.Schema({
     username: {type: String, unique: true, required: true},
     password: {type: String, required: true},
     firstName: {type: String, required: true},
     lastName:  {type: String, required: true},
     email: {type: String, required: true},
+    lifeSteps:  {type: Number},
+    lifeDistance:  {type: Number}
+})
+*/
+const userInfoSchema = mongoose.Schema({
+    username: {type: String, unique: true, required: true},
+    password: {type: String, required: true},
+    firstName: {type: String},
+    lastName:  {type: String},
+    email: {type: String},
     lifeSteps:  {type: Number},
     lifeDistance:  {type: Number}
 })
