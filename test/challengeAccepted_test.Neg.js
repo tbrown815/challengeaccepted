@@ -276,72 +276,278 @@ describe('USERS TEST SET', function() {
                         
                     })
 
-//LEFT OFF HERE
-                describe('CREATE USER TEST SET', function() {
+                    describe('CREATE USER TEST SET', function() {
+                        
+                        it('Will POST data to create new user, username too short', function() {
+                            
+                            const genData = generateData();
+                            
+                            genData.lifeSteps = 0;
+                            genData.lifeDistance = 0;
+                            
+                            let badUser = {
+                                username: 'toshort',
+                                password: genData.password,
+                                firstName: genData.firstName,
+                                lastName: genData.lastName,
+                                email: genData.email,
+                                lifeSteps: genData.lifeSteps,
+                                lifeDistance: genData.lifeDistance
+                            }
+                            
+                            return chai.request(app)
+                            
+                            .post('/users')
             
-                    it('Will POST data to create new user', function() {
-            
-                        const genData = generateData();
-
-                        genData.lifeSteps = 0;
-                        genData.lifeDistance = 0;
-
-                        return chai.request(app)
-            
-                        .post('/users')
-            
-                        .send(genData)
-            
+                            .send(badUser)
+                            
                         .then(function(res) {
-                            expect(res).to.have.status(201);
+                            console.log('res: ', res.body)
+                            expect(res).to.have.status(422);
                             expect(res).to.be.json;
                             expect(res).to.be.a('object');
-                          
-                            expect(res.body).to.include.keys('id', 'username', 'firstName', 'lastName', 'email', 'lifeSteps', 'lifeDistance');
-                            expect(res.body.username).to.contain(genData.username);
-                            expect(res.body.firstName).to.contain(genData.firstName);
-                            expect(res.body.lastName).to.contain(genData.lastName);
-                            expect(res.body.email).to.contain(genData.email);
-                            
-                            
-                            return userInfoModel.findById(res.body.id);
+                            expect(res.body).to.not.have.all.keys('id', 'username', 'firstName', 'lastName', 'email', 'lifeSteps', 'lifeDistance')
+                            expect(res.body.reason).to.have.string('ERROR');
+                            expect(res.body.message).to.have.string('is required to be at least 8 characters long');
+                            expect(res.body.location).to.have.string('username');
                             
                         })
-                        .then(function(user) {
-                            expect(user.username).to.equal(genData.username);
-                            expect(user.firstName).to.equal(genData.firstName);
-                            expect(user.lastName).to.equal(genData.lastName);
-                            expect(user.email).to.equal(genData.email);
-                            expect(user.email).to.have.lengthOf.at.least(1);
-                            expect(user.email).to.be.a('string');
-                            expect(user.email).to.have.string('@');
-                            expect(user.email).to.have.string('.');
-                            expect(user.lifeSteps).to.be.a('number');
-                            expect(user.lifeDistance).to.equal(0);
-                            expect(user.lifeSteps).to.be.a('number');
-                            expect(user.lifeDistance).to.equal(0);
-                            
-                        })
+                        
                     })
+                    
+                    it('Will POST data to create new user, password too short', function() {
             
+                        const genData = generateData();
+                        
+                        genData.lifeSteps = 0;
+                        genData.lifeDistance = 0;
+                        
+                        let badUser = {
+                            username: genData.username,
+                            password: 'toshort',
+                            firstName: genData.firstName,
+                            lastName: genData.lastName,
+                            email: genData.email,
+                            lifeSteps: genData.lifeSteps,
+                            lifeDistance: genData.lifeDistance
+                        }
+                        
+                        return chai.request(app)
+                        
+                        .post('/users')
+                        
+                        .send(badUser)
             
+                        .then(function(res) {
+                            console.log('res: ', res.body)
+                            expect(res).to.have.status(422);
+                            expect(res).to.be.json;
+                            expect(res).to.be.a('object');
+                            expect(res.body).to.not.have.all.keys('id', 'username', 'firstName', 'lastName', 'email', 'lifeSteps', 'lifeDistance')
+                            expect(res.body.reason).to.have.string('ERROR');
+                            expect(res.body.message).to.have.string('is required to be at least 8 characters long');
+                            expect(res.body.location).to.have.string('password');
+                            
+                        })
+                        
+                    })
+                    
+                    it('Will POST data to create new user, firstname undefined', function() {
+                        
+                        const genData = generateData();
+                        
+                        genData.lifeSteps = 0;
+                        genData.lifeDistance = 0;
+                        
+                        let badUser = {
+                            username: genData.username,
+                            password: genData.password,
+                            firstName: undefined,
+                            lastName: genData.lastName,
+                            email: genData.email,
+                            lifeSteps: genData.lifeSteps,
+                            lifeDistance: genData.lifeDistance
+                        }
+                        
+                        return chai.request(app)
+                        
+                        .post('/users')
             
+                        .send(badUser)
+                        
+                        .then(function(res) {
+                            console.log('res: ', res.body)
+                            expect(res).to.have.status(500);
+                            expect(res).to.be.json;
+                            expect(res).to.be.a('object');
+                            expect(res.body).to.not.have.all.keys('id', 'username', 'firstName', 'lastName', 'email', 'lifeSteps', 'lifeDistance')
+                            expect(res.body.reason).to.have.string('ERROR');
+                            expect(res.body.message).to.have.string('Field is not present');
+                            expect(res.body.location).to.have.string('firstName');
+                            
+                        })
+                        
+                    })
+                    
+                    it('Will POST data to create new user, lastname undefined', function() {
+                        
+                        const genData = generateData();
+                        
+                        genData.lifeSteps = 0;
+                        genData.lifeDistance = 0;
+                        
+                        let badUser = {
+                            username: genData.username,
+                            password: genData.password,
+                            firstName: genData.firstName,
+                            lastName: undefined,
+                            email: genData.email,
+                            lifeSteps: genData.lifeSteps,
+                            lifeDistance: genData.lifeDistance
+                        }
+                        
+                        return chai.request(app)
+                        
+                        .post('/users')
+                        
+                        .send(badUser)
+                        
+                        .then(function(res) {
+                            console.log('res: ', res.body)
+                            expect(res).to.have.status(500);
+                            expect(res).to.be.json;
+                            expect(res).to.be.a('object');
+                            expect(res.body).to.not.have.all.keys('id', 'username', 'firstName', 'lastName', 'email', 'lifeSteps', 'lifeDistance')
+                            expect(res.body.reason).to.have.string('ERROR');
+                            expect(res.body.message).to.have.string('Field is not present');
+                            expect(res.body.location).to.have.string('lastName');
+
+                        })
+                        
+                    })
+                    
+                    it('Will POST data to create new user, email undefined', function() {
+            
+                        const genData = generateData();
+                        
+                        genData.lifeSteps = 0;
+                        genData.lifeDistance = 0;
+                        
+                        let badUser = {
+                            username: genData.username,
+                            password: genData.password,
+                            firstName: genData.firstName,
+                            lastName: genData.lastName,
+                            email: undefined,
+                            lifeSteps: genData.lifeSteps,
+                            lifeDistance: genData.lifeDistance
+                        }
+                        
+                        return chai.request(app)
+                        
+                        .post('/users')
+                        
+                        .send(badUser)
+                        
+                        .then(function(res) {
+                            console.log('res: ', res.body)
+                            expect(res).to.have.status(500);
+                            expect(res).to.be.json;
+                            expect(res).to.be.a('object');
+                            expect(res.body).to.not.have.all.keys('id', 'username', 'firstName', 'lastName', 'email', 'lifeSteps', 'lifeDistance')
+                            expect(res.body.reason).to.have.string('ERROR');
+                            expect(res.body.message).to.have.string('Field is not present');
+                            expect(res.body.location).to.have.string('email');
+                            
+                        })
+                        
+                    })
+                    
                 });
-
-
-    //USERS TEST BLOCK END
-    });
-
-// STATS TEST BLOCK
-
-describe('STATS TEST SET', function() {
-
-    
-    it('post new stats by usertoken', function() {
+                
+                //USERS TEST BLOCK END
+            });
+            
+            
+            // STATS TEST BLOCK
+            
+            describe('STATS TEST SET', function() {
+                
+                
+                it('post new stats with bad authToken, return 401', function() {
+                    
+                    const username = userData.username; 
+                    
+                    
+                    return chai.request(app)
+                    .get(`/users/getuser/${username}`)
+                    .set('Authorization', `Bearer ${testToken}`)
+                    .then(function(res) {
+            
+                        expect(res).to.have.status(200);
+                        expect(res).to.be.a('object');
+                        expect(res.body.id).to.have.lengthOf.at.least(1);
+                        expect(res.body.id).to.be.a('string');
+                        
+                console.log('res: ', res.body)
+                let dbID = res.body.id;
+                
+                console.log('authid: ', dbID)
+                return dbID;
+                
+            }).then(function(dbID){
+                
+                console.log('${dbID}: ', `${dbID}`)
+                
+                const badToken = `123${testToken}456`
+                
+                const user = dbID;
+                const exerDate = faker.date.recent();
+                const steps = faker.random.number();
+                const distance = faker.random.number();
+                let exertype;
+                
+                function randomNum(num) {
+                    return Math.floor(Math.random() * Math.floor(num));
+                }
+                
+                if(randomNum = 0) {
+                    exertype = 'run';
+                }
+                else {
+                    exertype = 'walk';
+                }
+                
+                const userVal = {"user": `${user}`, "date": `${exerDate}`, "steps": `${steps}`, "distance": `${distance}`, "exertype": `${exertype}`}
+                
+                console.log('userVal: ', userVal)
+                console.log('the token: ', testToken)
+                
+                return chai.request(app)
+                .post(`/site/`)
+                .set('Authorization', `Bearer ${badToken}`)
+                .set('Content-Type', 'application/json')
+                .send(userVal)
+                
+                .then(function(res) {
+                    
+                    console.log('res: ', res.body)
+                    expect(res).to.have.status(401);
+                    expect(res.responseText).to.be.undefined;
+                    expect(res.body).to.not.have.all.keys('id', 'user', 'date', 'steps', 'distance', 'exertype')
+   
+                })
+                
+            })
+            
+        })  
         
-        const username = userData.username; 
-
         
+        it('post new stats with bad usertoken, return 500', function() {
+            
+            const username = userData.username; 
+            
+            
             return chai.request(app)
             .get(`/users/getuser/${username}`)
             .set('Authorization', `Bearer ${testToken}`)
@@ -361,59 +567,332 @@ describe('STATS TEST SET', function() {
             }).then(function(dbID){
                 
                 console.log('${dbID}: ', `${dbID}`)
-
-                const user = dbID;
+                
+                const badToken = `123${dbID}456`
+                
+                const user = badToken;
                 const exerDate = faker.date.recent();
                 const steps = faker.random.number();
                 const distance = faker.random.number();
                 let exertype;
-
+                
                 function randomNum(num) {
                     return Math.floor(Math.random() * Math.floor(num));
-                  }
-
-                  if(randomNum = 0) {
-                      exertype = 'run';
-                  }
-                  else {
-                      exertype = 'walk';
-                  }
-
-                  const userVal = {"user": `${user}`, "date": `${exerDate}`, "steps": `${steps}`, "distance": `${distance}`, "exertype": `${exertype}`}
-
-                  console.log('userVal: ', userVal)
-                  console.log('the token: ', testToken)
-
+                }
+                
+                if(randomNum = 0) {
+                    exertype = 'run';
+                }
+                else {
+                    exertype = 'walk';
+                }
+                
+                const userVal = {"user": `${user}`, "date": `${exerDate}`, "steps": `${steps}`, "distance": `${distance}`, "exertype": `${exertype}`}
+                
+                console.log('userVal: ', userVal)
+                console.log('the token: ', testToken)
+                
                 return chai.request(app)
                 .post(`/site/`)
                 .set('Authorization', `Bearer ${testToken}`)
                 .set('Content-Type', 'application/json')
                 .send(userVal)
-
+                
                 .then(function(res) {
-    
+                    
                     console.log('res: ', res.body)
-                    expect(res).to.have.status(201);
-                    expect(res).to.be.a('object');
-                    expect(res.body).to.have.all.keys('id', 'user', 'date', 'steps', 'distance', 'exertype')
-                    expect(res.body.id).to.have.lengthOf.at.least(1);
-                    expect(res.body.id).to.be.a('string');
-                    expect(res.body.user).to.have.lengthOf.at.least(1);
-                    expect(res.body.user).to.be.a('string');
-                    expect(res.body.date).to.have.lengthOf.at.least(1);
-                    expect(res.body.date).to.be.a('string');
-                    expect(res.body.steps).to.be.a('number');
-                    expect(res.body.distance).to.be.a('number');
-                    expect(res.body.exertype).to.be.oneOf(['walk', 'run']);
-    
+                    expect(res).to.have.status(500);
+                    expect(res.body).to.not.have.all.keys('id', 'user', 'date', 'steps', 'distance', 'exertype')
+                    expect(res.body.reason).to.have.string('ERROR');
+                    expect(res.body.message).to.have.string('unable to post data');
+                    expect(res.body.location).to.have.string('');
+                    
                 })
                 
             })
-    
-    
             
         })
-              
+        
+        
+        it('post new stats with empty exerDate, return 500', function() {
+            
+            const username = userData.username; 
+            
+            
+            return chai.request(app)
+            .get(`/users/getuser/${username}`)
+            .set('Authorization', `Bearer ${testToken}`)
+            .then(function(res) {
+                
+                expect(res).to.have.status(200);
+                expect(res).to.be.a('object');
+                expect(res.body.id).to.have.lengthOf.at.least(1);
+                expect(res.body.id).to.be.a('string');
+                
+                console.log('res: ', res.body)
+                let dbID = res.body.id;
+                
+                console.log('authid: ', dbID)
+                return dbID;
+                
+            }).then(function(dbID){
+                
+                console.log('${dbID}: ', `${dbID}`)
+                
+                const user = dbID;
+                const exerDate = undefined;
+                const steps = faker.random.number();
+                const distance = faker.random.number();
+                let exertype;
+                
+                function randomNum(num) {
+                    return Math.floor(Math.random() * Math.floor(num));
+                }
+                
+                if(randomNum = 0) {
+                    exertype = 'run';
+                }
+                else {
+                    exertype = 'walk';
+                }
+                
+                const userVal = {"user": `${user}`, "date": `${exerDate}`, "steps": `${steps}`, "distance": `${distance}`, "exertype": `${exertype}`}
+                
+                console.log('userVal: ', userVal)
+                console.log('the token: ', testToken)
+                
+                        return chai.request(app)
+                        .post(`/site/`)
+                        .set('Authorization', `Bearer ${testToken}`)
+                        .set('Content-Type', 'application/json')
+                        .send(userVal)
+                        
+                        .then(function(res) {
+                            
+                            console.log('res: ', res.body)
+                            expect(res).to.have.status(500);
+                            expect(res.body).to.not.have.all.keys('id', 'user', 'date', 'steps', 'distance', 'exertype')
+                            expect(res.body.reason).to.have.string('ERROR');
+                            expect(res.body.message).to.have.string('something went wrong');
+                            expect(res.body.location).to.have.string('');
+                            
+                        })
+                        
+                    })
+                    
+                })
+                
+                
+                it('post new stats with empty steps, return 500', function() {
+                    
+                    const username = userData.username; 
+                    
+                    
+                    return chai.request(app)
+                    .get(`/users/getuser/${username}`)
+                    .set('Authorization', `Bearer ${testToken}`)
+                    .then(function(res) {
+                        
+                        expect(res).to.have.status(200);
+                        expect(res).to.be.a('object');
+                        expect(res.body.id).to.have.lengthOf.at.least(1);
+                        expect(res.body.id).to.be.a('string');
+                        
+                        console.log('res: ', res.body)
+                        let dbID = res.body.id;
+                        
+                        console.log('authid: ', dbID)
+                        return dbID;
+                        
+                    }).then(function(dbID){
+                        
+                        console.log('${dbID}: ', `${dbID}`)
+                        
+                        const user = dbID;
+                        const exerDate = faker.date.recent();;
+                        const steps = undefined;
+                        const distance = faker.random.number();
+                        let exertype;
+                        
+                        function randomNum(num) {
+                            return Math.floor(Math.random() * Math.floor(num));
+                        }
+                        
+                        if(randomNum = 0) {
+                            exertype = 'run';
+                        }
+                        else {
+                            exertype = 'walk';
+                              }
+            
+                              const userVal = {"user": `${user}`, "date": `${exerDate}`, "steps": `${steps}`, "distance": `${distance}`, "exertype": `${exertype}`}
+                              
+                              console.log('userVal: ', userVal)
+                              console.log('the token: ', testToken)
+                              
+                              return chai.request(app)
+                              .post(`/site/`)
+                              .set('Authorization', `Bearer ${testToken}`)
+                              .set('Content-Type', 'application/json')
+                              .send(userVal)
+                              
+                              .then(function(res) {
+                                  
+                                  console.log('res: ', res.body)
+                                  expect(res).to.have.status(500);
+                                  expect(res.body).to.not.have.all.keys('id', 'user', 'date', 'steps', 'distance', 'exertype')
+                                  expect(res.body.reason).to.have.string('ERROR');
+                                  expect(res.body.message).to.have.string('something went wrong');
+                                  expect(res.body.location).to.have.string('');
+                                  
+                                })
+                                
+                            })
+                            
+                        })
+                        
+                        
+                        it('post new stats with empty distance, return 500', function() {
+                            
+                            const username = userData.username; 
+                            
+                            
+                            return chai.request(app)
+                            .get(`/users/getuser/${username}`)
+                            .set('Authorization', `Bearer ${testToken}`)
+                            .then(function(res) {
+                                
+                                expect(res).to.have.status(200);
+                                expect(res).to.be.a('object');
+                                expect(res.body.id).to.have.lengthOf.at.least(1);
+                                expect(res.body.id).to.be.a('string');
+                                
+                                console.log('res: ', res.body)
+                                let dbID = res.body.id;
+                                
+                                console.log('authid: ', dbID)
+                                return dbID;
+                                
+                            }).then(function(dbID){
+                                
+                                console.log('${dbID}: ', `${dbID}`)
+                                
+                                const user = dbID;
+                                const exerDate = faker.date.recent();;
+                                const steps = faker.random.number();
+                                const distance = undefined;
+                                let exertype;
+                                
+                                function randomNum(num) {
+                                    return Math.floor(Math.random() * Math.floor(num));
+                                }
+                                
+                                if(randomNum = 0) {
+                                    exertype = 'run';
+                                }
+                                else {
+                                    exertype = 'walk';
+                                }
+                                
+                                const userVal = {"user": `${user}`, "date": `${exerDate}`, "steps": `${steps}`, "distance": `${distance}`, "exertype": `${exertype}`}
+                                
+                                console.log('userVal: ', userVal)
+                                console.log('the token: ', testToken)
+                                
+                                return chai.request(app)
+                                .post(`/site/`)
+                                .set('Authorization', `Bearer ${testToken}`)
+                                .set('Content-Type', 'application/json')
+                                .send(userVal)
+                                
+                                .then(function(res) {
+                                    
+                                    console.log('res: ', res.body)
+                                    expect(res).to.have.status(500);
+                                    expect(res.body).to.not.have.all.keys('id', 'user', 'date', 'steps', 'distance', 'exertype')
+                                    expect(res.body.reason).to.have.string('ERROR');
+                                    expect(res.body.message).to.have.string('something went wrong');
+                                    expect(res.body.location).to.have.string('');
+                                    
+                                })
+                                
+                            })
+                            
+                        })
+
+                        
+                        it.only('post new stats with empty exerType, return 201', function() {
+                            
+                            const username = userData.username; 
+                            
+                            
+                            return chai.request(app)
+                            .get(`/users/getuser/${username}`)
+                            .set('Authorization', `Bearer ${testToken}`)
+                            .then(function(res) {
+                                
+                                expect(res).to.have.status(200);
+                                    expect(res).to.be.a('object');
+                                    expect(res.body.id).to.have.lengthOf.at.least(1);
+                                    expect(res.body.id).to.be.a('string');
+                                    
+                                    console.log('res: ', res.body)
+                                    let dbID = res.body.id;
+                                    
+                                    console.log('authid: ', dbID)
+                                    return dbID;
+                                    
+                                }).then(function(dbID){
+                                    
+                                    console.log('${dbID}: ', `${dbID}`)
+                                    
+                                    const user = dbID;
+                                    const exerDate = faker.date.recent();;
+                                    const steps = faker.random.number();
+                                    const distance = faker.random.number();
+                                    let exertype = undefined;
+                                    
+                                    
+                                    const userVal = {"user": `${user}`, "date": `${exerDate}`, "steps": `${steps}`, "distance": `${distance}`, "exertype": `${exertype}`}
+                                    
+                                    console.log('userVal: ', userVal)
+                                    console.log('the token: ', testToken)
+                                    
+                                    return chai.request(app)
+                                    .post(`/site/`)
+                                    .set('Authorization', `Bearer ${testToken}`)
+                                    .set('Content-Type', 'application/json')
+                                    .send(userVal)
+                                    
+                                    .then(function(res) {
+                                        
+                                        console.log('res: ', res.body)
+                                        expect(res).to.have.status(201);
+                                        expect(res).to.be.a('object');
+                                        expect(res.body).to.have.all.keys('id', 'user', 'date', 'steps', 'distance', 'exertype')
+                                        expect(res.body.id).to.have.lengthOf.at.least(1);
+                                        expect(res.body.id).to.be.a('string');
+                                        expect(res.body.user).to.have.lengthOf.at.least(1);
+                                        expect(res.body.user).to.be.a('string');
+                                        expect(res.body.date).to.have.lengthOf.at.least(1);
+                                        expect(res.body.date).to.be.a('string');
+                                        expect(res.body.steps).to.be.a('number');
+                                        expect(res.body.distance).to.be.a('number');
+                                        //          expect(res.body.exertype).to.be.an('undefined');
+                                        
+                                    })
+                                    
+                                })
+                                
+                            })
+                            
+                            
+                            
+//LEFT OFF HERE
+                            
+                            
+                            
+                            
 it('request user stats by usertoken', function() {
                 
     console.log('statData: ', statData)
