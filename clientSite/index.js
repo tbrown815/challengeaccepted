@@ -91,7 +91,6 @@ function displayUserStats(data) {
         <li><b>Lifetime Steps:</b> ${totalSteps.toFixed(0)}
         <li><b>Lifetime Distance:</b> ${totalDistance.toFixed(2)} miles
         </ul>`
-        
     );
     
     $('.js-personStats').append(
