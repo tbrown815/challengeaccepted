@@ -1,190 +1,199 @@
 <!DOCTYPE html>
 <html lang='en-US' dir='ltr'>
-  <head>
-    <meta charset='utf-8'>
-    <meta name='description' content='Challenge Accepted' />
 
-    <!-- Responsive viewport tag, tells small screens that it's responsive -->
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+<head>
+  <meta charset='utf-8'>
+  <meta name='description' content='Challenge Accepted' />
 
-    <title>Challenge Accepted Dashboard</title>
+  <!-- Responsive viewport tag, tells small screens that it's responsive -->
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-    <!--favicon-->
-    <link rel="shortcut icon" type="image/png" href="../siteFav.ico"/>
-    
-    <!-- fonts  -->
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet">
+  <title>Challenge Accepted Dashboard</title>
 
-    <!-- reset -->
-    <link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css'>
+  <!--favicon-->
+  <link rel="shortcut icon" type="image/png" href="../siteFav.ico" />
 
-    <!--Load Babel because IE11 is a terrible browser-->
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <!-- fonts  -->
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet">
 
-    <!-- styles -->
-    <link href='grid_v2.css' rel='stylesheet' type='text/css' />
-    <link href='index.css' rel='stylesheet' type='text/css' />
+  <!-- reset -->
+  <link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css'>
 
-    <!-- jQuery -->
-    <script src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=' crossorigin='anonymous'></script>
+  <!--Load Babel because IE11 is a terrible browser-->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
-    <!--jQuery Datepicker-->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <!-- styles -->
+  <link href='grid_v2.css' rel='stylesheet' type='text/css' />
+  <link href='index.css' rel='stylesheet' type='text/css' />
+
+  <!-- jQuery -->
+  <script src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4='
+    crossorigin='anonymous'></script>
+
+  <!--jQuery Datepicker-->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
 
 
-  </head>
+</head>
 
-  <body>
-    <main>
-      
-      <img src='../background.jpg' class='bg' alt='background'>
+<body>
+  <main>
 
-  <div class='row'>
+    <img src='../background.jpg' class='bg' alt='background'>
+
+    <div class='row'>
       <nav class='col-12 topNav js-topNav'>
-    <!-- Title bar info goes here -->
+        <!-- Title bar info goes here -->
       </nav>
-  </div>
-      
-<div class='row'>
-<div class='leftSection col-6' role='presentation'>                                                                   
-
-  <div class='lifeStats js-lifeStats' id='lifeStats'>
-       <!--Personal Stats will display here-->
-  </div>
-
-  <div class='enterStats js-enterStats'>
-    <!--User can enter stats here-->
-    <form id='enterStatsForm' role='form' class='enterStatsForm js-enterStatsForm'>
-      <fieldset name='enterStats'>
-        <h2 class='boxTitle'>Log activity:</h2>
-        <label class='execDate js-execDate' for='execDateEntry'>Activity date:
-          <br>
-            <input required id='execDateEntry' class='execDateEntry js-execDateEntry' type='text' name='execDateEntry' placeholder='Select Date'>
-        </label>
-        <br><br>
-        <label class='selectExer js-selectExer' for='selectExerType'>Type of Activity:
-            <br>
-            <select required id='selectExerType' class='selectExerType js-selectExerType'>
-              <option value=''>--Select an Activity--</option>
-              <option value='walk'>Walk</option>
-              <option value='run'>Run</option>
-            </select>
-          </label>
-          <br><br>
-        <label class='enterSteps js-enterSteps' for='enterSteps'>
-          Steps:
-          <input required id='stepsField' class='stepsField js-stepsField' type='number' onkeypress='return event.charCode >= 48' min='0' step='1' max='' name='stepsField' placeholder='Enter # Steps'/>
-        </label>
-        <br><br>
-        <label class='enterDistance js-enterDistance' for='enterDistance'>
-          Distance in miles:
-          <input required id='distanceField' class='distanceField js-distanceField' type='number' onkeypress='return event.charCode 46 && >= 48' min='0' step='0.01' max='' name='distanceField' placeholder='Enter Distance'/>
-        </label>
-        <br><br>
-        <div class='buttonDiv'>
-          <label class='submitStats js-submitStats' for='submitStatsButton'>
-          <button required class='submitStatsButton js-submitStatsButton' type='submit' name='submitStatsButton'>Submit Activity</button>
-        </label>
-        </div>
-      </fieldset>
-      
-    </form>  
-  </div>
-    
-</div>
-<div class='rightSection col-6' role='presentation'>
-
-      <div class='personStats js-personStats' id='personStats'>
-        <!--Personal Stats will display here-->
-      </div>
-
-</div>
-
-
-
-</div>
-
-  <br><br><br>
-
-  <div class='row'>
-    <div class='col-12'>
-    
-      <div class='bottomtemp js-bottomtemp'>
-        <!--this is the temp info-->
-      </div>
-    
     </div>
-   </div>
 
-<div id='openEditModal' class='modal js-modal' role='presentation' aria-hidden='true'>
-    <div>
+    <div class='row'>
+      <div class='leftSection col-6' role='presentation'>
+
+        <div class='lifeStats js-lifeStats' id='lifeStats'>
+          <!--Personal Stats will display here-->
+        </div>
+
+        <div class='enterStats js-enterStats'>
+          <!--User can enter stats here-->
+          <form id='enterStatsForm' role='form' class='enterStatsForm js-enterStatsForm'>
+            <fieldset name='enterStats'>
+              <h2 class='boxTitle'>Log activity:</h2>
+              <label class='execDate js-execDate' for='execDateEntry'>Activity date:
+                <br>
+                <input required id='execDateEntry' class='execDateEntry js-execDateEntry' type='text' name='execDateEntry' placeholder='Select Date'>
+              </label>
+              <br><br>
+              <label class='selectExer js-selectExer' for='selectExerType'>Type of Activity:
+                <br>
+                <select required id='selectExerType' class='selectExerType js-selectExerType'>
+                  <option value=''>--Select an Activity--</option>
+                  <option value='walk'>Walk</option>
+                  <option value='run'>Run</option>
+                </select>
+              </label>
+              <br><br>
+              <label class='enterSteps js-enterSteps' for='enterSteps'>
+                Steps:
+                <input required id='stepsField' class='stepsField js-stepsField' type='number' onkeypress='return event.charCode >= 48' min='0'
+                  step='1' max='' name='stepsField' placeholder='Enter # Steps' />
+              </label>
+              <br><br>
+              <label class='enterDistance js-enterDistance' for='enterDistance'>
+                Distance in miles:
+                <input required id='distanceField' class='distanceField js-distanceField' type='number' onkeypress='return event.charCode 46 && >= 48'
+                  min='0' step='0.01' max='' name='distanceField' placeholder='Enter Distance' />
+              </label>
+              <br><br>
+              <div class='buttonDiv'>
+                <label class='submitStats js-submitStats' for='submitStatsButton'>
+                  <button required class='submitStatsButton js-submitStatsButton' type='submit' name='submitStatsButton'>Submit
+                    Activity
+                  </button>
+                </label>
+              </div>
+            </fieldset>
+
+          </form>
+        </div>
+
+      </div>
+      <div class='rightSection col-6' role='presentation'>
+
+        <div class='personStats js-personStats' id='personStats'>
+          <!--Personal Stats will display here-->
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+    <br><br><br>
+
+    <div class='row'>
+      <div class='col-12'>
+
+        <div class='bottomtemp js-bottomtemp'>
+          <!--this is the temp info-->
+        </div>
+
+      </div>
+    </div>
+
+    <div id='openEditModal' class='modal js-modal' role='presentation' aria-hidden='true'>
+      <div>
         <a href='#close' title='closeModal' id='closeEditModal' class='closeModal js-closeModal'>X</a>
         <h2 class='modalTitle'>Update Activity</h2>
         <form id='editExerForm' role='form' class='editExerForm js-editExerForm'>
           <fieldset name='editExerStat'>
-                  <label class='editDate js-editDate' for='editDateEntry'>Activity date:
-                    <br>
-                      <input required id='editDateEntry' class='editDateEntry js-editDateEntry' type='text' name='editDateEntry' placeholder='Select Date'>
-                  </label>
-                  <br><br>
-                  <label class='selectEditExer js-selectExer' for='selectEditExerType'>Type of Activity:
-                      <br>
-                      <select required id='selectEditExerType' class='selectEditExerType js-selectEditExerType'>
-                        <option value=''>--Select an Activity--</option>
-                        <option value='walk'> Walk</option>
-                        <option value='run'> Run</option>
-                      </select>
-                    </label>
-                    <br><br>
-                  <label class='editSteps js-editSteps' for='editStepsField'>
-                    Steps:
-                    <input required id='editStepsField' class='editStepsField js-editStepsField' type='number' onkeypress='return event.charCode >= 48' min='0' step='1' max='' name='editStepsField' placeholder='Enter # Steps'/>
-                  </label>
-                  <br><br>
-                  <label class='editDistance js-editDistance' for='editDistanceField'>
-                    Distance in miles:
-                    <input required id='editDistanceField' class='editDistanceField js-editDistanceField' type='number' onkeypress='return event.charCode 46 && >= 48' min='0' step='0.01' max='' name='editDistanceField' placeholder='Enter Distance'/>
-                  </label>
-                  <br><br>
-                  <div class='buttonDiv'>
-                  <label class='submitEditStats js-submitEditStats' for='submitEditStatsButton'>
-                    <button required class='submitEditStatsButton js-submitEditStatsButton' type='submit' name='submitEditStatsButton'>Update Activity</button>
-                  </label>
-                  </div>                  
-                </fieldset>
-                
-              </form>  
-    </div>
-</div>
+            <label class='editDate js-editDate' for='editDateEntry'>Activity date:
+              <br>
+              <input required id='editDateEntry' class='editDateEntry js-editDateEntry' type='text' name='editDateEntry' placeholder='Select Date'>
+            </label>
+            <br><br>
+            <label class='selectEditExer js-selectExer' for='selectEditExerType'>Type of Activity:
+              <br>
+              <select required id='selectEditExerType' class='selectEditExerType js-selectEditExerType'>
+                <option value=''>--Select an Activity--</option>
+                <option value='walk'> Walk</option>
+                <option value='run'> Run</option>
+              </select>
+            </label>
+            <br><br>
+            <label class='editSteps js-editSteps' for='editStepsField'>
+              Steps:
+              <input required id='editStepsField' class='editStepsField js-editStepsField' type='number' onkeypress='return event.charCode >= 48'
+                min='0' step='1' max='' name='editStepsField' placeholder='Enter # Steps' />
+            </label>
+            <br><br>
+            <label class='editDistance js-editDistance' for='editDistanceField'>
+              Distance in miles:
+              <input required id='editDistanceField' class='editDistanceField js-editDistanceField' type='number' onkeypress='return event.charCode 46 && >= 48'
+                min='0' step='0.01' max='' name='editDistanceField' placeholder='Enter Distance' />
+            </label>
+            <br><br>
+            <div class='buttonDiv'>
+              <label class='submitEditStats js-submitEditStats' for='submitEditStatsButton'>
+                <button required class='submitEditStatsButton js-submitEditStatsButton' type='submit' name='submitEditStatsButton'>Update
+                  Activity
+                </button>
+              </label>
+            </div>
+          </fieldset>
 
-<div id='openDelModal' class='modal js-modal' role='presentation' aria-hidden='true'>
-    <div>
+        </form>
+      </div>
+    </div>
+
+    <div id='openDelModal' class='modal js-modal' role='presentation' aria-hidden='true'>
+      <div>
         <a href='#close' title='closeModal' id='closeDelModal' class='closeModal js-closeModal'>X</a>
         <h2 class='modalTitle'>Delete Activity</h2>
         <form id='delExerForm' role='form' class='delExerForm js-delExerForm'>
-            <fieldset name='delExerStat'>
-              <label class='delExerStat js-delExerStat' for='delExerStat'>
-                <h3 class='modalTitle'>ARE YOU SURE YOU WANT TO DELETE?</h3>
-                </label>
-                <br>
-                <div class='buttonDiv'>
-                <label class='yesDelStats js-yesDelStats' for='yesDelStats'>
-                    <button required class='yesDelStatsButton js-yesDelStatsButton' type='submit' name='yesDelStatsButton'>YES, DELETE!</button>
-                </label>   
-                </div>
-            </fieldset>
-        </form>             
+          <fieldset name='delExerStat'>
+            <label class='delExerStat js-delExerStat' for='delExerStat'>
+              <h3 class='modalTitle'>ARE YOU SURE YOU WANT TO DELETE?</h3>
+            </label>
+            <br>
+            <div class='buttonDiv'>
+              <label class='yesDelStats js-yesDelStats' for='yesDelStats'>
+                <button required class='yesDelStatsButton js-yesDelStatsButton' type='submit' name='yesDelStatsButton'>YES,
+                  DELETE!
+                </button>
+              </label>
+            </div>
+          </fieldset>
+        </form>
+      </div>
     </div>
-</div>
-</main>  
-  </body>
-  
-  <script type='text/babel' data-presets='es2015,stage-2' src='index.js'></script>
-  
-  </html>
-  
-  
+  </main>
+</body>
 
+<script type='text/babel' data-presets='es2015,stage-2' src='index.js'></script>
+
+</html>

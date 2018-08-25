@@ -3,12 +3,6 @@ const userToken = JSON.parse(`${sessionStorage.getItem('userToken')}`);
 const username = sessionStorage.getItem('username');
 const totalSteps = JSON.parse(`${sessionStorage.getItem('lifeSteps')}`);
 const totalDistance = JSON.parse(`${sessionStorage.getItem('lifeDistance')}`);
-/*
-let getuserStatsURL;
-let userStatsURL;
-let userLifeTimeURL;
-let loginRedirect;
-*/
 
 let index;
 
@@ -17,36 +11,9 @@ let userStatsURL = '/site/';
 let userLifeTimeURL = '/users/update/';
 let loginRedirect = '/'
 
-/*
-function checkEnv() {
-    
-    let envHost = window.location.hostname;
-    let envName = envHost.search('heroku');
-    
-    
-    if (envName > 1) {
-        console.log('envName > 1: ', envName > 1)
-        
-        getuserStatsURL = '/site/stats/';
-        userStatsURL = '/site/';
-        userLifeTimeURL = '/users/update/';
-        loginRedirect = '/'
-
-    }
-
-    else {
-        getuserStatsURL = 'http://localhost:8080/site/stats/';
-        userStatsURL = 'http://localhost:8080/site/';
-        userLifeTimeURL = 'http://localhost:8080/users/update/';
-        loginRedirect = '/ChallengeAccepted/public/index.html';
-
-    };
-};
-*/
-
-
+//calls user stat endpoint to retrieve users stats
 function getUserStats() {
-    //   setTimeout(function() {userBack(MOCK_USER_STATS)}, 1);
+//if authtoken or usertoken null redirect user to login page
     if (authToken === null || userToken === null) {
         sessionStorage.clear();
         location.href = loginRedirect;
@@ -58,33 +25,31 @@ function getUserStats() {
         cache: false,
         url: `${getuserStatsURL}` + `${userToken}`,
         method: 'GET',
-        headers: {        
+        headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${authToken}`
-            },
-            error: function (xhr) { 
-                errFunc(xhr)
-                },
-            success: function(response) {
-            console.log('user stat success') 
+        },
+        error: function (xhr) {
+            errFunc(xhr)
+        },
+        success: function (response) {
+            return;
         }
     }
 
-    $.ajax(userStats).done(function(response) {
-        console.log('user response: ', response)
+    $.ajax(userStats).done(function (response) {
         displayUserStats(response);
     })
-    
+
 }
 
 
 
-
+//displays the user stats that were retrieved
 function displayUserStats(data) {
-    console.log('data: ', data)
-    
+
     let userStatArray = data.userStats;
-    
+
     $('.js-lifeStats').html(`
         <H2 class='boxTitle'>Lifetime stats:</h2>
         <ul class='topBullet'>
@@ -92,26 +57,24 @@ function displayUserStats(data) {
         <li><b>Lifetime Distance:</b> ${totalDistance.toFixed(2)} miles
         </ul>`
     );
-    
+
     $('.js-personStats').append(
         `<h2 class='boxTitle'>Recent Activity:</h2>`
     )
-    
-  
-    console.log('userStatArray: ', userStatArray)
-    
-            if(userStatArray.length < 1 || userStatArray === null || userStatArray === undefined) {
-                $('.js-personStats').append(`
+
+// IF no user stats display message to user to create stats
+    if (userStatArray.length < 1 || userStatArray === null || userStatArray === undefined) {
+        $('.js-personStats').append(`
                     <p>Log activities to the left.</p>
                     
                     <p>This section displays your last 10 recorded activities</p>`
-                );
-    
-            }
-    
+        );
+
+    }
+
     for (index in data.userStats) {
-    
-       
+
+
         let statID = data.userStats[index].id;
         let exerDate = data.userStats[index].date.substring(0, 10);
         let numSteps = data.userStats[index].steps;
@@ -119,7 +82,7 @@ function displayUserStats(data) {
         let exertype = data.userStats[index].exertype;
 
 
-        if(numSteps === null && distance === null) {
+        if (numSteps === null && distance === null) {
             $('.js-personStats').append(`
                 <ul class='topBullet'>
                 <li>Date: ${exerDate}
@@ -132,7 +95,7 @@ function displayUserStats(data) {
             );
 
         }
-        else if(numSteps === null) {
+        else if (numSteps === null) {
             $('.js-personStats').append(`
                 <ul class='topBullet'>
                 <li>Date: ${exerDate}
@@ -146,7 +109,7 @@ function displayUserStats(data) {
             );
 
         }
-        else if(distance === null) {
+        else if (distance === null) {
             $('.js-personStats').append(`
                 <ul class='topBullet'>
                 <li>Date: ${exerDate}
@@ -178,71 +141,56 @@ function displayUserStats(data) {
 
     }
 
-
-    $('.js-editStats').unbind().click(function() {
-        
-        //on the event prevent default behavior with no args
-        //event.preventDefault();
+//click watcher to enter edit stat flow
+    $('.js-editStats').unbind().click(function () {
 
         let clickedId = $(this).attr('id');
-
-        console.log('edit id: ', clickedId)
 
         editGetStats(clickedId);
-
     })
 
-    $('.js-delStats').unbind().click(function() {
-        
-        //on the event prevent default behavior with no args
-        //event.preventDefault();
+//click watcher to enter delete stat flow
+    $('.js-delStats').unbind().click(function () {
 
         let clickedId = $(this).attr('id');
 
-        console.log('del id: ', clickedId)
-
         delGetStats(clickedId);
-
     })
-
 }
 
-
+//get stats to edit
 function editGetStats(data) {
 
     let editID = data;
-
 
     let findStat = {
         async: true,
         crossDomain: true,
         cache: false,
-        url:  `${userStatsURL}` + `${editID}`,
+        url: `${userStatsURL}` + `${editID}`,
         method: 'GET',
-        headers: {        
+        headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${authToken}`
-            },
-            error: function (xhr) { 
-                errFunc(xhr)
-                },
-            success: function() {
-        console.log('user stat retrieved') 
+        },
+        error: function (xhr) {
+            errFunc(xhr)
+        },
+        success: function () {
+            return;
+
         }
     }
 
-    $.ajax(findStat).done(function(response) {
+    $.ajax(findStat).done(function (response) {
         displayEditStats(response, editID);
     })
 
 
 }
 
-
+//display stats to edit
 function displayEditStats(data, editID) {
-    console.log('edit data: ', data)
-
-
 
     editID = editID;
     let exerDate = data.date.substring(0, 10);
@@ -258,12 +206,13 @@ function displayEditStats(data, editID) {
     saveEditStats(exerDate, numSteps, distance, exertype, editID);
 }
 
+//put updated status to DB and update user stats
 function saveEditStats(exerDate, numSteps, distance, exertype, editID) {
 
-    $( "#editDateEntry" ).datepicker();
+    $("#editDateEntry").datepicker();
 
 
-    $('.js-editExerForm').unbind().submit(function(event) {
+    $('.js-editExerForm').unbind().submit(function (event) {
 
         event.preventDefault();
 
@@ -279,10 +228,11 @@ function saveEditStats(exerDate, numSteps, distance, exertype, editID) {
         let numStepsUpdate = 0;
         let numDistanceUpdate = 0;
 
+        //If flow to determine adjustments to life steps
         if (newNumSteps == numSteps) {
-            
+
             numStepsUpdate = parseFloat(newNumSteps) - parseFloat(numSteps)
-            
+
             updateSteps = parseFloat(totalSteps) + parseFloat(numStepsUpdate);
 
         }
@@ -290,7 +240,7 @@ function saveEditStats(exerDate, numSteps, distance, exertype, editID) {
         if (newNumSteps > numSteps) {
 
             numStepsUpdate = parseFloat(newNumSteps) - parseFloat(numSteps)
-            
+
             updateSteps = parseFloat(totalSteps) + parseFloat(numStepsUpdate);
         }
 
@@ -304,45 +254,45 @@ function saveEditStats(exerDate, numSteps, distance, exertype, editID) {
 
         if (newNumSteps == 0 || newNumSteps == null || newNumSteps == undefined) {
 
-                if (newNumSteps == null || newNumSteps == undefined) {
-                    newNumSteps = 0;
-                }
+            if (newNumSteps == null || newNumSteps == undefined) {
+                newNumSteps = 0;
+            }
 
-                updateSteps = parseFloat(totalSteps) - parseFloat(numSteps);
+            updateSteps = parseFloat(totalSteps) - parseFloat(numSteps);
 
         }
 
-
+        //If flow to determine adjustments to life distance
         if (newDistance == distance) {
-            
-            numStepsUpdate = parseFloat(newDistance) - parseFloat(distance)
-            
-            updateDistance = parseFloat(totalDistance) + parseFloat(numStepsUpdate);
+
+            numDistanceUpdate = parseFloat(newDistance) - parseFloat(distance)
+
+            updateDistance = parseFloat(totalDistance) + parseFloat(numDistanceUpdate);
 
         }
 
         if (newDistance > distance) {
 
-            numStepsUpdate = parseFloat(newDistance) - parseFloat(distance)
-            
-            updateDistance = parseFloat(totalDistance) + parseFloat(numStepsUpdate);
+            numDistanceUpdate = parseFloat(newDistance) - parseFloat(distance)
+
+            updateDistance = parseFloat(totalDistance) + parseFloat(numDistanceUpdate);
         }
 
         if (newDistance < distance) {
 
-            numStepsUpdate = parseFloat(distance) - parseFloat(newDistance);
+            numDistanceUpdate = parseFloat(distance) - parseFloat(newDistance);
 
-            updateDistance = parseFloat(totalDistance) - parseFloat(numStepsUpdate);
+            updateDistance = parseFloat(totalDistance) - parseFloat(numDistanceUpdate);
 
         }
 
         if (newDistance == 0 || newDistance == null || newDistance == undefined) {
 
-                if (newDistance == null || newDistance == undefined) {
-                    newDistance = 0;
-                }
+            if (newDistance == null || newDistance == undefined) {
+                newDistance = 0;
+            }
 
-                updateDistance = parseFloat(totalDistance) - parseFloat(distance);
+            updateDistance = parseFloat(totalDistance) - parseFloat(distance);
 
         }
 
@@ -352,31 +302,30 @@ function saveEditStats(exerDate, numSteps, distance, exertype, editID) {
             cache: false,
             url: `${userStatsURL}` + `${editID}`,
             method: 'PUT',
-            headers: {        
+            headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${authToken}`
-                },
+            },
             processData: false,
-            data: JSON.stringify({id: `${editID}`,date: `${newExerDate}`,steps: `${newNumSteps}`,distance: `${newDistance}`,exertype: `${newExertype}`}),
-            error: function (xhr) { 
+            data: JSON.stringify({ id: `${editID}`, date: `${newExerDate}`, steps: `${newNumSteps}`, distance: `${newDistance}`, exertype: `${newExertype}` }),
+            error: function (xhr) {
                 errFunc(xhr)
-                },
-            success: function(response) {
-                console.log('user stat updated')
+            },
+            success: function (response) {
                 $('#closeEditModal')[0].click();
+                //send to update life stats
                 updateLifeTimeInfo(updateSteps, updateDistance)
 
             }
         }
 
-        console.log('editStats: ', editStats)
         $.ajax(editStats);
     })
 
 }
 
 
-
+//get user stat for delete
 function delGetStats(data) {
 
     let delID = data;
@@ -386,72 +335,73 @@ function delGetStats(data) {
         async: true,
         crossDomain: true,
         cache: false,
-        url:  `${userStatsURL}` + `${delID}`,
+        url: `${userStatsURL}` + `${delID}`,
         method: 'GET',
-        headers: {        
+        headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${authToken}`
-            },
-            error: function (xhr) { 
-                errFunc(xhr)
-                },
-            success: function(response) {
-                delStats(response);
-        console.log('user stat retrieved') 
+        },
+        error: function (xhr) {
+            errFunc(xhr)
+        },
+        success: function (response) {
+            delStats(response);
+            return;
+
         }
     }
 
     $.ajax(findStat)
-    
+
 }
 
+//delete selected user stat by stat id
 function delStats(response) {
-    console.log('delStat data: ', response)
-
 
     let delID = response.id;
     let numSteps = response.steps;
     let numDistance = response.distance;
 
-    $('.js-delExerForm').unbind().submit(function(event) {
-        
-        
+    $('.js-delExerForm').unbind().submit(function (event) {
+
+
         event.preventDefault();
 
+        //calc for removal of user life stats
         let updateSteps = parseFloat(totalSteps) - parseFloat(numSteps);
         let updateDistance = parseFloat(totalDistance) - parseFloat(numDistance);
-        
+
         let delStats = {
             async: true,
             crossDomain: true,
             cache: false,
             url: `${userStatsURL}` + `${delID}`,
             method: 'DELETE',
-            headers: {        
+            headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${authToken}`
-                },
-                error: function (xhr) { 
-                    errFunc(xhr)
-                    },
-                success: function() {
-                console.log('user stat removed')
+            },
+            error: function (xhr) {
+                errFunc(xhr)
+            },
+            success: function () {
                 $('#closeDelModal')[0].click()
+                //send to update life stats
                 updateLifeTimeInfo(updateSteps, updateDistance)
             }
         }
-        
+
         $.ajax(delStats);
     })
 
 }
 
-
+//create new stat
 function newExerStat() {
 
-    $( "#execDateEntry" ).datepicker();
+    $("#execDateEntry").datepicker();
 
-    $('.js-enterStatsForm').unbind().submit(function(event) {
+    $('.js-enterStatsForm').unbind().submit(function (event) {
 
         event.preventDefault();
 
@@ -461,12 +411,9 @@ function newExerStat() {
         let addDistance = $('#distanceField').val();
         let addExertype = $('#selectExerType').val();
 
+        //calc to update life stats
         let updateSteps = parseFloat(totalSteps) + parseFloat(addNumSteps);
-
         let updateDistance = parseFloat(totalDistance) + parseFloat(addDistance);
-
-        console.log('updateSteps: ', updateSteps)
-        console.log('updateDistance: ', updateDistance)
 
         let newStats = {
             async: true,
@@ -474,17 +421,17 @@ function newExerStat() {
             cache: false,
             url: `${userStatsURL}`,
             method: 'POST',
-            headers: {        
+            headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${authToken}`
-                },
+            },
             processData: false,
-            data: JSON.stringify({user: `${userToken}`,date: `${addExerDate}`,steps: `${addNumSteps}`,distance: `${addDistance}`,exertype: `${addExertype}`}),
-            error: function (xhr) { 
+            data: JSON.stringify({ user: `${userToken}`, date: `${addExerDate}`, steps: `${addNumSteps}`, distance: `${addDistance}`, exertype: `${addExertype}` }),
+            error: function (xhr) {
                 errFunc(xhr)
-                },
-            success: function(response) {
-                console.log('user stat create')
+            },
+            success: function (response) {
+                //send to update life stats
                 updateLifeTimeInfo(updateSteps, updateDistance)
             }
         }
@@ -494,9 +441,8 @@ function newExerStat() {
 
 }
 
-
+//update life stats when sent from create/edit/delete flows
 function updateLifeTimeInfo(updateSteps, updateDistance) {
-    console.log('updateLifeTimeInfo start')
 
     let updateLifeTime = {
 
@@ -505,28 +451,27 @@ function updateLifeTimeInfo(updateSteps, updateDistance) {
         cache: false,
         url: `${userLifeTimeURL}` + `${userToken}`,
         method: 'PUT',
-        headers: {        
+        headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${authToken}`
-            } ,
+        },
         processData: false,
-        data: JSON.stringify({id: `${userToken}`,lifeSteps: `${updateSteps}`,lifeDistance: `${updateDistance}`}),
-        error: function (xhr) { 
+        data: JSON.stringify({ id: `${userToken}`, lifeSteps: `${updateSteps}`, lifeDistance: `${updateDistance}` }),
+        error: function (xhr) {
             errFunc(xhr)
-            },
-        success: function() {
+        },
+        success: function () {
             sessionStorage.setItem('lifeSteps', JSON.stringify(updateSteps))
             sessionStorage.setItem('lifeDistance', JSON.stringify(updateDistance))
-            console.log('lifetime stats updated')
             location.reload(true);
         }
     }
-    
+
     $.ajax(updateLifeTime);
-    
+
 };
 
-
+//display welcome message and logout, on logout clear session storage and redirect to login page
 function userLogOut() {
     $('.js-topNav').html(`
     <div class='navInfo'>
@@ -536,34 +481,23 @@ function userLogOut() {
     </div>
     `)
 
-    $('#logoutLink').click(function(event) {
-       // event.preventDefault();
+    $('#logoutLink').click(function (event) {
+
         sessionStorage.clear();
     });
 
 };
 
+//function for error message alert display
 function errFunc(xhr) {
-    return  alert(`${xhr.responseJSON.reason}: ${xhr.responseJSON.location} ${xhr.responseJSON.message}`)
-  
-  };
-    
+    return alert(`${xhr.responseJSON.reason}: ${xhr.responseJSON.location} ${xhr.responseJSON.message}`)
+
+};
+
 function getAndDisplayInfo() {
-   // checkEnv();
     userLogOut();
     newExerStat();
     getUserStats(displayUserStats);
-    
-    /*
-    $('.js-bottomtemp').html(`
-    <p>TEMP DATA:</p>
-    <ul>
-    <li>authToken: ${authToken}
-    <li>userToken: ${userToken}
-    <li>username: ${username}
-    </ul>`
-    );
-    */
 }
 
-    $(getAndDisplayInfo);
+$(getAndDisplayInfo);

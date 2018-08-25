@@ -1,47 +1,51 @@
-"use-strict";
+'use-strict';
 
-const {Strategy: LocalStrategy} = require('passport-local');
+const { Strategy: LocalStrategy } = require('passport-local');
 
-const {Strategy: JwtStrategy, ExtractJwt} = require('passport-jwt');
+const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
 
-const {userInfoModel} = require('../models');
+const { userInfoModel } = require('../models');
 
-const {JWT_SECRET} = require('../config');
+const { JWT_SECRET } = require('../config');
 
 const localStrategy = new LocalStrategy((username, password, callback) => {
 
     let user;
-
-    userInfoModel.findOne({username: username})
-    .then(_user => {
-        user = _user;
-        if (!user) {
-            return Promise.reject({
-                reason: 'ERROR',
-                message: 'Unable to authorize access'
-            });
-        }
-        return user.valPass(password);
-    })
-    .then(isValid => {
-        if (!isValid) {
-            return Promise.reject({
-                reason: 'ERROR',
-                message: 'Unable to authorize access'
-            });
-        }
-        return callback(null, user);
-    })
-    .catch(err => {
-        if (err.reason === 'ERROR') {
-            return callback(null, false, err);
-        }
-        return callback(err, false);
-    });
+    
+    //verify user exists
+    userInfoModel.findOne({ username: username })
+        .then(_user => {
+            user = _user;
+            if (!user) {
+                return Promise.reject({
+                    reason: 'ERROR',
+                    message: 'Unable to authorize access'
+                });
+            }
+            return user.valPass(password);
+        })
+        //validate password entered at login
+        .then(isValid => {
+            if (!isValid) {
+                return Promise.reject({
+                    reason: 'ERROR',
+                    message: 'Unable to authorize access'
+                });
+            }
+            return callback(null, user);
+        })
+        .catch(err => {
+            if (err.reason === 'ERROR') {
+                return callback(null, false, err);
+            }
+            return callback(err, false);
+        });
 });
 
+//extract jwt from request header 
 const jwtStrategy = new JwtStrategy(
-    {secretOrKey: JWT_SECRET,
+    {
+        secretOrKey: JWT_SECRET,
         jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
         algorithms: ['HS256']
     },
@@ -50,4 +54,4 @@ const jwtStrategy = new JwtStrategy(
     }
 );
 
-module.exports = {localStrategy, jwtStrategy};
+module.exports = { localStrategy, jwtStrategy };

@@ -1,147 +1,155 @@
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="description" content="Challenge Accepted Login" />
 
-    <!-- Responsive viewport tag, tells small screens that it's responsive -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Challenge Accepted Login" />
 
-    <title>Challenge Accepted Login</title>
+  <!-- Responsive viewport tag, tells small screens that it's responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!--favicon-->
-    <link rel="shortcut icon" type="image/png" href="../siteFav.ico"/>
-    
-    <!-- fonts  -->
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet">
+  <title>Challenge Accepted Login</title>
 
-    <!-- reset -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
+  <!--favicon-->
+  <link rel="shortcut icon" type="image/png" href="../siteFav.ico" />
 
-    <!--Load Babel because IE11 is a terrible browser-->
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <!-- fonts  -->
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet">
 
-    <!-- styles -->
-    <link href="grid_v2.css" rel="stylesheet" type="text/css" />
-    <link href="index.css" rel="stylesheet" type="text/css" />
+  <!-- reset -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <!--Load Babel because IE11 is a terrible browser-->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- styles -->
+  <link href="grid_v2.css" rel="stylesheet" type="text/css" />
+  <link href="index.css" rel="stylesheet" type="text/css" />
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
 
 
 
-  </head>
+</head>
 
-  <body>
-    
-    <main>
-        <img src='../background.jpg' class='bg' alt='background'>
-      
+<body>
+
+  <main>
+    <img src='../background.jpg' class='bg' alt='background'>
+
     <div class='row'>
-      
+
       <nav class='col-12 topNav js-topNav'>
         <h1>Challenge Accepted</h1>
-        <h3>Does friendly competition help motivate you to get off the couch and go for a run?</h3> 
+        <h3>Does friendly competition help motivate you to get off the couch and go for a run?</h3>
         <p>
-          Challenge Accepted helps you to track your recent fitness activities, like runs and walks, measuring steps and distance traveled. 
-          With an account, you'll be able to log recent activity and review your lifetime step and distance data. Get moving with Challenge Accepted!
+          Challenge Accepted helps you to track your recent fitness activities, like runs and walks, measuring steps and distance traveled.
+          With an account, you'll be able to log recent activity and review your lifetime step and distance data. Get moving
+          with Challenge Accepted!
         </p>
       </nav>
 
-  </div>
+    </div>
 
-  <div class='row'>
-    <div class='col-12' role='presentation'>
+    <div class='row'>
+      <div class='col-12' role='presentation'>
 
         <div class='loginBox js-loginBox'>
 
-        <form id='loginForm' role='form' class='loginForm js-loginForm'>
-          <fieldset name='login'>
-            <label class='userId js-userId' for='userIdfield'>
-              User ID:
-              <br>
-              <input required id='userIdfield' class='userIdfield js-userIdfield' type='text' name='userIdfield' autocomplete='username' placeholder="Enter User ID"/>
-            </label>
-            <br><br>
-            <label class='userPass js-userPass' for='userPassField'>
-              Password:
-              <br>
-              <input required id='userPassField' class='userPassField js-userPassField' type='password' name='userPassField' autocomplete='current-password' placeholder="Enter your Password"/>
-            </label>
-            <br><br>
-            <div class='buttonDiv'>
-            <label class='login js-login' for='login'>
-              <button required class='loginButton js-loginButton' type='submit' name='loginButton'>Login</button>
-            </label>
-          </div>
-          <p class='newUserLink'>New User? <a href="#openNewUserModal">Click here!</a></p>
-          </fieldset>
-        </form>
+          <form id='loginForm' role='form' class='loginForm js-loginForm'>
+            <fieldset name='login'>
+              <label class='userId js-userId' for='userIdfield'>
+                User ID:
+                <br>
+                <input required id='userIdfield' class='userIdfield js-userIdfield' type='text' name='userIdfield' autocomplete='username'
+                  placeholder="Enter User ID" />
+              </label>
+              <br><br>
+              <label class='userPass js-userPass' for='userPassField'>
+                Password:
+                <br>
+                <input required id='userPassField' class='userPassField js-userPassField' type='password' name='userPassField' autocomplete='current-password'
+                  placeholder="Enter your Password" />
+              </label>
+              <br><br>
+              <div class='buttonDiv'>
+                <label class='login js-login' for='login'>
+                  <button required class='loginButton js-loginButton' type='submit' name='loginButton'>Login</button>
+                </label>
+              </div>
+              <p class='newUserLink'>New User? <a href="#openNewUserModal">Click here!</a></p>
+            </fieldset>
+          </form>
 
-      </div>
+        </div>
 
 
 
-      <div id='openNewUserModal' class='modal js-modal' role='presentation' aria-hidden='true'>
-        <div>
+        <div id='openNewUserModal' class='modal js-modal' role='presentation' aria-hidden='true'>
+          <div>
             <a href='#close' title='Close' id='closeNewUserModal' class='closeModal js-closeModal'>X</a>
             <h2 class='modalTitle'>Please provide your details:</h2>
             <form id='newUserForm' role='form' class='newUserForm js-newUserForm'>
               <fieldset name='newUser'>
-                  <label class='newUserFirst js-newUserFirst' for='newUserFirstField'>
-                    Firstname:
-                    <input required id='newUserFirstField' class='newUserFirstField js-newUserFirstField' type='text' name='newUserFirstField' autocomplete='firstname' placeholder="Enter Firstname"/>
-                  </label>
-                  <br><br>
+                <label class='newUserFirst js-newUserFirst' for='newUserFirstField'>
+                  Firstname:
+                  <input required id='newUserFirstField' class='newUserFirstField js-newUserFirstField' type='text' name='newUserFirstField'
+                    autocomplete='firstname' placeholder="Enter Firstname" />
+                </label>
+                <br><br>
 
-                  <label class='newUserLast js-newUserLast' for='newUserLastField'>
-                    Lastname:
-                    <input required id='newUserLastField' class='newUserLastField js-newUserLastField' type='text' name='newUserLastField' autocomplete='lastname' placeholder="Enter Lastname"/>
-                  </label>
-                  <br><br>
+                <label class='newUserLast js-newUserLast' for='newUserLastField'>
+                  Lastname:
+                  <input required id='newUserLastField' class='newUserLastField js-newUserLastField' type='text' name='newUserLastField' autocomplete='lastname'
+                    placeholder="Enter Lastname" />
+                </label>
+                <br><br>
 
                 <label class='newUserEmail js-newUserEmail' for='newUserEmailField'>
                   E-Mail:
-                  <input required id='newUserEmailField' class='newUserEmailField js-newUserEmailField' type='email' name='newUserEmailField' autocomplete='email' placeholder="you@email.com"/>
+                  <input required id='newUserEmailField' class='newUserEmailField js-newUserEmailField' type='email' name='newUserEmailField'
+                    autocomplete='email' placeholder="you@email.com" />
                 </label>
                 <br><br>
 
                 <label class='newUserId js-newUserId' for='newUserIdField'>
                   User ID: <span class='fyiSensitive'>*User ID is case sensitive.</span>
-                  <input required id='newUserIdField' class='newUserIdField js-newUserIdField' type='text' name='newUserIdField' autocomplete='username' placeholder="Enter User ID"/>
+                  <input required id='newUserIdField' class='newUserIdField js-newUserIdField' type='text' name='newUserIdField' autocomplete='username'
+                    placeholder="Enter User ID" />
                 </label>
                 <br><br>
 
                 <label class='newUserPass js-newUserPass' for='newUserPassField'>
                   Password: <span class='fyiSensitive'>*Password is case sensitive.</span>
-                  <input required id='newUserPassField' class='newUserPassField js-newUserPassField' type='password' name='newUserPassField' autocomplete='new-password' placeholder="Enter your Password"/>
+                  <input required id='newUserPassField' class='newUserPassField js-newUserPassField' type='password' name='newUserPassField'
+                    autocomplete='new-password' placeholder="Enter your Password" />
                 </label>
                 <br><br>
 
                 <label class='newUserPassConf js-newUserPassConf' for='newUserPassConfField'>
                   Confirm Password:
-                  <input required id='newUserPassConfField' class='newUserPassConfField js-newUserPassConfField' type='password' name='newUserPassConfField' autocomplete='current-password' placeholder="Confirm your Password"/>
+                  <input required id='newUserPassConfField' class='newUserPassConfField js-newUserPassConfField' type='password' name='newUserPassConfField'
+                    autocomplete='current-password' placeholder="Confirm your Password" />
                 </label>
                 <br><br>
                 <div class='buttonDiv'>
 
-                <label class='createUser js-createUser' for='createUserButton'>
-                  <button required class='createUserButton js-createUserButton' type='submit' name='createUserButton'>Submit</button>
-                </label>
+                  <label class='createUser js-createUser' for='createUserButton'>
+                    <button required class='createUserButton js-createUserButton' type='submit' name='createUserButton'>Submit</button>
+                  </label>
                 </div>
-                </fieldset>
+              </fieldset>
 
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</main>
+  </main>
 
 </body>
 
 <script type='text/babel' data-presets='es2015,stage-2' src='index.js'></script>
 
 </html>
-
-
-
