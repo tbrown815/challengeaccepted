@@ -100,7 +100,7 @@ function displayUserStats(data) {
                 <ul class='topBullet'>
                 <li>Date: ${exerDate}
                 <ul>
-                    <li> Distance: ${distance} miles
+                    <li> Distance: ${distance.toFixed(2)} miles
                     <li> Activity: ${exertype}
                     <li> <a href='#openEditModal' class='js-editStats' id='${statID}' onclick='(this)'>Edit</a> |
                         <a href='#openDelModal' class='js-delStats' id='${statID}' onclick='(this)'>Delete</a>
@@ -129,7 +129,7 @@ function displayUserStats(data) {
                 <li>Date: ${exerDate}
                 <ul>
                     <li> # Steps: ${numSteps}
-                    <li> Distance: ${distance} miles
+                    <li> Distance: ${distance.toFixed(2)} miles
                     <li> Activity: ${exertype}
                     <li> <a href='#openEditModal' class='js-editStats' id='${statID}' onclick='(this)'>Edit</a> |
                         <a href='#openDelModal' class='js-delStats' id='${statID}' onclick='(this)'>Delete</a>
