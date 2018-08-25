@@ -3,21 +3,30 @@
 ##  About:
 
 I created this project for my NodeJS project while enrolled at Thinkful.
-The application is a basic tool to track different activities - At this time Steps/Distance and Run/Walks.
+The application is a basic tool to track different activities.  Current activities that a user can record are steps/distance and run/walk.
     
 *   Users can create new accounts.  Creating a new account will require a users first and last names, their e-mail, and selection of a username and password.
+
     ![Alt](/readme/createUser.png "Create User screenshot")
+
 *   Returning users can login by providing their username and password.
     *   During login a JWT is created and saved to the browser session storage.  It is used to authenticate access to various endpoints required to retrieve and save data.
+
     ![Alt](/readme/loginPage.png "Login Page screenshot")
+
 *   Users can view and record new activities on the user dashboard.
     *   The dashboard displays a users recorded lifetime Steps and Distance .
     *   The dashboard allows users to enter new activity data.  Lifetime steps and distance are updated upon creation.
     *   The dashboard displays up to 10 of the users most recent activities.
+
     ![Alt](/readme/userDashboard.png "User Dashboard screenshot")
+
 *   The list of recent activies presents the user with an 'edit' link.  This allows the users to update existing activity stats.  Lifetime steps and distance are updated upon saving.
+
     ![Alt](/readme/updateStats.png "Edit activity screenshot")
+
 *   The list of recent activies also presents the user with an 'delete' link.  This allows the users to remove existing activity stats.  Lifetime steps and distance are updated upon delete.
+
     ![Alt](/readme/deleteStat.png "Delete activity screenshot")
 
 
