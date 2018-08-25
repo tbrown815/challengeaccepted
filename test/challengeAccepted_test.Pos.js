@@ -167,27 +167,12 @@ describe('Test Resources', function () {
     });
 
 
-    //HTML CHECK TESTS
-    describe('HTML TEST SET', function () {
-
-        it('public should return typeof html and status 200', function () {
-            return chai.request(app)
-                .get('/users/')
-                .set('authorization', `Bearer ${testToken}`)
-                .then(function (res) {
-                    expect(res).to.have.status(200);
-                    expect(res).to.be.json;
-                })
-        })
-    })
-
-
     //STATIC PAGE CHECKS
     describe('HTML TEST SET', function () {
 
         it('public should return typeof html and status 200', function () {
             return chai.request(app)
-                .get('/clientSite/')
+                .get('/')
                 .then(function (res) {
                     expect(res).to.have.status(200);
                     expect(res).to.be.html;
@@ -207,62 +192,6 @@ describe('Test Resources', function () {
 
     //USER TESTS
     describe('USERS TEST SET', function () {
-
-        it('GET DB objects, validate count and json/200 resp', function () {
-
-            let res;
-
-            return chai.request(app)
-                .get('/users')
-                .then(function (_res) {
-                    res = _res;
-
-                    expect(res).to.have.status(200);
-                    expect(res).to.be.json;
-                    expect(res.body.users).to.have.lengthOf.at.least(1);
-                    return userInfoModel.count();
-                })
-
-                .then(function (count) {
-                    expect(res.body.users).to.have.lengthOf(count);
-                })
-        });
-
-        it('GET DB objects and verify expected keys present', function () {
-            let respUsers = [];
-            let recordCount = userInfoModel.count();
-
-            return chai.request(app)
-                .get('/users')
-
-                .then(function (res) {
-                    expect(res).to.have.status(200);
-                    expect(res).to.be.json;
-                    expect(res.body.users).to.have.lengthOf.at.least(1);
-
-                    res.body.users.forEach(function (user) {
-                        expect(user).to.be.a('object');
-                        expect(user).to.include.keys('id', 'username', 'firstName', 'lastName', 'email', 'lifeSteps', 'lifeDistance');
-                    })
-
-                    respUsers = res.body.users[0];
-                    return userInfoModel.findById(respUsers.id)
-
-                })
-
-                .then(function (user) {
-                    expect(respUsers.id).to.be.equal(user.id);
-                    expect(respUsers.username).to.be.equal(user.username);
-                    expect(respUsers.firstName).to.be.equal(user.firstName);
-                    expect(respUsers.lastName).to.be.equal(user.lastName);
-                    expect(respUsers.email).to.be.equal(user.email);
-                    expect(respUsers.lifeSteps).to.be.equal(user.lifeSteps);
-                    expect(respUsers.lifeDistance).to.be.equal(user.lifeDistance);
-
-                })
-        })
-
-
 
         it('GET JWT and request user info', function () {
             const id = userData._id;

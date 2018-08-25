@@ -334,8 +334,6 @@ describe('Test Resources', function () {
                         expect(res.body).to.not.have.all.keys('id', 'username', 'firstName', 'lastName', 'email', 'lifeSteps', 'lifeDistance')
                         expect(res.body.reason).to.have.string('ERROR');
                         expect(res.body.message).to.have.string('is required to be at least 8 characters long');
-                        expect(res.body.location).to.have.string('password');
-
                     })
 
             })
