@@ -57,7 +57,7 @@ router.get('/:id', jwtAuth, (req, res) => {
 
 router.get('/stats/:id', jwtAuth, (req, res) => {
 
-    exerStatsModel.find({ user: req.params.id }).sort({ 'date': -1, 'exertype': 1 }).limit(5)
+    exerStatsModel.find({ user: req.params.id }).sort({ 'date': -1, 'exertype': 1 }).limit(10)
         .then(userStats => {
             res.json({
                 userStats: userStats.map(
