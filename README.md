@@ -5,43 +5,58 @@
 I created this project for my NodeJS project while enrolled at Thinkful.
 The application is a basic tool to track different activities - At this time Steps/Distance and Run/Walks.
     
-*   Users can create new accounts.
-*   Users can login - during login a JWT Auth token is created and used to authenticate access to various endpoints to retrieve and save data.
-*   Users can record different activities.
-*   Users can edit existing activities.
-*   Users can delete existing activities.
+*   Users can create new accounts.  Creating a new account will require a users first and last names, their e-mail, and selection of a username and password.
+    ![Alt](/readme/createUser.png "Create User screenshot")
+*   Returning users can login by providing their username and password.
+    *   During login a JWT is created and saved to the browser session storage.  It is used to authenticate access to various endpoints required to retrieve and save data.
+    ![Alt](/readme/loginPage.png "Login Page screenshot")
+*   Users can view and record new activities on the user dashboard.
+    *   The dashboard displays a users recorded lifetime Steps and Distance .
+    *   The dashboard allows users to enter new activity data.  Lifetime steps and distance are updated upon creation.
+    *   The dashboard displays up to 10 of the users most recent activities.
+    ![Alt](/readme/userDashboard.png "User Dashboard screenshot")
+*   The list of recent activies presents the user with an 'edit' link.  This allows the users to update existing activity stats.  Lifetime steps and distance are updated upon saving.
+    ![Alt](/readme/updateStats.png "Edit activity screenshot")
+*   The list of recent activies also presents the user with an 'delete' link.  This allows the users to remove existing activity stats.  Lifetime steps and distance are updated upon delete.
+    ![Alt](/readme/deleteStat.png "Delete activity screenshot")
 
 
 
 
-##  Tech used:
+##  Technology used:
 
-*   nodejs
-*   expressjs
-*   passport
 *   bcryptjs
-*   jwt
-*   mongoose
-*   mocha
-*   chai/chai-http
-*   faker
-*   Mongo DB
-*   Travis CI
-*   Heroku
+*   Chai/Chai-http
+*   CSS
+*   Express.js
+*   Faker
 *   Git/GitHub
+*   Heroku
+*   HTML
+*   JavaScript
+*   JSON Web Token
+*   jQuery
+*   mLab
+*   Mocha
+*   Mongo DB
+*   Mongoose
+*   Node.js
+*   Passport.js
 *   Postman
+*   Travis CI
 
 
-Documentation - https://documenter.getpostman.com/view/4606197/RWTrNGAt
-
-
+## API Documentation
+*   https://documenter.getpostman.com/view/4606197/RWTrNGAt
 
 
 ##  Access and testing:
 
-**Access:**
+Users can access the application at the below URL:
 
-https://mysterious-forest-20103.herokuapp.com/
+*   https://mysterious-forest-20103.herokuapp.com/
+
+Users can create new users from the login screen or use an existing test user below:
 
 **Test Usernames:**
 
@@ -50,7 +65,8 @@ https://mysterious-forest-20103.herokuapp.com/
 *   therealmort22
 *   spastastic
 
-Password for all: test1099
+**Password for existing test users:**
+*   test1099
 
 
 
