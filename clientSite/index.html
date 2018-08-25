@@ -53,7 +53,7 @@
     <div class='row'>
       <div class='leftSection col-6' role='presentation'>
 
-        <div class='lifeStats js-lifeStats' id='lifeStats'>
+        <div class='lifeStats js-lifeStats' id='lifeStats' role='presentation'>
           <!--Personal Stats will display here-->
         </div>
 
@@ -82,7 +82,7 @@
                   step='1' max='' name='stepsField' placeholder='Enter # Steps' />
               </label>
               <br><br>
-              <label class='enterDistance js-enterDistance' for='enterDistance'>
+              <label class='enterDistance js-enterDistance' for='distanceField'>
                 Distance in miles:
                 <input required id='distanceField' class='distanceField js-distanceField' type='number' onkeypress='return event.charCode 46 && >= 48'
                   min='0' step='0.01' max='' name='distanceField' placeholder='Enter Distance' />
@@ -90,7 +90,7 @@
               <br><br>
               <div class='buttonDiv'>
                 <label class='submitStats js-submitStats' for='submitStatsButton'>
-                  <button required class='submitStatsButton js-submitStatsButton' type='submit' name='submitStatsButton'>Submit
+                  <button required class='submitStatsButton js-submitStatsButton' id='submitStatsButton' type='submit' name='submitStatsButton'>Submit
                     Activity
                   </button>
                 </label>
@@ -103,7 +103,7 @@
       </div>
       <div class='rightSection col-6' role='presentation'>
 
-        <div class='personStats js-personStats' id='personStats'>
+        <div class='personStats js-personStats' id='personStats' role='presentation'>
           <!--Personal Stats will display here-->
         </div>
 
@@ -114,16 +114,6 @@
     </div>
 
     <br><br><br>
-
-    <div class='row'>
-      <div class='col-12'>
-
-        <div class='bottomtemp js-bottomtemp'>
-          <!--this is the temp info-->
-        </div>
-
-      </div>
-    </div>
 
     <div id='openEditModal' class='modal js-modal' role='presentation' aria-hidden='true'>
       <div>
@@ -159,7 +149,7 @@
             <br><br>
             <div class='buttonDiv'>
               <label class='submitEditStats js-submitEditStats' for='submitEditStatsButton'>
-                <button required class='submitEditStatsButton js-submitEditStatsButton' type='submit' name='submitEditStatsButton'>Update
+                <button required class='submitEditStatsButton js-submitEditStatsButton' id='submitEditStatsButton' type='submit' name='submitEditStatsButton'>Update
                   Activity
                 </button>
               </label>
@@ -182,7 +172,7 @@
             <br>
             <div class='buttonDiv'>
               <label class='yesDelStats js-yesDelStats' for='yesDelStats'>
-                <button required class='yesDelStatsButton js-yesDelStatsButton' type='submit' name='yesDelStatsButton'>YES,
+                <button required class='yesDelStatsButton js-yesDelStatsButton' id='yesDelStats' type='submit' name='yesDelStatsButton'>YES,
                   DELETE!
                 </button>
               </label>
