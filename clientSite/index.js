@@ -475,7 +475,7 @@ function updateLifeTimeInfo(updateSteps, updateDistance) {
 function userLogOut() {
     $('.js-topNav').html(`
     <div class='navInfo'>
-    <h1>Challenge Accepted</h1>
+    <img src='Challenge-Accepted.png' class='titleImg' />
     <h2 class='userHello'>Hello ${username}!</h2>
     <a href='${loginRedirect}' class='logoutLink js-logoutLink' id='logoutLink'>Logout</a>
     </div>

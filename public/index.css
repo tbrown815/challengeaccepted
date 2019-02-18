@@ -6,8 +6,50 @@ body {
   background-color: slategray;
 }
 
+main  {
+  height: 1000px;
+}
+
+/* for veiwport adjusting background*/
+.bg {
+  background-image: url("./running-background-sml.svg.png");
+
+
+  /* scaling */
+  width: 100%;
+  height: 100%;
+
+  /* position */
+  position: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  z-index: -1;
+
+}
+
+
+.titleImg {
+  margin-top: 3%;
+  width: 100%;
+}
+
+footer {
+  position: relative;
+  bottom: 10px;
+  width: 100%;
+  padding-left: 1%;  
+  padding-top: 2%;
+
+ }
+
+ footer a {
+  color: #2a1a36 !important;
+ }
+
+
 nav, .loginBox {
-  background-color: #71af8d !important;
+  background-color: #95d9ad !important;
   border: 1px solid;
   border-color: black;
 }
@@ -17,7 +59,7 @@ nav, .newUserLink {
 }
 
 nav {
-  margin-top: 2%;
+  margin-top: 20%;
 }
 
 .loginBox, .buttonDiv, input {
@@ -98,7 +140,7 @@ button:hover {
   margin: 10% auto;
   padding: 5px 20px 13px 20px;
   border-radius: 10px;
-  background: #71af8d;
+  background: #95d9ad;
   text-align: left;
 }
 
@@ -137,7 +179,7 @@ button:hover {
   /*increases font size on smaller screens*/
 
   nav {
-    margin-top: 5%;
+    margin-top: 10%;
   }
 
   .loginBox {
