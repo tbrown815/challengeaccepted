@@ -47,6 +47,9 @@ footer {
   color: #2a1a36 !important;
  }
 
+.testUser {
+  text-align: center;
+}
 
 nav, .loginBox {
   background-color: #95d9ad !important;
