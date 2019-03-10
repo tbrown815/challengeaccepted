@@ -5,7 +5,7 @@
 I created this project for my NodeJS project while enrolled at Thinkful.
 The application is a basic tool to track different activities.  Current activities that a user can record are steps/distance and run/walk.
     
-*   Users can create new accounts.  Creating a new account will require a users first and last names, their e-mail, and selection of a username and password.
+*   Users can create new accounts.  Creating a new account will require a user's first and last names, their e-mail, and selection of a username and password.
 
     ![Alt](/readme/createUser.png "Create User screenshot")
 
@@ -15,7 +15,7 @@ The application is a basic tool to track different activities.  Current activiti
     ![Alt](/readme/loginPage.png "Login Page screenshot")
 
 *   Users can view and record new activities on the user dashboard.
-    *   The dashboard displays a users recorded lifetime Steps and Distance .
+    *   The dashboard displays a users recorded lifetime Steps and Distance.
     *   The dashboard allows users to enter new activity data.  Lifetime steps and distance are updated upon creation.
     *   The dashboard displays up to 10 of the users most recent activities.
 
@@ -25,7 +25,7 @@ The application is a basic tool to track different activities.  Current activiti
 
     ![Alt](/readme/updateStats.png "Edit activity screenshot")
 
-*   The list of recent activies also presents the user with an 'delete' link.  This allows the users to remove existing activity stats.  Lifetime steps and distance are updated upon delete.
+*   The list of recent activies also presents the user with a 'delete' link.  This allows the users to remove existing activity stats.  Lifetime steps and distance are updated upon delete.
 
     ![Alt](/readme/deleteStat.png "Delete activity screenshot")
 
