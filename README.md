@@ -15,17 +15,17 @@ The application is a basic tool to track different activities.  Current activiti
     ![Alt](/readme/loginPage.png "Login Page screenshot")
 
 *   Users can view and record new activities on the user dashboard.
-    *   The dashboard displays a users recorded lifetime Steps and Distance.
+    *   The dashboard displays a user's recorded lifetime Steps and Distance.
     *   The dashboard allows users to enter new activity data.  Lifetime steps and distance are updated upon creation.
-    *   The dashboard displays up to 10 of the users most recent activities.
+    *   The dashboard displays up to 10 of the user's most recent activities.
 
     ![Alt](/readme/userDashboard.png "User Dashboard screenshot")
 
-*   The list of recent activies presents the user with an 'edit' link.  This allows the users to update existing activity stats.  Lifetime steps and distance are updated upon saving.
+*   The list of recent activities presents the user with an 'edit' link.  This allows the user to update existing activity stats.  Lifetime steps and distance are updated upon saving.
 
     ![Alt](/readme/updateStats.png "Edit activity screenshot")
 
-*   The list of recent activies also presents the user with a 'delete' link.  This allows the users to remove existing activity stats.  Lifetime steps and distance are updated upon delete.
+*   The list of recent activities also presents the user with a 'delete' link.  This allows the user to remove existing activity stats.  Lifetime steps and distance are updated upon delete.
 
     ![Alt](/readme/deleteStat.png "Delete activity screenshot")
 
